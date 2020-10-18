@@ -1,0 +1,126 @@
+.section1{
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.white{
+    color: white;
+    font-size: large;
+}
+.v-line{
+    border-left: 1px dashed rgba(255, 255, 255, .9);
+    height: 100%;
+    margin: 0px 15px;
+}
+.small-label{
+    font-size: .7em;
+    color: rgb(240, 240, 240);
+}
+
+.query-data-div{
+    height: 11vh;
+    background-color: crimson;
+    background-image: linear-gradient(135deg, crimson, #b8017b);
+    display: flex;
+}
+.query-data-div > .container{
+    display: flex;
+    height: 90%;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 8px;
+}
+.query-data-div > .container > div{
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+}
+.trip-places > div{
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+.trip-time > div{
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+.trip-places{
+    flex: 1;
+    overflow: hidden;
+}
+.trip-time, .trip-class{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.trip-modify{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.trip-modify button{
+    background-color: white;
+    transition-duration: .2s;
+}
+.trip-modify button:hover, button:active, button:focus{
+    background-color: rgba(220,53,69,.1);
+}
+
+.query-result-div{
+    flex: 1;
+    background-color: #fff;
+    display: flex;
+}
+.actual-result-div{
+    flex: 1;
+    padding: 10px;
+}
+.filter-box > div{
+    margin: 10px 0px;
+}
+.square-box{
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: .6em;
+    width: 23%;
+    transition-duration: .2s;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.square-box:hover{
+    cursor: pointer;
+}
+.square-box.active{
+    background-color: #0075ff;
+    border-color: #0075ff;
+    color: white;
+}
+.square-box img{
+    width: 34px;
+}
+.filter-img-div{
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.each-flight-div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+.each-flight-div > div{
+    display: flex;
+}
+.company-details{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.company-name{
+    font-weight: bold;
+}
+.plane-name{
+    font-size: smaller;
+}

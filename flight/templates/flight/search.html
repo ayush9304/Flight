@@ -7,7 +7,134 @@
 {% endblock %}
 
 {% block body %}
-    <section class="section1">
-        //
+    <section class="section section1">
+        <div class="query-data-div">
+            <div class="container">
+                <div class="trip-places">
+                    <div class="from-div text-align-left">
+                        <div class="small-label">From</div>
+                        <div class="white">Delhi (DEL)</div>
+                    </div>
+                    <div class="trip-type-div white">
+                        <div class="small-label">&nbsp;</div>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                        </svg>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </div>
+                    <div class="to-div text-align-right">
+                        <div class="small-label">To</div>
+                        <div class="white">Bangalore (BLR)</div>
+                    </div>
+                </div>
+                <div class="v-line"></div>
+                <div class="trip-time">
+                    <div class="depart-date-div">
+                        <div class="small-label">Depart</div>
+                        <div class="white">19 Oct 2020</div>
+                    </div>
+                    <div class="return-date-div">
+                        <div class="small-label">Return</div>
+                        <div class="white">23 Oct 2020</div>
+                    </div>
+                </div><div class="v-line"></div>
+                <div class="trip-class">
+                    <div class="return-date-div">
+                        <div class="small-label">Class</div>
+                        <div class="white">Economy</div>
+                    </div>
+                </div>
+                <div class="v-line"></div>
+                <div class="trip-modify">
+                    <button class="btn btn-outline-danger">Modify</button>
+                </div>
+            </div>
+        </div>
+        <div class="query-result-div">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 filter-div">
+                        <div class="filter">
+                            <h4>Filter Results</h4>
+                            <div class="filter-box">
+                                <div class="filter-price">
+                                    <div class="font-weight-bold">Price</div>
+                                    <div>
+                                        <input type="range" class="form-control-range" min="500" max="99999">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="time-slot">
+                                    <div class="font-weight-bold">Depart Time</div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div class="square-box active">
+                                            <div class="filter-img-div">
+                                                <div>
+                                                    <img src="{% static 'img/morning_inactive.png' %}" alt="" style="display: none;">
+                                                    <img src="{% static 'img/morning_active.png' %}" alt="">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                Before 6 AM
+                                            </div>
+                                        </div>
+                                        <div class="square-box">
+                                            <div class="filter-img-div">
+                                                <div>
+                                                    <img src="{% static 'img/noon_inactive.png' %}" alt="">
+                                                    <img src="{% static 'img/noon_active.png' %}" alt="" style="display: none;">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                6 am - 12 pm
+                                            </div>
+                                        </div>
+                                        <div class="square-box">
+                                            <div class="filter-img-div">
+                                                <div>
+                                                    <img src="{% static 'img/evening_inactive.png' %}" alt="">
+                                                    <img src="{% static 'img/evening_active.png' %}" alt="" style="display: none;">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                12 pm - 6 pm
+                                            </div>
+                                        </div>
+                                        <div class="square-box">
+                                            <div class="filter-img-div">
+                                                <div>
+                                                    <img src="{% static 'img/night_inactive.png' %}" alt="">
+                                                    <img src="{% static 'img/night_active.png' %}" alt="" style="display: none;">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                After 6 pm
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 actual-result-div">
+                        <div class="each-flight-div">
+                            <div class="flight-company">
+                                <div class="flight-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1.5em" height="1.3em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 440 384"><path d="M14 335h405v43H14v-43zm417.5-199.5q3.5 12.5-3 24T409 175l-114 30l-92 25l-114 30l-34 10l-16-29l-39-67l31-9l42 33l106-28L91 17l41-11l147 137l113-30q13-4 24.5 3t15 19.5z" fill="#434445"/><rect x="0" y="0" width="440" height="384" fill="rgba(0, 0, 0, 0)" /></svg>
+                                </div>
+                                <div class="company-details">
+                                    <div class="company-name">Air India</div>
+                                    <div class="plane-name">747-8I</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </section>
 {% endblock %}
