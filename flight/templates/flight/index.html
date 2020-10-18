@@ -1,0 +1,143 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block body %}
+    <section class="section first-section" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('{% static 'img/plane3.1.jfif'%}');">
+        <div class="banner-div">
+            <div class="banner">
+            <h1 class="banner-text">Book Domestic and International Flight Tickets</h1>
+            </div>
+        </div>
+        <div class="search-flight">
+            <div class="container">
+            <form class="search-flight-form" action="#">
+                <div class="align-items-center">
+                <div class="search-flight-form-data">
+                    <div class="input-row" style="display: flex;">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                        <input type="radio" class="form-check-input trip-type" id="one-way" name="triptype" value="1" checked>One-way
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                        <input type="radio" class="form-check-input trip-type" id="round-trip" name="triptype" value="2">Round Trip
+                        </label>
+                    </div>
+                    </div>
+                    <div class="input-row">
+                    <label for="flight-from">From: </label>
+                    <input type="text" placeholder="From" id="flight-from" class="form-control mr-sm-3" onfocus="places_from()">
+                    <div class="dropdown-menu dropdown-input places_from">
+                        <a class="dropdown-item" data-value="bgp">Bhagalpur (BGP)</a>
+                        <a class="dropdown-item" data-value="pnbe">Patna (PNBE)</a>
+                        <a class="dropdown-item" data-value="dli">Delhi (DLI)</a>
+                        <a class="dropdown-item" data-value="ndls">New Delhi (NDLS)</a>
+                        <a class="dropdown-item" data-value="cstm">C Shivagi Mah T (CSTM)</a>
+                        <a class="dropdown-item" data-value="ypr">Yesvantpur Jn (YPR)</a>
+                    </div>
+                    </div>
+                    <div class="input-row">
+                    <label for="flight-to">To: </label>
+                    <input type="text" placeholder="To" id="flight-to" class="form-control mr-sm-3" onfocus="places_to()">
+                    <div class="dropdown-menu dropdown-input places_to">
+                        <a class="dropdown-item" data-value="bgp">Bhagalpur (BGP)</a>
+                        <a class="dropdown-item" data-value="pnbe">Patna (PNBE)</a>
+                        <a class="dropdown-item" data-value="dli">Delhi (DLI)</a>
+                        <a class="dropdown-item" data-value="ndls">New Delhi (NDLS)</a>
+                        <a class="dropdown-item" data-value="cstm">C Shivagi Mah T (CSTM)</a>
+                        <a class="dropdown-item" data-value="ypr">Yesvantpur Jn (YPR)</a>
+                    </div>
+                    </div>
+                    <div class="input-row">
+                    <label for="depart-date">Departure Date: </label>
+                    <input type="date" min="2020-09-22" max="2022-12-31" id="depart-date" placeholder="Date" class="form-control mr-sm-2">
+                    </div>
+                    <div class="input-row">
+                    <label for="return-date">Return Date: </label>
+                    <input type="date" min="2020-09-22" max="2022-12-31" id="return-date" placeholder="Date" class="form-control mr-sm-2">
+                    </div>
+                    <div class="input-row">
+                    <button type="submit" class="btn btn-danger">Search Flight</button>
+                    </div>
+                </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </section>
+    <section class="section second-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h2>Popular Destination</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row popular_destinations">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/1.png' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Italy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/2.png' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Brazil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/3.png' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">America</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/4.png' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Nepal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/5.png' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Maldives</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/6.png' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Indonesia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock%}
