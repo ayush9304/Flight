@@ -69,12 +69,26 @@
     background-color: #fff;
     display: flex;
 }
+.filter-div{
+    padding: 15px;
+}
 .actual-result-div{
     flex: 1;
-    padding: 10px;
+    padding: 20px 35px;
 }
 .filter-box > div{
     margin: 10px 0px;
+}
+.filter-div h4{
+    font-weight: 800;
+    line-height: .75em;
+    font-size: 1.1em;
+    color: #321d1d;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.filter-box .font-weight-bold{
+    margin-bottom: 5px;
 }
 .square-box{
     border: 1px solid grey;
@@ -107,9 +121,21 @@
 .each-flight-div{
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    border-radius: 3px;
+    padding: 15px 20px;/*
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);*/
+    overflow: hidden;
+}
+.each-flight-div-box{
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    margin-top: 10px;
+}
+.card{
+    border: none;
+    border-top: 1px solid rgba(0,0,0,.125);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 .each-flight-div > div{
     display: flex;
@@ -123,4 +149,74 @@
 }
 .plane-name{
     font-size: smaller;
+}
+.flight-time{
+    display: flex;
+    justify-content: space-evenly;
+}
+.flight-time h5{
+    margin-bottom: 2px;
+}
+.flight-place{
+    font-size: .8em;
+    color: grey;
+}
+.each-flight-div > div{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.flight-price{
+    display: flex;
+    margin-right: 15px;
+}
+.flight-price > h5{
+    margin-top: 20%;
+    margin-bottom: 20%;
+    font-weight: 600;
+}
+.flight-stops{
+    position: relative;
+}
+.flight-stops-seperator{
+    border-top: 2px solid #979797;
+    width: 50px;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.flight-stops-disc{
+    width: 6px;
+    height: 6px;
+    border: 1px solid #000;
+    display: inline-block;
+    background-color: #fff;
+    position: relative;
+    z-index: 2;
+}
+.flight-details-btn{
+    display: flex;
+}
+.flight-details-btn button{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.sort-div{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 150px;
+    font-size: .9em;
+}
+.sort-arrive, .sort-depart{
+    margin-left: 34px;
+    margin-right: 4px;
+}
+.sort-price{
+    margin-right: 20px;
 }

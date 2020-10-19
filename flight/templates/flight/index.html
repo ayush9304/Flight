@@ -39,27 +39,35 @@
                     </div>
                     </div>
                     <div class="input-row">
-                    <label for="flight-to">To: </label>
-                    <input type="text" placeholder="To" id="flight-to" class="form-control mr-sm-3" onfocus="places_to()">
-                    <div class="dropdown-menu dropdown-input places_to">
-                        <a class="dropdown-item" data-value="bgp">Bhagalpur (BGP)</a>
-                        <a class="dropdown-item" data-value="pnbe">Patna (PNBE)</a>
-                        <a class="dropdown-item" data-value="dli">Delhi (DLI)</a>
-                        <a class="dropdown-item" data-value="ndls">New Delhi (NDLS)</a>
-                        <a class="dropdown-item" data-value="cstm">C Shivagi Mah T (CSTM)</a>
-                        <a class="dropdown-item" data-value="ypr">Yesvantpur Jn (YPR)</a>
-                    </div>
-                    </div>
-                    <div class="input-row">
-                    <label for="depart-date">Departure Date: </label>
-                    <input type="date" min="2020-09-22" max="2022-12-31" id="depart-date" placeholder="Date" class="form-control mr-sm-2">
+                        <label for="flight-to">To: </label>
+                        <input type="text" placeholder="To" id="flight-to" class="form-control mr-sm-3" onfocus="places_to()">
+                        <div class="dropdown-menu dropdown-input places_to">
+                            <a class="dropdown-item" data-value="bgp">Bhagalpur (BGP)</a>
+                            <a class="dropdown-item" data-value="pnbe">Patna (PNBE)</a>
+                            <a class="dropdown-item" data-value="dli">Delhi (DLI)</a>
+                            <a class="dropdown-item" data-value="ndls">New Delhi (NDLS)</a>
+                            <a class="dropdown-item" data-value="cstm">C Shivagi Mah T (CSTM)</a>
+                            <a class="dropdown-item" data-value="ypr">Yesvantpur Jn (YPR)</a>
+                        </div>
                     </div>
                     <div class="input-row">
-                    <label for="return-date">Return Date: </label>
-                    <input type="date" min="2020-09-22" max="2022-12-31" id="return-date" placeholder="Date" class="form-control mr-sm-2">
+                        <label for="depart-date">Departure Date: </label>
+                        <input type="date" min="2020-09-22" max="2022-12-31" id="depart-date" placeholder="Date" class="form-control mr-sm-2">
                     </div>
                     <div class="input-row">
-                    <button type="submit" class="btn btn-danger">Search Flight</button>
+                        <label for="return-date">Return Date: </label>
+                        <input type="date" min="2020-09-22" max="2022-12-31" id="return-date" placeholder="Date" class="form-control mr-sm-2">
+                    </div>
+                    <div class="input-row">
+                        <label for="seat-class">Class: </label>
+                        <select name="seat-class" class="form-control mr-sm-2">
+                            <option value="economy">Economy</option>
+                            <option value="business">Business</option>
+                            <option value="first">First</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <button type="submit" class="btn btn-danger">Search Flight</button>
                     </div>
                 </div>
                 </div>
