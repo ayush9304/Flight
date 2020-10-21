@@ -8,6 +8,9 @@ def index(request):
 def search(request):
     return render(request, 'flight/search.html')
 
+def book(request):
+    return render(request, 'flight/book.html')
+
 #def search(request):
 #    from = request.GET.get('from')
 #    to = request.GET.get('to')

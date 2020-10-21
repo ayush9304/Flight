@@ -124,7 +124,6 @@
     padding: 15px 20px;/*
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);*/
-    overflow: hidden;
 }
 .each-flight-div-box{
     border-radius: 5px;
@@ -160,6 +159,7 @@
 .flight-place{
     font-size: .8em;
     color: grey;
+    text-align: center;
 }
 .each-flight-div > div{
     display: flex;
@@ -177,8 +177,42 @@
 }
 .flight-stops{
     position: relative;
+    opacity: 1;
 }
-.flight-stops-seperator{
+.tooltip .tooltiptext {
+    visibility: hidden;
+    white-space: nowrap;
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 4px 7px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .9em;
+}
+.tooltip .tooltiptext:before{
+    content:'';
+    display:block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, .8);
+    width:0;
+    height:0;
+    position:absolute;
+    left:50%;
+    transform: translateX(-50%);
+    top:100%;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+
+/*.flight-stops-seperator{
     border-top: 2px solid #979797;
     width: 50px;
     height: 2px;
@@ -198,7 +232,7 @@
     background-color: #fff;
     position: relative;
     z-index: 2;
-}
+}*/
 .flight-details-btn{
     display: flex;
 }

@@ -1,0 +1,160 @@
+.col-8{
+    padding: 15px;
+}
+.col-4{
+    padding: 15px;
+}
+
+.ticket-details, .traveller-details, .seat-map, .price-details, .coupon-code{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 13px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    overflow: hidden;
+}
+
+.col-8 > div > hr, .col-4 > div > hr{
+    margin: 0px -13px;
+    border-top: 0.5px solid rgba(0,0,0,.1);
+}{
+    margin: 0px -13px;
+    border-top: 0.5px solid rgba(0,0,0,.1);
+}
+.ticket-details-div{
+    margin: 13px 10px;
+}
+
+.time-details > div{
+    text-align: center;
+}
+
+.time-details{
+    margin-right: 25px;
+    margin-left: -25px;
+}
+.brand{
+    font-weight: 600;
+}
+.plane-name{
+    color: #4a4a4a;
+    font-size: .8em;
+}
+.time{
+    font-size: 1.4em;
+    font-weight: 600;
+}
+.duration{
+    border-bottom: 0.7px solid #9f9f9f;
+    font-size: .9em;
+    color: #454545;
+}
+.date, .place, .airport{
+    font-size: smaller;
+}
+.date{
+    font-size: 1em;
+    font-weight: 600;
+    color: #454545;
+}
+.place{
+    color: #4a4a4a;
+    font-size: .8em;
+    font-weight: 600;
+}
+.airport{
+    color: #4a4a4a;
+    font-size: .8em;
+}
+.baggage-details{
+    font-size: .8em;
+    color: grey;
+    padding-top: 13px;
+}
+
+.each-traveller{
+    justify-content: space-between;
+    margin: 13px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+    padding: 8px 17px;
+    border-radius: 10px;
+}
+.add-traveller{
+    /*margin: 13px;*/
+    padding-top: 13px;
+}
+.add-traveller-btn{
+    color: blue;
+    padding: 0;
+    font-size: .9em;
+}
+.add-traveller-btn:hover{
+    color: blue;
+}
+.add-traveller-btn:focus, .add-traveller-btn:active{
+    box-shadow: none;
+}
+.traveller-name{
+    font-weight: 600;
+}
+.delete-traveller button{
+    padding: 0;
+}
+.delete-traveller button:focus, .delete-traveller button:active{
+    box-shadow: none;
+}
+.delete-traveller button:hover{
+    color: red;
+}
+
+.add-traveller-div{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    margin: 13px 10px;
+    padding: 10px;
+    flex-flow: column;
+}
+.add-traveller-div form{
+    flex: 1;
+}
+.note-name{
+    font-size: .9em;
+    margin-bottom: 9px;
+}
+.note-name span{
+    font-weight: 600;
+}
+.radio-div > div{
+    padding-left: 15px;
+}
+
+.seat-map{
+    display: flex;
+    justify-content: space-between;
+}
+.seat-map-label{
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.payment-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.base-fare, .surcharges, .other-service, .total-fare{
+    margin: 13px 10px;
+    justify-content: space-between;
+    font-weight: bold;
+}
+.base-fare-value, .surcharges-value, .other-service-value{
+    font-size: 1.1em;
+}
+.total-fare{
+    font-size: 1.3em;
+    padding-top: 13px;
+    display: flex;
+    margin: 0px;
+}
