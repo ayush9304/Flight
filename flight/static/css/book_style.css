@@ -1,3 +1,10 @@
+.section1{
+    background-color: rgba(10, 0, 0, .1);
+}
+.col-8 > div, .col-4 > div{
+    background-color: #fff;
+}
+
 .col-8{
     padding: 15px;
 }
@@ -15,9 +22,6 @@
 }
 
 .col-8 > div > hr, .col-4 > div > hr{
-    margin: 0px -13px;
-    border-top: 0.5px solid rgba(0,0,0,.1);
-}{
     margin: 0px -13px;
     border-top: 0.5px solid rgba(0,0,0,.1);
 }

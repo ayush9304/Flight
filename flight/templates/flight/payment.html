@@ -1,0 +1,131 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/payment_style.css' %}">
+{% endblock %}
+
+{% block body %}
+    <section class="section section1">
+        <div class="container">
+            <div class="payment-box">
+                <div class="payment-box-head-div">
+                    <div class="payment-box-head">
+                        <h5>Payment Details</h5>
+                        <div class="display-td">
+                            <img class="card-img" src="{% static 'img/card.png' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-details-input-box">
+                    <div class="row card-no-div">
+                        <div class="form-group">
+                            <label for="card_number">CARD NUMBER</label>
+                            <div class="input-group">
+                                <input type="tel" pattern="[0-9]*" class="form-control" id="card_number" name="card_number" autocomplete="off" maxlength="19" placeholder="Enter card number"> <!--onkeypress="return isNumericValue(event);"-->
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                        <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                    </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <!--<small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                        </div>
+                    </div>
+                    <div class="row card-holder-div">
+                        <div class="form-group">
+                            <label for="card_holder_name">CARD HOLDER'S NAME</label>
+                            <input type="text" class="form-control" id="card_holder_name" placeholder="Enter name">
+                            <!--<small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                        </div>
+                    </div>
+                    <div class="row expiry-cvv">
+                        <div class="row">
+                            <div class="left-col">
+                                <label for="expiry_month">EXPIRY DATE</label>
+                                <div class="expiry-input-div">
+                                    <div class="month-div">
+                                        <select name="month" id="expiry_month" class="form-control">
+                                            <option value="">Month</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+                                    <div class="yeae-div">
+                                        <select name="year" id="expiry_year" class="form-control">
+                                            <option value="">Year</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                            <option value="2028">2028</option>
+                                            <option value="2029">2029</option>
+                                            <option value="2030">2030</option>
+                                            <option value="2031">2031</option>
+                                            <option value="2032">2032</option>
+                                            <option value="2033">2033</option>
+                                            <option value="2034">2034</option>
+                                            <option value="2035">2035</option>
+                                            <option value="2036">2036</option>
+                                            <option value="2037">2037</option>
+                                            <option value="2038">2038</option>
+                                            <option value="2039">2039</option>
+                                            <option value="2040">2040</option>
+                                            <option value="2041">2041</option>
+                                            <option value="2042">2042</option>
+                                            <option value="2043">2043</option>
+                                            <option value="2044">2044</option>
+                                            <option value="2045">2045</option>
+                                            <option value="2046">2046</option>
+                                            <option value="2047">2047</option>
+                                            <option value="2048">2048</option>
+                                            <option value="2049">2049</option>
+                                            <option value="2050">2050</option>
+                                            <option value="2051">2051</option>
+                                            <option value="2052">2052</option>
+                                            <option value="2053">2053</option>
+                                            <option value="2054">2054</option>
+                                            <option value="2055">2055</option>
+                                            <option value="2056">2056</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-col">
+                                <div class="form-group">
+                                    <label for="cvv_number">CVV CODE</label>
+                                    <input type="password" pattern="[0-9]*" class="form-control" placeholder="CVV" id="cvv_number" name="cvv" maxlength="3">    <!--onkeypress="return isNumericValue(event);"-->
+                                    <!--<small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-btn">
+                        <button class="btn btn-primary btn-danger">Make payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+{% endblock %}

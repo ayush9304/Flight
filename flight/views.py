@@ -11,6 +11,9 @@ def search(request):
 def book(request):
     return render(request, 'flight/book.html')
 
+def payment(request):
+    return render(request, 'flight/payment.html')
+
 #def search(request):
 #    from = request.GET.get('from')
 #    to = request.GET.get('to')

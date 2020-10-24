@@ -57,11 +57,19 @@
     padding-right: 12px;
 }
 .trip-modify button{
-    background-color: white;
     transition-duration: .2s;
+    color: white;
+    border-color: white;
 }
-.trip-modify button:hover, button:active, button:focus{
+/*.trip-modify button:hover, button:active, button:focus{
     background-color: rgba(220,53,69,.1);
+}*/
+.trip-modify button:hover, button:active{
+    background-color: rgb(255, 235, 245);
+    color: rgb(189, 4, 116);
+}
+.trip-modify button:focus{
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255,.3);
 }
 
 .query-result-div{
