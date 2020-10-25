@@ -1,5 +1,5 @@
 .section1{
-    background-color: rgba(10, 0, 0, .1);
+    background-color: rgba(10, 0, 0, .05);
 }
 .col-8 > div, .col-4 > div{
     background-color: #fff;
@@ -10,6 +10,12 @@
 }
 .col-4{
     padding: 15px;
+}
+
+h5{
+    background: -webkit-linear-gradient(right, crimson, #b8017b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .ticket-details, .traveller-details, .seat-map, .price-details, .coupon-code{
@@ -82,6 +88,14 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
     padding: 8px 17px;
     border-radius: 10px;
+}
+.traveller-head{
+    display: flex;
+    justify-content: space-between;
+}
+.traveller-head h6{
+    color: darkgreen;
+    padding-top: 2px;
 }
 .add-traveller{
     /*margin: 13px;*/

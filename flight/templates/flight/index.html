@@ -28,39 +28,41 @@
                     </div>
                     <div class="input-row">
                     <label for="flight-from">From: </label>
-                    <input type="text" placeholder="From" id="flight-from" class="form-control mr-sm-3" onfocus="places_from()">
-                    <div class="dropdown-menu dropdown-input places_from">
-                        <a class="dropdown-item" data-value="bgp">Bhagalpur (BGP)</a>
-                        <a class="dropdown-item" data-value="pnbe">Patna (PNBE)</a>
-                        <a class="dropdown-item" data-value="dli">Delhi (DLI)</a>
-                        <a class="dropdown-item" data-value="ndls">New Delhi (NDLS)</a>
-                        <a class="dropdown-item" data-value="cstm">C Shivagi Mah T (CSTM)</a>
-                        <a class="dropdown-item" data-value="ypr">Yesvantpur Jn (YPR)</a>
-                    </div>
-                    </div>
-                    <div class="input-row">
-                        <label for="flight-to">To: </label>
-                        <input type="text" placeholder="To" id="flight-to" class="form-control mr-sm-3" onfocus="places_to()">
-                        <div class="dropdown-menu dropdown-input places_to">
-                            <a class="dropdown-item" data-value="bgp">Bhagalpur (BGP)</a>
-                            <a class="dropdown-item" data-value="pnbe">Patna (PNBE)</a>
-                            <a class="dropdown-item" data-value="dli">Delhi (DLI)</a>
-                            <a class="dropdown-item" data-value="ndls">New Delhi (NDLS)</a>
-                            <a class="dropdown-item" data-value="cstm">C Shivagi Mah T (CSTM)</a>
-                            <a class="dropdown-item" data-value="ypr">Yesvantpur Jn (YPR)</a>
-                        </div>
+                    <input type="text" name="OriginCity" placeholder="From" id="flight-from" class="form-control mr-sm-3" onfocus="places_from()" list="places_from">
+                    <datalist id="places_from">
+                        <option data-value="del">New Delhi (India)</option>
+                        <option data-value="bom">Mumbai (India)</option>
+                        <option data-value="bkk">Bangkok (Thailand)</option>
+                        <option data-value="tyo">Tokyo (Japan)</option>
+                        <option data-value="sin">Singapore (Singapore)</option>
+                        <option data-value="tpe">Taipei (Taiwan)</option>
+                        <option data-value="nyc">New York (USA)</option>
+                    </datalist>
                     </div>
                     <div class="input-row">
-                        <label for="depart-date">Departure Date: </label>
-                        <input type="date" min="2020-09-22" max="2022-12-31" id="depart-date" placeholder="Date" class="form-control mr-sm-2">
+                        <label for="flight_to">To: </label>
+                        <input type="text" name="DestinationCity" placeholder="To" id="flight_to" class="form-control mr-sm-3" onfocus="places_to()" list="places_to">
+                        <datalist id="places_to">
+                            <option data-value="del">New Delhi (India)</option>
+                            <option data-value="bom">Mumbai (India)</option>
+                            <option data-value="bkk">Bangkok (Thailand)</option>
+                            <option data-value="tyo">Tokyo (Japan)</option>
+                            <option data-value="sin">Singapore (Singapore)</option>
+                            <option data-value="tpe">Taipei (Taiwan)</option>
+                            <option data-value="nyc">New York (USA)</option>
+                        </datalist>
                     </div>
                     <div class="input-row">
-                        <label for="return-date">Return Date: </label>
-                        <input type="date" min="2020-09-22" max="2022-12-31" id="return-date" placeholder="Date" class="form-control mr-sm-2">
+                        <label for="depart_date">Departure Date: </label>
+                        <input type="date" name="DepartDate" min="2020-09-22" max="2022-12-31" id="depart_date" placeholder="Date" class="form-control mr-sm-2">
                     </div>
                     <div class="input-row">
-                        <label for="seat-class">Class: </label>
-                        <select name="seat-class" class="form-control mr-sm-2">
+                        <label for="return_date">Return Date: </label>
+                        <input type="date" name="ReturnDate" min="2020-09-22" max="2022-12-31" id="return_date" placeholder="Date" class="form-control mr-sm-2">
+                    </div>
+                    <div class="input-row">
+                        <label for="seat_class">Class: </label>
+                        <select name="SeatClass" id="seat_class" class="form-control mr-sm-2">
                             <option value="economy">Economy</option>
                             <option value="business">Business</option>
                             <option value="first">First</option>
