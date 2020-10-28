@@ -260,6 +260,36 @@ footer .container > div{
     width: 44px;
 }
 
+#places_from, #places_to{
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    cursor: pointer;
+}
+.each_places_from_list, .each_places_to_list{
+    padding: 10px 15px;
+    transition-duration: .2s;
+}
+.each_places_from_list:hover, .each_places_to_list:hover{
+    background-color: lightsalmon;
+}
+#flight-from:focus + #places_from{
+    display: block;
+    transition-duration: .4s;
+}
+#flight-to:focus + #places_to{
+    display: block;
+    transition-duration: .4s;
+}
+.search-flight-form-data{
+    position: relative;
+}
+
 
 
 
