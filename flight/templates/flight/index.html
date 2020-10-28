@@ -2,6 +2,11 @@
 
 {% load static %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/layout_style.css' %}">
+    <script type="text/javascript" src="{% static 'js/layout.js' %}"></script>
+{% endblock head %}
+
 {% block body %}
     <section class="section first-section" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('{% static 'img/plane3.1.jfif'%}');">
         <div class="banner-div">
@@ -27,29 +32,29 @@
                         </div>
                         </div>
                         <div class="input-row">
-                        <label for="flight-from">From: </label>
-                        <input type="text" name="OriginCity" placeholder="From" id="flight-from" class="form-control mr-sm-3" data-value="" data-list="places_from">  <!--list="places_from"-->
-                        <div id="places_from">
-                            <div class="each_places_from_list" data-value="del">New Delhi (India)</div>
-                            <div class="each_places_from_list" data-value="bom">Mumbai (India)</div>
-                            <div class="each_places_from_list" data-value="bkk">Bangkok (Thailand)</div>
-                            <div class="each_places_from_list" data-value="tyo">Tokyo (Japan)</div>
-                            <div class="each_places_from_list" data-value="sin">Singapore (Singapore)</div>
-                            <div class="each_places_from_list" data-value="tpe">Taipei (Taiwan)</div>
-                            <div class="each_places_from_list" data-value="nyc">New York (USA)</div>
-                        </div>
+                            <label for="flight-from">From: </label>
+                            <input type="text" name="OriginCity" placeholder="From" id="flight-from" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_from">  <!--list="places_from"-->
+                            <div id="places_from" class="places_box">
+                                <div class="each_places_from_list places__list" data-value="del" onclick="selectplace(this)">New Delhi (India)</div>
+                                <div class="each_places_from_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
+                                <div class="each_places_from_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
+                                <div class="each_places_from_list places__list" data-value="tyo" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                <div class="each_places_from_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
+                                <div class="each_places_from_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
+                                <div class="each_places_from_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
+                            </div>
                         </div>
                         <div class="input-row">
                             <label for="flight_to">To: </label>
-                            <input type="text" name="DestinationCity" placeholder="To" id="flight-to" class="form-control mr-sm-3" data-value="" data-list="places_to">
-                            <div id="places_to">
-                                <div class="each_places_to_list" data-value="del">New Delhi (India)</div>
-                                <div class="each_places_to_list" data-value="bom">Mumbai (India)</div>
-                                <div class="each_places_to_list" data-value="bkk">Bangkok (Thailand)</div>
-                                <div class="each_places_to_list" data-value="tyo">Tokyo (Japan)</div>
-                                <div class="each_places_to_list" data-value="sin">Singapore (Singapore)</div>
-                                <div class="each_places_to_list" data-value="tpe">Taipei (Taiwan)</div>
-                                <div class="each_places_to_list" data-value="nyc">New York (USA)</div>
+                            <input type="text" name="DestinationCity" placeholder="To" id="flight-to" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_to">
+                            <div id="places_to" class="places_box">
+                                <div class="each_places_to_list places__list" data-value="del" onclick="selectplace(this)">New Delhi (India)</div>
+                                <div class="each_places_to_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
+                                <div class="each_places_to_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
+                                <div class="each_places_to_list places__list" data-value="tyo" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                <div class="each_places_to_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
+                                <div class="each_places_to_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
+                                <div class="each_places_to_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
                             </div>
                         </div>
                         <div class="input-row">

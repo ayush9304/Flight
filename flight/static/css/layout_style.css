@@ -276,15 +276,13 @@ footer .container > div{
     transition-duration: .2s;
 }
 .each_places_from_list:hover, .each_places_to_list:hover{
-    background-color: lightsalmon;
+    background-color: #f2f2f2;
 }
-#flight-from:focus + #places_from{
-    display: block;
-    transition-duration: .4s;
+.each_places_from_list:active, .each_places_to_list:active{
+    background-color: #e5e5e5;
 }
-#flight-to:focus + #places_to{
-    display: block;
-    transition-duration: .4s;
+.places_box{
+    display: none;
 }
 .search-flight-form-data{
     position: relative;
@@ -306,3 +304,4 @@ footer .container > div{
     background: #ccc;
     border-radius: 5px;
 }
+

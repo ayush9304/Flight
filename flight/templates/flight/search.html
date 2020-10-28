@@ -4,6 +4,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/search_style.css' %}">
+    <script src="{% static 'js/search.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -72,44 +73,44 @@
                                 <div class="time-slot">
                                     <div class="font-weight-bold">Depart Time</div>
                                     <div style="display: flex; justify-content: space-between;">
-                                        <div class="square-box active">
+                                        <div class="square-box active" onclick="timeslot(this)">
                                             <div class="filter-img-div">
                                                 <div>
-                                                    <img src="{% static 'img/morning_inactive.png' %}" alt="" style="display: none;">
-                                                    <img src="{% static 'img/morning_active.png' %}" alt="">
+                                                    <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive" style="display: none;">
+                                                    <img src="{% static 'img/morning_active.png' %}" alt="" data-statefor="active">
                                                 </div>
                                             </div>
                                             <div>
                                                 Before 6 AM
                                             </div>
                                         </div>
-                                        <div class="square-box">
+                                        <div class="square-box" onclick="timeslot(this)">
                                             <div class="filter-img-div">
                                                 <div>
-                                                    <img src="{% static 'img/noon_inactive.png' %}" alt="">
-                                                    <img src="{% static 'img/noon_active.png' %}" alt="" style="display: none;">
+                                                    <img src="{% static 'img/noon_inactive.png' %}" alt="" data-statefor="inactive">
+                                                    <img src="{% static 'img/noon_active.png' %}" alt="" data-statefor="active" style="display: none;">
                                                 </div>
                                             </div>
                                             <div>
                                                 6 am - 12 pm
                                             </div>
                                         </div>
-                                        <div class="square-box">
+                                        <div class="square-box" onclick="timeslot(this)">
                                             <div class="filter-img-div">
                                                 <div>
-                                                    <img src="{% static 'img/evening_inactive.png' %}" alt="">
-                                                    <img src="{% static 'img/evening_active.png' %}" alt="" style="display: none;">
+                                                    <img src="{% static 'img/evening_inactive.png' %}" alt="" data-statefor="inactive">
+                                                    <img src="{% static 'img/evening_active.png' %}" alt="" data-statefor="active" style="display: none;">
                                                 </div>
                                             </div>
                                             <div>
                                                 12 pm - 6 pm
                                             </div>
                                         </div>
-                                        <div class="square-box">
+                                        <div class="square-box" onclick="timeslot(this)">
                                             <div class="filter-img-div">
                                                 <div>
-                                                    <img src="{% static 'img/night_inactive.png' %}" alt="">
-                                                    <img src="{% static 'img/night_active.png' %}" alt="" style="display: none;">
+                                                    <img src="{% static 'img/night_inactive.png' %}" alt="" data-statefor="inactive">
+                                                    <img src="{% static 'img/night_active.png' %}" alt="" data-statefor="active" style="display: none;">
                                                 </div>
                                             </div>
                                             <div>
