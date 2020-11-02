@@ -19,7 +19,7 @@
 }
 
 .query-data-div{
-    height: 11vh;
+    min-height: 11vh;
     background-color: crimson;
     background-image: linear-gradient(135deg, crimson, #b8017b);
     display: flex;
@@ -47,6 +47,7 @@
 .trip-places{
     flex: 1;
     overflow: hidden;
+    min-width: 33%;
 }
 .trip-time, .trip-class{
     padding-left: 10px;
@@ -155,11 +156,28 @@
     font-weight: bold;
 }
 .plane-name{
-    font-size: smaller;
+    font-size: .8em;
+    color: rgb(97, 97, 97);
+}
+.flight-company{
+    width: 25%;
 }
 .flight-time{
     display: flex;
     justify-content: space-evenly;
+    flex: 1;
+}
+.flight-details{
+    width: 32%;
+    justify-content: space-between;
+}
+.flight-origin-time, .flight-destination-time{
+    width: 40%;
+}
+.flight-stops{
+    width: 20%;
+    display: flex;
+    justify-content: center;
 }
 .flight-time h5{
     margin-bottom: 2px;
@@ -251,13 +269,16 @@
 .sort-div{
     display: flex;
     justify-content: space-between;
-    margin-left: 20px;
-    margin-right: 150px;
+    /*margin-left: 20px;
+    margin-right: 150px;*/
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: .9em;
 }
 .sort-arrive, .sort-depart{
-    margin-left: 34px;
-    margin-right: 4px;
+    /*margin-left: 34px;
+    margin-right: 4px;*/
+    text-align: center;
 }
 .sort-price{
     margin-right: 20px;

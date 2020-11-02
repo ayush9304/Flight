@@ -14,11 +14,11 @@
                 <div class="trip-places">
                     <div class="from-div text-align-left">
                         <div class="small-label">From</div>
-                        <div class="white">Delhi (DEL)</div>
+                        <div class="white">{{origin.city}} ({{origin.code}})</div>
                     </div>
                     <div class="trip-type-div white">
                         <div class="small-label">&nbsp;</div>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <svg style="display:none" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -27,24 +27,24 @@
                     </div>
                     <div class="to-div text-align-right">
                         <div class="small-label">To</div>
-                        <div class="white">Bangalore (BLR)</div>
+                        <div class="white">{{destination.city}} ({{destination.code}})</div>
                     </div>
                 </div>
                 <div class="v-line"></div>
                 <div class="trip-time">
                     <div class="depart-date-div">
                         <div class="small-label">Depart</div>
-                        <div class="white">19 Oct 2020</div>
+                        <div class="white">{{depart_date|date:"D, d M Y"}}</div>
                     </div>
                     <div class="return-date-div">
                         <div class="small-label">Return</div>
-                        <div class="white">23 Oct 2020</div>
+                        <div class="white">{{return_date|date:"D, d M Y"|default_if_none:"--"}}</div>
                     </div>
                 </div><div class="v-line"></div>
                 <div class="trip-class">
                     <div class="return-date-div">
                         <div class="small-label">Class</div>
-                        <div class="white">Economy</div>
+                        <div class="white">{{seat}}</div>
                     </div>
                 </div>
                 <div class="v-line"></div>
@@ -57,200 +57,252 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 filter-div">
-                        <div class="filter">
-                            <center>
-                                <h4>Filter Results</h4>
-                            </center>
-                            <div class="filter-box">
-                                <div class="filter-price">
-                                    <div class="font-weight-bold">Price</div>
-                                    <div>
-                                        <input type="range" class="form-control-range" min="500" max="99999" step="100">
-                                        <div class="price-range-output">
-                                            <div class="initial-price-range">
-                                                <span class="currency-symbol">₹</span>
-                                                <span class="initial-price-value">0</span>
+                    {% if flights %}
+                        <div class="col-lg-3 filter-div">
+                            <div class="filter">
+                                <center>
+                                    <h4>Filter Results</h4>
+                                </center>
+                                <div class="filter-box">
+                                    <div class="filter-price">
+                                        <div class="font-weight-bold">Price</div>
+                                        <div>
+                                            <input type="range" class="form-control-range" min="{{min_price}}" max="{{max_price}}" value="{{max_price}}">
+                                            <div class="price-range-output">
+                                                <div class="initial-price-range">
+                                                    <span class="currency-symbol">₹</span>
+                                                    <span class="initial-price-value">{{min_price}}</span>
+                                                </div>
+                                                <div class="final-price-range">
+                                                    <span class="currency-symbol">₹</span>
+                                                    <span class="final-price-value"></span>
+                                                </div>
                                             </div>
-                                            <div class="final-price-range">
-                                                <span class="currency-symbol">₹</span>
-                                                <span class="final-price-value"></span>
+                                        </div>
+                                    </div><!---->
+                                    <div class="time-slot">
+                                        <div class="font-weight-bold">Departure Time</div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <div class="square-box" onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/morning_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Before 6 AM
+                                                </div>
+                                            </div>
+                                            <div class="square-box" onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/noon_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/noon_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    6 am - 12 pm
+                                                </div>
+                                            </div>
+                                            <div class="square-box" onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/evening_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/evening_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    12 pm - 6 pm
+                                                </div>
+                                            </div>
+                                            <div class="square-box" onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/night_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/night_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    After 6 pm
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div><!---->
-                                <div class="time-slot">
-                                    <div class="font-weight-bold">Departure Time</div>
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <div class="square-box" onclick="timeslot(this)">
-                                            <div class="filter-img-div">
+                                    <div class="time-slot">
+                                        <div class="font-weight-bold">Arrival Time</div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <div class="square-box " onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/morning_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
+                                                </div>
                                                 <div>
-                                                    <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/morning_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    Before 6 AM
                                                 </div>
                                             </div>
-                                            <div>
-                                                Before 6 AM
-                                            </div>
-                                        </div>
-                                        <div class="square-box" onclick="timeslot(this)">
-                                            <div class="filter-img-div">
+                                            <div class="square-box" onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/noon_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/noon_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
+                                                </div>
                                                 <div>
-                                                    <img src="{% static 'img/noon_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/noon_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    6 am - 12 pm
                                                 </div>
                                             </div>
-                                            <div>
-                                                6 am - 12 pm
-                                            </div>
-                                        </div>
-                                        <div class="square-box" onclick="timeslot(this)">
-                                            <div class="filter-img-div">
+                                            <div class="square-box" onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/evening_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/evening_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
+                                                </div>
                                                 <div>
-                                                    <img src="{% static 'img/evening_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/evening_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    12 pm - 6 pm
                                                 </div>
                                             </div>
-                                            <div>
-                                                12 pm - 6 pm
-                                            </div>
-                                        </div>
-                                        <div class="square-box" onclick="timeslot(this)">
-                                            <div class="filter-img-div">
-                                                <div>
-                                                    <img src="{% static 'img/night_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/night_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                            <div class="square-box" onclick="timeslot(this)">
+                                                <div class="filter-img-div">
+                                                    <div>
+                                                        <img src="{% static 'img/night_inactive.png' %}" alt="" data-statefor="inactive">
+                                                        <img src="{% static 'img/night_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                After 6 pm
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="time-slot">
-                                    <div class="font-weight-bold">Arrival Time</div>
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <div class="square-box " onclick="timeslot(this)">
-                                            <div class="filter-img-div">
                                                 <div>
-                                                    <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/morning_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                                                    After 6 pm
                                                 </div>
-                                            </div>
-                                            <div>
-                                                Before 6 AM
-                                            </div>
-                                        </div>
-                                        <div class="square-box" onclick="timeslot(this)">
-                                            <div class="filter-img-div">
-                                                <div>
-                                                    <img src="{% static 'img/noon_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/noon_active.png' %}" alt="" data-statefor="active" style="display: none;">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                6 am - 12 pm
-                                            </div>
-                                        </div>
-                                        <div class="square-box" onclick="timeslot(this)">
-                                            <div class="filter-img-div">
-                                                <div>
-                                                    <img src="{% static 'img/evening_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/evening_active.png' %}" alt="" data-statefor="active" style="display: none;">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                12 pm - 6 pm
-                                            </div>
-                                        </div>
-                                        <div class="square-box" onclick="timeslot(this)">
-                                            <div class="filter-img-div">
-                                                <div>
-                                                    <img src="{% static 'img/night_inactive.png' %}" alt="" data-statefor="inactive">
-                                                    <img src="{% static 'img/night_active.png' %}" alt="" data-statefor="active" style="display: none;">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                After 6 pm
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-9 actual-result-div">
-                        <div class="sort-div">
-                            <div class="sort-label">Sort By:</div>
-                            <div style="display: flex;">
-                                <div class="sort-depart">
-                                    Depart
-                                    <span>&nbsp;</span>
+                        <div class="col-lg-9 actual-result-div">
+                            <div class="sort-div" style="display:none">
+                                <div class="sort-label">Sort By:</div>
+                                <div style="display: flex;">
+                                    <div class="sort-depart">
+                                        Depart
+                                        <span>--</span>
+                                    </div>
+                                    <div class="sort-arrive">
+                                        Arrive
+                                        <span>--</span>
+                                    </div>
                                 </div>
-                                <div class="sort-arrive">
-                                    Arrive
-                                    <span>&nbsp;</span>
+                                <div class="sort-price">
+                                    Price
+                                    <span>&#8593;<!--&#8595;--></span>
                                 </div>
                             </div>
-                            <div class="sort-price">
-                                Price
-                                <span>&#8593;<!--&#8595;--></span>
+
+
+                            {% if flights %}
+                                <div class="sort-div">
+                                <div class="flight-company">
+                                    <div class="sort-label">Sort By:</div>
+                                </div>
+                                <div class="flight-time">
+                                    <div class="flight-origin-time sort-depart">
+                                        Depart
+                                        <span></span>
+                                    </div>
+                                    <div class="flight-stops"></div>
+                                    <div class="flight-destination-time sort-arrive">
+                                        Arrive
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="flight-details">
+                                    Price
+                                    <span>&#8593;<!--&#8595;--></span>
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+
+
+                            <div id="flights_div">
+                                {% for flight in flights %}
+
+                                    <div class="each-flight-div-box">
+                                        <div class="each-flight-div">
+                                            <div class="flight-company">
+                                                <div class="flight-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1.5em" height="1.3em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 440 384"><path d="M14 335h405v43H14v-43zm417.5-199.5q3.5 12.5-3 24T409 175l-114 30l-92 25l-114 30l-34 10l-16-29l-39-67l31-9l42 33l106-28L91 17l41-11l147 137l113-30q13-4 24.5 3t15 19.5z" fill="#434445"/><rect x="0" y="0" width="440" height="384" fill="rgba(0, 0, 0, 0)" /></svg>
+                                                </div>
+                                                <div class="company-details">
+                                                    <div class="company-name">{{flight.airline}}</div>
+                                                    <div class="plane-name">{{flight.plane}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="flight-time">
+                                                <div class="flight-origin-time">
+                                                    <div class="flight-time">
+                                                        <h5>{{flight.depart_time|time:"H:i"}}</h5>
+                                                    </div>
+                                                    <div class="flight-place">
+                                                        {{flight.origin.city}}
+                                                    </div>
+                                                </div>
+                                                <div class="flight-stops tooltip">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24">
+                                                        <path d="M13,9.03544443 C14.6961471,9.27805926 16,10.736764 16,12.5 C16,14.263236 14.6961471,15.7219407 13,15.9645556 L13,21.5207973 C13,21.7969397 12.7761424,22.0207973 12.5,22.0207973 C12.2238576,22.0207973 12,21.7969397 12,21.5207973 L12,15.9645556 C10.3038529,15.7219407 9,14.263236 9,12.5 C9,10.736764 10.3038529,9.27805926 12,9.03544443 L12,3.5 C12,3.22385763 12.2238576,3 12.5,3 C12.7761424,3 13,3.22385763 13,3.5 L13,9.03544443 L13,9.03544443 Z M12.5,15 C13.8807119,15 15,13.8807119 15,12.5 C15,11.1192881 13.8807119,10 12.5,10 C11.1192881,10 10,11.1192881 10,12.5 C10,13.8807119 11.1192881,15 12.5,15 Z" transform="rotate(90 12.5 12.51)"/>
+                                                    </svg>
+                                                    <span class="tooltiptext">{{flight.duration}}</span><!--07 hrs 50 mins-->
+                                                </div>
+                                                <div class="flight-destination-time">
+                                                    <div class="flight-time">
+                                                        <h5>{{flight.arrival_time|time:"H:i"}}</h5>
+                                                    </div>
+                                                    <div class="flight-place">
+                                                        {{flight.destination.city}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flight-details">
+                                                <div class="flight-price">
+                                                    <h5>
+                                                        ₹ 
+                                                        <span>
+                                                            {% if seat == 'Economy' %}{{flight.economy_fare}}{% endif %}
+                                                            {% if seat == 'Business' %}{{flight.business_fare}}{% endif %}
+                                                            {% if seat == 'First' %}{{flight.first_fare}}{% endif %}
+                                                        </span>
+                                                    </h5>
+                                                </div>
+                                                <div class="flight-details-btn">
+                                                    <button class="btn btn-primary btn-danger" type="button">
+                                                        Book Flight &#8594;
+                                                    </button> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
                             </div>
                         </div>
-
-                        {% for flight in flights %}
-
-                            <div class="each-flight-div-box">
-                                <div class="each-flight-div">
-                                    <div class="flight-company">
-                                        <div class="flight-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1.5em" height="1.3em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 440 384"><path d="M14 335h405v43H14v-43zm417.5-199.5q3.5 12.5-3 24T409 175l-114 30l-92 25l-114 30l-34 10l-16-29l-39-67l31-9l42 33l106-28L91 17l41-11l147 137l113-30q13-4 24.5 3t15 19.5z" fill="#434445"/><rect x="0" y="0" width="440" height="384" fill="rgba(0, 0, 0, 0)" /></svg>
-                                        </div>
-                                        <div class="company-details">
-                                            <div class="company-name">{{flight.airline}}</div>
-                                            <div class="plane-name">{{flight.plane}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="flight-time">
-                                        <div class="flight-origin-time">
-                                            <div class="flight-time">
-                                                <h5>{{flight.depart_time}}</h5>
-                                            </div>
-                                            <div class="flight-place">
-                                                {{flight.origin.city}}
-                                            </div>
-                                        </div>
-                                        <div class="flight-stops tooltip">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24">
-                                                <path d="M13,9.03544443 C14.6961471,9.27805926 16,10.736764 16,12.5 C16,14.263236 14.6961471,15.7219407 13,15.9645556 L13,21.5207973 C13,21.7969397 12.7761424,22.0207973 12.5,22.0207973 C12.2238576,22.0207973 12,21.7969397 12,21.5207973 L12,15.9645556 C10.3038529,15.7219407 9,14.263236 9,12.5 C9,10.736764 10.3038529,9.27805926 12,9.03544443 L12,3.5 C12,3.22385763 12.2238576,3 12.5,3 C12.7761424,3 13,3.22385763 13,3.5 L13,9.03544443 L13,9.03544443 Z M12.5,15 C13.8807119,15 15,13.8807119 15,12.5 C15,11.1192881 13.8807119,10 12.5,10 C11.1192881,10 10,11.1192881 10,12.5 C10,13.8807119 11.1192881,15 12.5,15 Z" transform="rotate(90 12.5 12.51)"/>
-                                            </svg>
-                                            <span class="tooltiptext">{{flight.duration}}</span><!--07 hrs 50 mins-->
-                                        </div>
-                                        <div class="flight-destination-time">
-                                            <div class="flight-time">
-                                                <h5>{{flight.arrival_time}}</h5>
-                                            </div>
-                                            <div class="flight-place">
-                                                {{flight.destination.city}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flight-details">
-                                        <div class="flight-price">
-                                            <h5>₹ {{flight.economy_fare}}</h5>
-                                        </div>
-                                        <div class="flight-details-btn">
-                                            <button class="btn btn-primary btn-danger" type="button">
-                                                Book Flight &#8594;
-                                            </button> 
-                                        </div>
-                                    </div>
-                                </div>
+                    {% else %}
+                        <div style="height: 100%; width:100%; padding: 10%;">
+                            <div style="text-align: center; margin: auto;">
+                                <svg width="4em" height="4em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                                </svg>
+                                <br><br>
+                                <h3>Sorry, No Flight for this Search</h3>
+                                <p>
+                                    We cannnot find any flights for the cabin class of your search. Please modify your search criteria and try again.
+                                </p>
                             </div>
-
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
 

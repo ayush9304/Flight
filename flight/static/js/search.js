@@ -30,4 +30,16 @@ function timeslot(slot) {
 function filter_price() {
     let value = document.querySelector(".filter-price input[type=range]").value;
     document.querySelector(".filter-price .final-price-value").innerText = value;
+
+    let div = document.querySelector("#flights_div");
+    let flights = div.querySelectorAll(".each-flight-div-box");
+    for (let i = 0; i < flights.length; i++) {
+        if (flights[i].querySelector(".flight-price span").innerText > parseInt(value)) {
+            flights[i].style.display = 'none';
+        }
+        else {
+            flights[i].style.display = 'block';
+        }
+    }
+    
 }
