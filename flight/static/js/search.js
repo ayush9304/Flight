@@ -24,6 +24,36 @@ function timeslot(slot) {
             image.style.display = 'block';
         }
     })
+
+
+    let type = slot.dataset.type;
+    let start = slot.dataset.start;
+    let end = slot.dataset.end;
+    let div = document.querySelector("#flights_div");
+    let flights = div.querySelectorAll(".each-flight-div-box");
+    if (type === 'departure') {
+        for (let i = 0; i < flights.length; i++) {
+            time = flights[i].querySelector(".flight-origin-time .flight-time h5").innerText.split(":");
+            if((parseInt(time[0]) >= parseInt(start)) && (parseInt(time[0]) < parseInt(end))) {
+                flights[i].style.display = 'block';
+            }
+            else {
+                flights[i].style.display = 'none';
+            }
+        }
+    }
+    if (type === 'arrival') {
+        for (let i = 0; i < flights.length; i++) {
+            time = flights[i].querySelector(".flight-destination-time .flight-time h5").innerText.split(":");
+            if((parseInt(time[0]) >= parseInt(start)) && (parseInt(time[0]) < parseInt(end))) {
+                flights[i].style.display = 'block';
+            }
+            else {
+                flights[i].style.display = 'none';
+            }
+        }
+    }
+
 }
 
 

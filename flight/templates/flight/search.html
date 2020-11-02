@@ -83,7 +83,7 @@
                                     <div class="time-slot">
                                         <div class="font-weight-bold">Departure Time</div>
                                         <div style="display: flex; justify-content: space-between;">
-                                            <div class="square-box" onclick="timeslot(this)">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="departure" data-start="0" data-end="6">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive">
@@ -94,7 +94,7 @@
                                                     Before 6 AM
                                                 </div>
                                             </div>
-                                            <div class="square-box" onclick="timeslot(this)">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="departure" data-start="6" data-end="12">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/noon_inactive.png' %}" alt="" data-statefor="inactive">
@@ -105,7 +105,7 @@
                                                     6 am - 12 pm
                                                 </div>
                                             </div>
-                                            <div class="square-box" onclick="timeslot(this)">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="departure" data-start="12" data-end="18">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/evening_inactive.png' %}" alt="" data-statefor="inactive">
@@ -116,7 +116,7 @@
                                                     12 pm - 6 pm
                                                 </div>
                                             </div>
-                                            <div class="square-box" onclick="timeslot(this)">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="departure" data-start="18" data-end="24">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/night_inactive.png' %}" alt="" data-statefor="inactive">
@@ -132,7 +132,7 @@
                                     <div class="time-slot">
                                         <div class="font-weight-bold">Arrival Time</div>
                                         <div style="display: flex; justify-content: space-between;">
-                                            <div class="square-box " onclick="timeslot(this)">
+                                            <div class="square-box " onclick="timeslot(this)" data-type="arrival" data-start="0" data-end="6">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive">
@@ -143,7 +143,7 @@
                                                     Before 6 AM
                                                 </div>
                                             </div>
-                                            <div class="square-box" onclick="timeslot(this)">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="arrival" data-start="6" data-end="12">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/noon_inactive.png' %}" alt="" data-statefor="inactive">
@@ -154,7 +154,7 @@
                                                     6 am - 12 pm
                                                 </div>
                                             </div>
-                                            <div class="square-box" onclick="timeslot(this)">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="arrival" data-start="12" data-end="18">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/evening_inactive.png' %}" alt="" data-statefor="inactive">
@@ -165,7 +165,7 @@
                                                     12 pm - 6 pm
                                                 </div>
                                             </div>
-                                            <div class="square-box" onclick="timeslot(this)">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="arrival" data-start="18" data-end="24">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/night_inactive.png' %}" alt="" data-statefor="inactive">
