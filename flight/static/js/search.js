@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    //
+    document.querySelector(".filter-price input[type=range]").addEventListener('input', filter_price);
+    filter_price();
 });
 
 function timeslot(slot) {
@@ -25,6 +26,8 @@ function timeslot(slot) {
     })
 }
 
-function filter_result() {
-    return false;
+
+function filter_price() {
+    let value = document.querySelector(".filter-price input[type=range]").value;
+    document.querySelector(".filter-price .final-price-value").innerText = value;
 }

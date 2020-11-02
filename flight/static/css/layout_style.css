@@ -270,6 +270,9 @@ footer .container > div{
     background-color: #fff;
     box-shadow: 0 0 5px rgba(0,0,0,.2);
     cursor: pointer;
+    max-height: 70%;
+    overflow: auto;
+    cursor: pointer;
 }
 .each_places_from_list, .each_places_to_list{
     padding: 10px 15px;
@@ -283,6 +286,7 @@ footer .container > div{
 }
 .places_box{
     display: none;
+    cursor: pointer;
 }
 .search-flight-form-data{
     position: relative;

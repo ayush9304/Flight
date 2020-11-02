@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/layout_style.css' %}">
     <script type="text/javascript" src="{% static 'js/layout.js' %}"></script>
 {% endblock head %}
 
@@ -16,29 +15,29 @@
         </div>
         <div class="search-flight">
             <div class="container">
-            <form class="search-flight-form" action="#">
+            <form class="search-flight-form" action="{% url 'flight' %}" onsubmit="return flight_search()">
                 <div class="align-items-center">
                     <div class="search-flight-form-data">
                         <div class="input-row" style="display: flex;">
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                            <input type="radio" class="form-check-input trip-type" id="one-way" name="triptype" value="1" checked>One-way
+                            <input type="radio" class="form-check-input trip-type" id="one-way" name="TripType" value="1" checked>One-way
                             </label>
                         </div>
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                            <input type="radio" class="form-check-input trip-type" id="round-trip" name="triptype" value="2">Round Trip
+                            <input type="radio" class="form-check-input trip-type" id="round-trip" name="TripType" value="2">Round Trip
                             </label>
                         </div>
                         </div>
                         <div class="input-row">
                             <label for="flight-from">From: </label>
-                            <input type="text" name="OriginCity" placeholder="From" id="flight-from" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_from">  <!--list="places_from"-->
+                            <input type="text" name="Origin" placeholder="From" id="flight-from" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_from" autocomplete="off">  <!--list="places_from"-->
                             <div id="places_from" class="places_box">
-                                <div class="each_places_from_list places__list" data-value="del" onclick="selectplace(this)">New Delhi (India)</div>
+                                <div class="each_places_from_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
                                 <div class="each_places_from_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
                                 <div class="each_places_from_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
-                                <div class="each_places_from_list places__list" data-value="tyo" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                <div class="each_places_from_list places__list" data-value="nrt" onclick="selectplace(this)">Tokyo (Japan)</div>
                                 <div class="each_places_from_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
                                 <div class="each_places_from_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
                                 <div class="each_places_from_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
@@ -46,12 +45,12 @@
                         </div>
                         <div class="input-row">
                             <label for="flight_to">To: </label>
-                            <input type="text" name="DestinationCity" placeholder="To" id="flight-to" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_to">
+                            <input type="text" name="Destination" placeholder="To" id="flight-to" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_to" autocomplete="off">
                             <div id="places_to" class="places_box">
-                                <div class="each_places_to_list places__list" data-value="del" onclick="selectplace(this)">New Delhi (India)</div>
+                                <div class="each_places_to_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
                                 <div class="each_places_to_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
                                 <div class="each_places_to_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
-                                <div class="each_places_to_list places__list" data-value="tyo" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                <div class="each_places_to_list places__list" data-value="nrt" onclick="selectplace(this)">Tokyo (Japan)</div>
                                 <div class="each_places_to_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
                                 <div class="each_places_to_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
                                 <div class="each_places_to_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
@@ -63,11 +62,11 @@
                         </div>
                         <div class="input-row">
                             <label for="return_date">Return Date: </label>
-                            <input type="date" name="ReturnDate" min="2020-09-22" max="2022-12-31" id="return_date" placeholder="Date" class="form-control mr-sm-2">
+                            <input type="date" name="ReturnDate" min="2020-09-22" max="2022-12-31" id="return_date" placeholder="Date" class="form-control mr-sm-2" disabled>
                         </div>
                         <div class="input-row">
                             <label for="seat_class">Class: </label>
-                            <select name="SeatClass" id="seat_class" class="form-control mr-sm-2">
+                            <select name="SeatClass" id="SeatType" class="form-control mr-sm-2">
                                 <option value="economy">Economy</option>
                                 <option value="business">Business</option>
                                 <option value="first">First</option>

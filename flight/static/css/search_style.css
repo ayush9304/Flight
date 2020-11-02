@@ -85,7 +85,7 @@
     padding: 20px 35px;
 }
 .filter-box > div{
-    margin: 10px 0px;
+    margin: 10px 0px 30px 0px;
 }
 .filter-div h4{
     font-weight: 800;
@@ -261,4 +261,12 @@
 }
 .sort-price{
     margin-right: 20px;
+}
+
+.price-range-output{
+    margin-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    color: #808080;
+    font-size: .8em;
 }
