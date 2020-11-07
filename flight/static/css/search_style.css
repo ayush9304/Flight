@@ -136,6 +136,7 @@
     text-decoration: none;
     background: none;
     outline: none;
+    cursor: pointer;
 }
 
 
@@ -302,4 +303,12 @@
     justify-content: space-between;
     color: #808080;
     font-size: .8em;
+}
+
+
+.show{
+    display: block;
+}
+.hide{
+    display: none;
 }
