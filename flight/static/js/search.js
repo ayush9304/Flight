@@ -1,30 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+    flight_duration();
     document.querySelector(".filter-price input[type=range]").addEventListener('input', filter_price);
     filter_price();
+    document.querySelector(".clr-filter-div button").addEventListener('click', reset_filter);
 });
 
-function timeslot(slot) {
-    slot.parentElement.querySelectorAll('.active').forEach(element => {
-        element.classList.remove('active');
-        element.querySelectorAll('img').forEach(image => {
-            if(image.dataset.statefor === 'inactive') {
-                image.style.display = 'block';
-            }
-            else {
-                image.style.display = 'none';
-            }
-        })
+function flight_duration() {
+    document.querySelectorAll(".flight-stops .tooltiptext").forEach(element => {
+        let time = element.dataset.value.split(":");
+        element.innerText = time[0]+"h "+time[1]+"m";
     });
-    slot.classList.add('active');
-    slot.querySelectorAll('img').forEach(image => {
-        if(image.dataset.statefor === 'inactive') {
-            image.style.display = 'none';
-        }
-        else {
-            image.style.display = 'block';
-        }
-    })
+}
 
+function timeslot(slot) {
+    inactive(slot);
+    active(slot);
 
     let type = slot.dataset.type;
     let start = slot.dataset.start;
@@ -56,6 +46,32 @@ function timeslot(slot) {
 
 }
 
+function active(slot) {
+    slot.classList.add('active');
+    slot.querySelectorAll('img').forEach(image => {
+        if(image.dataset.statefor === 'inactive') {
+            image.style.display = 'none';
+        }
+        else {
+            image.style.display = 'block';
+        }
+    });
+}
+function inactive(slot) {
+    slot.parentElement.querySelectorAll('.active').forEach(element => {
+        element.classList.remove('active');
+        element.querySelectorAll('img').forEach(image => {
+            if(image.dataset.statefor === 'inactive') {
+                image.style.display = 'block';
+            }
+            else {
+                image.style.display = 'none';
+            }
+        })
+    });
+}
+
+
 
 function filter_price() {
     let value = document.querySelector(".filter-price input[type=range]").value;
@@ -72,4 +88,18 @@ function filter_price() {
         }
     }
     
+}
+
+function reset_filter() {
+    document.querySelectorAll('.time-slot').forEach(slot => {
+        inactive(slot.querySelector(".square-box"));
+    });
+    let max = document.querySelector(".filter-price input[type=range]").getAttribute('max');
+    document.querySelector(".filter-price input[type=range]").value = max;
+    document.querySelector(".filter-price .final-price-value").innerText = max;
+
+    let flights = document.querySelector("#flights_div").querySelectorAll(".each-flight-div-box");
+    for (let i = 0; i < flights.length; i++) {
+            flights[i].style.display = 'block';
+    }
 }

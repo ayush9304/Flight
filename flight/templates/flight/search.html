@@ -132,7 +132,7 @@
                                     <div class="time-slot">
                                         <div class="font-weight-bold">Arrival Time</div>
                                         <div style="display: flex; justify-content: space-between;">
-                                            <div class="square-box " onclick="timeslot(this)" data-type="arrival" data-start="0" data-end="6">
+                                            <div class="square-box" onclick="timeslot(this)" data-type="arrival" data-start="0" data-end="6">
                                                 <div class="filter-img-div">
                                                     <div>
                                                         <img src="{% static 'img/morning_inactive.png' %}" alt="" data-statefor="inactive">
@@ -178,6 +178,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="clr-filter-div">
+                                    <center>
+                                        <button class="btn-link">Reset Filters</button>
+                                    </center>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +259,7 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="24" viewBox="0 0 24 24">
                                                         <path d="M13,9.03544443 C14.6961471,9.27805926 16,10.736764 16,12.5 C16,14.263236 14.6961471,15.7219407 13,15.9645556 L13,21.5207973 C13,21.7969397 12.7761424,22.0207973 12.5,22.0207973 C12.2238576,22.0207973 12,21.7969397 12,21.5207973 L12,15.9645556 C10.3038529,15.7219407 9,14.263236 9,12.5 C9,10.736764 10.3038529,9.27805926 12,9.03544443 L12,3.5 C12,3.22385763 12.2238576,3 12.5,3 C12.7761424,3 13,3.22385763 13,3.5 L13,9.03544443 L13,9.03544443 Z M12.5,15 C13.8807119,15 15,13.8807119 15,12.5 C15,11.1192881 13.8807119,10 12.5,10 C11.1192881,10 10,11.1192881 10,12.5 C10,13.8807119 11.1192881,15 12.5,15 Z" transform="rotate(90 12.5 12.51)"/>
                                                     </svg>
-                                                    <span class="tooltiptext">{{flight.duration}}</span><!--07 hrs 50 mins-->
+                                                    <span class="tooltiptext" data-value="{{flight.duration}}"></span><!--07 hrs 50 mins-->
                                                 </div>
                                                 <div class="flight-destination-time">
                                                     <div class="flight-time">

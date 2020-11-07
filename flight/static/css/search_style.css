@@ -126,6 +126,18 @@
     margin-left: auto;
     margin-right: auto;
 }
+.btn-link{
+    background: none;
+    border: none;
+    outline: none;
+    color: blue;
+}
+.btn-link:hover, .btn-link:focus, .btn-link:active{
+    text-decoration: none;
+    background: none;
+    outline: none;
+}
+
 
 .each-flight-div{
     display: flex;
