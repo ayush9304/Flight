@@ -31,27 +31,44 @@
             <a class="nav-link" href="{% url 'index' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">My Trips</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+              Manage Bookings
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">View/Edit Booking</a>
+              <a class="dropdown-item" href="#">Print Ticket</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="#">Cancel Booking</a>
             </div>
           </li>
+        </ul>
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            {% if user.is_authenticated %}
+              <button class="btn btn-outline-danger" onclick="window.location.href = '#';">
+                <svg width="1.1em" height="1.1em" viewBox="0 1.5 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+                Login
+              </button>
+            {% else %}
+              <button class="btn btn-outline-danger" onclick="window.location.href = '#';">
+                <svg width="1.1em" height="1.1em" viewBox="0 1.5 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+                  <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+                </svg>
+                Logout
+              </button>
+            {% endif %}
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <!--<form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search destinations..." aria-label="Search">
           <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        </form>-->
       </div>
     </nav>
 
