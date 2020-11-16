@@ -10,5 +10,6 @@ urlpatterns = [
     path("bookpage", views.book, name="book"),
     path("paymentpage", views.payment, name="payment"),
     path("query/places/<str:q>", views.query, name="query"),
-    path("flight", views.flight, name="flight")
+    path("flight", views.flight, name="flight"),
+    path("review", views.review, name="review")
 ]

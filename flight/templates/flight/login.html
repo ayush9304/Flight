@@ -1,0 +1,58 @@
+{% extends "flight/layout2.html" %}
+
+{% load static %}
+
+{% block title %}
+    Sign In | Network
+{% endblock %}
+
+{% block body %}
+    <div class="user-box">
+        <div>
+            <center>
+                <img src="{% static 'img/icon_logo.png' %}" height="35em" style="margin-bottom: 2vh;">
+                <h3>Log in to Network</h3><br>
+            </center>
+        </div>
+    
+        <form action="{% url 'login' %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control inp usrnm" type="text" name="username" placeholder="Username" autocomplete="off" autofocus>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp pswd" type="password" name="password" placeholder="Password" autocomplete="off">
+                <span class="star"><small>{{message}}</small></span>
+            </div>
+            <center>
+                <input class="btn btn-danger" type="submit" value="Log in" style="margin-top: 10px; width: 95%;" disabled>
+            </center>
+        </form>
+    
+        <div>
+            <center>
+                Don't have an account?&nbsp;&nbsp;<a href="{% url 'register' %}">Sign Up</a>
+            </center>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".inp").forEach(input => {
+                input.addEventListener('input', () => {
+                    if ((document.querySelector('.usrnm').value.length === 0) || (document.querySelector('.pswd').value.length === 0)) {
+                        document.querySelector('input[type="submit"]').disabled = true;
+                    }
+                    else {
+                        document.querySelector('input[type="submit"]').disabled = false;
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+

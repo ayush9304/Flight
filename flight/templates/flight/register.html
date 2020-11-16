@@ -1,0 +1,65 @@
+{% extends "flight/layout2.html" %}
+
+{% load static %}
+
+{% block title %}
+    Sign Up | Network
+{% endblock %}
+
+{% block script %}
+    <script type"text/javascript" src="{% static 'js/signup.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="user-box" style="margin-top: 6vh;">
+        <div>
+            <center>
+                <img src="{% static 'img/icon_logo.png' %}" height="35em" style="margin-bottom: 2vh;">
+                <h3>Sign up for Network</h2><br>
+            </center>
+        </div>
+    
+        <form action="{% url 'register' %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="form-row align-items-center">
+                <div class="col-sm-6 my-1">
+                    <input class="form-control inp fname" type="text" name="firstname" placeholder="First Name *" autocomplete="off" autofocus>
+                    <span class="star small"></span>
+                </div>
+                <div class="col-sm-6 my-1">
+                    <input class="form-control inp lname" type="text" name="lastname" placeholder="Last Name *" autocomplete="off">
+                    <span class="star small"></span>
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp usrname" type="text" name="username" placeholder="Username *" autocomplete="off">
+                <span class="star small">{{message}}</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp email" type="email" name="email" placeholder="Email Address *" autocomplete="off">
+                <span class="star small"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp pswd" type="password" name="password" placeholder="Password *" autocomplete="off">
+                <span class="star small"></span>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp cpswd" type="password" name="confirmation" placeholder="Confirm Password *" autocomplete="off">
+                <span class="star small"></span>
+            </div>
+
+
+            <center>
+                <input class="btn btn-danger" type="submit" value="Sign Up" style="margin-top: 10px; width: 95%;" disabled>
+            </center>
+        </form>
+    
+        <div>
+            <center>
+                Already have an account?&nbsp;&nbsp;<a href="{% url 'login' %}">Log in</a>
+            </center>
+        </div><br><br>
+    </div>
+{% endblock %}

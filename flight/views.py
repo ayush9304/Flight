@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import calendar
 import math
 from .models import *
@@ -23,9 +23,6 @@ def book(request):
 def payment(request):
     return render(request, 'flight/payment.html')
 
-#def search(request):
-#    from = request.GET.get('from')
-#    to = request.GET.get('to')
 
 def login_view(request):
     if request.method == "POST":
@@ -46,7 +43,34 @@ def login_view(request):
             return render(request, "flight/login.html")
 
 def register_view(request):
-    return render(request, "flight/register.html")
+    if request.method == "POST":
+        fname = request.POST['firstname']
+        lname = request.POST['lastname']
+        username = request.POST["username"]
+        email = request.POST["email"]
+
+        # Ensuring password matches confirmation
+        password = request.POST["password"]
+        confirmation = request.POST["confirmation"]
+        if password != confirmation:
+            return render(request, "flight/register.html", {
+                "message": "Passwords must match."
+            })
+
+        # Attempt to create new user
+        try:
+            user = User.objects.create_user(username, email, password)
+            user.first_name = fname
+            user.last_name = lname
+            user.save()
+        except:
+            return render(request, "flight/register.html", {
+                "message": "Username already taken."
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("index"))
+    else:
+        return render(request, "flight/register.html")
 
 def logout_view(request):
     logout(request)
@@ -112,4 +136,22 @@ def flight(request):
         'return_date': return_date,
         'max_price': math.ceil(max_price/100)*100,
         'min_price': math.floor(min_price/100)*100
+    })
+
+def review(request):
+    flight_1 = request.GET.get('flight1Id')
+    date1 = request.GET.get('flight1Date')
+    flight1 = Flight.objects.get(id=flight_1)
+    flight1ddate = datetime(int(date1.split('-')[2]),int(date1.split('-')[1]),int(date1.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
+    flight1adate = (flight1ddate + flight1.duration)
+    print("//////////////////////////////////")
+    print(f"flight1ddate: {flight1ddate}")
+    print("//////////////////////////////////")
+    print(f"flight1.duration: {flight1.duration.total_seconds()}")
+    print("//////////////////////////////////")
+    print(f"flight1adate: {flight1adate}")
+    return render(request, "flight/book.html", {
+        'flight1': flight1,
+        "flight1ddate": flight1ddate,
+        "flight1adate": flight1adate
     })

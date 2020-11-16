@@ -16,48 +16,48 @@
                     <hr>
                     <div class="row ticket-details-div">
                         <div class="col-3 airline-name">
-                            <div class="brand">All Nippon Airways</div>
-                            <div class="plane-name">B747-8I</div>
+                            <div class="brand">{{flight1.airline}}</div>
+                            <div class="plane-name">{{flight1.plane}}</div>
                         </div>
                         <div class="col-3 depart-time">
-                            <div class="time">18:45</div>
-                            <div class="date">Fri, 08 Jan 21</div>
-                            <div class="place">New Delhi</div>
-                            <div class="airport">Indira Gandhi International Airport</div>
+                            <div class="time">{{flight1.depart_time}}</div>
+                            <div class="date ddate" data-value="{{flight1ddate | date:"d-m-Y"}}">{{flight1ddate | date:"D, d M y"}}</div>
+                            <div class="place">{{flight1.origin.city}}</div>
+                            <div class="airport">{{flight1.origin.airport}}</div>
                         </div>
                         <div class="col-3 time-details">
-                            <div class="duration">07 hrs 50 mins</div>
+                            <div class="duration" data-value="{{flight1.duration}}"></div>
                         </div>
                         <div class="col-3 arrival-time">
-                            <div class="time">06:05</div>
-                            <div class="date">Sat, 09 Jan 21</div>
-                            <div class="place">Tokyo</div>
-                            <div class="airport">Haneda Airport</div>
+                            <div class="time">{{flight1.arrival_time}}</div>
+                            <div class="date adate" data-value="{{flight1adate | date:"d-m-Y"}}">{{flight1adate | date:"D, d M y"}}</div>
+                            <div class="place">{{flight1.destination.city}}</div>
+                            <div class="airport">{{flight1.destination.airport}}</div>
                         </div>
                     </div>
-                    {% if True %}
+                    {% if flight2 %}
                         <!--Round Trip-->
                         <div style="padding: 0 15px;"><hr style="border-top: 0.5px dashed rgba(0,0,0,.1);"></div>
                         <!--/Round Trip-->
                         <div class="row ticket-details-div">
                             <div class="col-3 airline-name">
-                                <div class="brand">All Nippon Airways</div>
-                                <div class="plane-name">B747-8I</div>
+                                <div class="brand">{{flight2.airline}}</div>
+                                <div class="plane-name">{{flight2.plane}}</div>
                             </div>
                             <div class="col-3 depart-time">
-                                <div class="time">10:15</div>
-                                <div class="date">Fri, 15 Jan 2021</div>
-                                <div class="place">Tokyo</div>
-                                <div class="airport">Haneda Airport</div>
+                                <div class="time">{{flight2.depart_time}}</div>
+                                <div class="date ddate">{{flight2date | date:"D, d M y"}}</div>
+                                <div class="place">{{flight2.origin.city}}</div>
+                                <div class="airport">{{flight2.origin.airport}}</div>
                             </div>
                             <div class="col-3 time-details">
-                                <div class="duration">10 hrs 20 mins</div>
+                                <div class="duration" data-value="{{flight2.duration}}"></div>
                             </div>
                             <div class="col-3 arrival-time">
-                                <div class="time">17:05</div>
-                                <div class="date">Fri, 15 Jan 2021</div>
-                                <div class="place">New Delhi</div>
-                                <div class="airport">Indira Gandhi International Airport</div>
+                                <div class="time">{{flight2.arrival_time}}</div>
+                                <div class="date adate">Fri, 15 Jan 2021</div>
+                                <div class="place">{{flight2.departure.city}}</div>
+                                <div class="airport">{{flight2.departure.airport}}</div>
                             </div>
                         </div>
                     {% endif %}

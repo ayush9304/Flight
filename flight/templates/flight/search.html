@@ -38,7 +38,13 @@
                     </div>
                     <div class="return-date-div">
                         <div class="small-label">Return</div>
-                        <div class="white">{{return_date|date:"D, d M Y"|default_if_none:"--"}}</div>
+                        <div class="white">
+                            {% if return_date %}
+                                {{return_date|date:"D, d M Y"}}
+                            {% else %}
+                                --
+                            {% endif %}
+                        </div>
                     </div>
                 </div><div class="v-line"></div>
                 <div class="trip-class">
@@ -282,9 +288,13 @@
                                                     </h5>
                                                 </div>
                                                 <div class="flight-details-btn">
-                                                    <button class="btn btn-primary btn-danger" type="button">
-                                                        Book Flight &#8594;
-                                                    </button> 
+                                                    <form action="{% url 'review' %}" method="GET">
+                                                        <input type="hidden" name="flight1Id" value="{{flight.id}}">
+                                                        <input type="hidden" name="flight1Date", value="{{depart_date|date:'d-m-Y'}}">
+                                                        <button class="btn btn-primary btn-danger" type="submit">
+                                                            Book Flight &#8594;
+                                                        </button>
+                                                    </form> 
                                                 </div>
                                             </div>
                                         </div>
