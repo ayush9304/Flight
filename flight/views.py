@@ -141,17 +141,16 @@ def flight(request):
 def review(request):
     flight_1 = request.GET.get('flight1Id')
     date1 = request.GET.get('flight1Date')
+    seat = request.GET.get('seatClass')
     flight1 = Flight.objects.get(id=flight_1)
     flight1ddate = datetime(int(date1.split('-')[2]),int(date1.split('-')[1]),int(date1.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
     flight1adate = (flight1ddate + flight1.duration)
-    print("//////////////////////////////////")
-    print(f"flight1ddate: {flight1ddate}")
-    print("//////////////////////////////////")
-    print(f"flight1.duration: {flight1.duration.total_seconds()}")
-    print("//////////////////////////////////")
-    print(f"flight1adate: {flight1adate}")
+    #print("//////////////////////////////////")
+    #print(f"flight1ddate: {flight1adate-flight1ddate}")
+    #print("//////////////////////////////////")
     return render(request, "flight/book.html", {
         'flight1': flight1,
         "flight1ddate": flight1ddate,
-        "flight1adate": flight1adate
+        "flight1adate": flight1adate,
+        "seat": seat
     })

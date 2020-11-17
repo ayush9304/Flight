@@ -125,6 +125,27 @@ h5{
     color: red;
 }
 
+.contact-details-div{
+    margin: 13px 10px;
+    padding: 10px;
+    flex-flow: column;
+}
+.contact-details form{
+    flex: 1;
+}
+.ci{
+    font-weight: 400;
+    color: #4a4a4a;
+    font-size: .9em;
+}
+.cd{
+    font-weight: 550;
+}
+.send-email{
+    font-size: .87em;
+    color: grey;
+    padding-top: 13px;
+}
 .add-traveller-div{
     border: 1px solid lightgrey;
     border-radius: 5px;

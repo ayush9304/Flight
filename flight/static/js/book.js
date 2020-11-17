@@ -7,8 +7,6 @@ function flight_duration() {
         let time = element.dataset.value.split(":");
         element.innerText = time[0]+"h "+time[1]+"m";
     });
-    //let now = new Date();
-    //console.log(now.addHours(5).getDate());
 }
 
 //function flight_date() {
@@ -18,17 +16,6 @@ function flight_duration() {
 //    });
 //}
 
-Date.prototype.addSeconds = function(seconds) {
-    this.setSeconds(this.getSeconds() + seconds);
-    return this;
-};
-
-Date.prototype.addMinutes = function(minutes) {
-    this.setMinutes(this.getMinutes() + minutes);
-    return this;
-};
-
-Date.prototype.addHours = function(hours) {
-    this.setHours(this.getHours() + hours);
-    return this;
-};
+function book_submit() {
+    //
+}
