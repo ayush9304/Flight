@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from datetime import datetime
+
 # Create your models here.
 
 class User(AbstractUser):
@@ -42,9 +44,40 @@ class Flight(models.Model):
         return f"{self.id}: {self.origin} to {self.destination}"
 
 
+
+GENDER = (
+    ('male','MALE'),    #(actual_value, human_readable_value)
+    ('female','FEMALE')
+)
+
 class Passenger(models.Model):
-    passenger = models.ForeignKey(User, on_delete=models.CASCADE, related_name="flights")
-    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name="passengers")
+    first_name = models.CharField(max_length=64, blank=True)
+    last_name = models.CharField(max_length=64, blank=True)
+    gender = models.CharField(max_length=20, choices=GENDER, blank=True)
+    #passenger = models.ForeignKey(User, on_delete=models.CASCADE, related_name="flights")
+    #flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name="passengers")
 
     def __str__(self):
-        return f"Passenger: {self.passenger} | Flight: {self.flight}"
+        return f"Passenger: {self.first_name} {self.last_name}, {self.gender}"
+
+
+
+SEAT_CLASS = (
+    ('economy', 'Economy'),
+    ('business', 'Business'),
+    ('first', 'First')
+)
+
+TICKET_STATUS =(
+    ('PENDING', 'Pending'),
+    ('CONFIRMED', 'Confirmed')
+)
+
+class Ticket(models.Model):
+    ref_no = models.CharField(max_length=6, unique=True)
+    passengers = models.ManyToManyField(Passenger, related_name="flight_tickets")
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name="tickets")
+    flight_date = models.DateField()
+    seat_class = models.CharField(max_length=20, choices=SEAT_CLASS)
+    booking_date = models.DateTimeField(default=datetime.now)
+    status = models.CharField(max_length=45, choices=TICKET_STATUS)

@@ -9,19 +9,24 @@ import calendar
 import math
 from .models import *
 
+
+#Fee and Surcharge variable
+from .constant import FEE
+
+
 # Create your views here.
 
 def index(request):
     return render(request, 'flight/index.html')
 
-def search(request):
-    return render(request, 'flight/search.html')
+#def search(request):
+#    return render(request, 'flight/search.html')
 
-def book(request):
-    return render(request, 'flight/book.html')
+#def book(request):
+#    return render(request, 'flight/book.html')
 
-def payment(request):
-    return render(request, 'flight/payment.html')
+#def payment(request):
+#    return render(request, 'flight/payment.html')
 
 
 def login_view(request):
@@ -32,6 +37,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
+            
         else:
             return render(request, "flight/login.html", {
                 "message": "Invalid username and/or password."
@@ -139,18 +145,32 @@ def flight(request):
     })
 
 def review(request):
+
     flight_1 = request.GET.get('flight1Id')
     date1 = request.GET.get('flight1Date')
     seat = request.GET.get('seatClass')
-    flight1 = Flight.objects.get(id=flight_1)
-    flight1ddate = datetime(int(date1.split('-')[2]),int(date1.split('-')[1]),int(date1.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
-    flight1adate = (flight1ddate + flight1.duration)
-    #print("//////////////////////////////////")
-    #print(f"flight1ddate: {flight1adate-flight1ddate}")
-    #print("//////////////////////////////////")
-    return render(request, "flight/book.html", {
-        'flight1': flight1,
-        "flight1ddate": flight1ddate,
-        "flight1adate": flight1adate,
-        "seat": seat
-    })
+
+    if request.user.is_authenticated:
+        flight1 = Flight.objects.get(id=flight_1)
+        flight1ddate = datetime(int(date1.split('-')[2]),int(date1.split('-')[1]),int(date1.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
+        flight1adate = (flight1ddate + flight1.duration)
+        #print("//////////////////////////////////")
+        #print(f"flight1ddate: {flight1adate-flight1ddate}")
+        #print("//////////////////////////////////")
+        return render(request, "flight/book.html", {
+            'flight1': flight1,
+            "flight1ddate": flight1ddate,
+            "flight1adate": flight1adate,
+            "seat": seat,
+            "fee": FEE
+        })
+    else:
+        return HttpResponseRedirect(reverse("login"))
+
+def book(request):
+
+
+    #flight1=11   flight2=   flight1Date=17-01-2021   flight2Date=   countryCode=91   mobile=1234567890   email=liuyang%40mail.com   passengersCount=1   passenger1FName=Liu   passenger1LName=Yang   passenger1Gender=female   coupon=
+
+
+    return render(request, "flight/payment.html")

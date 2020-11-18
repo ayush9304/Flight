@@ -9,7 +9,7 @@
 
 {% block body %}
     <section class="section section1">
-        <form action="#" onsubmit="return book_submit()" method="POST">
+        <form action="{% url 'book' %}" onsubmit="return book_submit()" method="POST">
             {% csrf_token %}
             <input type="hidden" name="flight1" value="{{flight1.id}}">
             <input type="hidden" name="flight2" value="{{flight2.id}}">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-3 arrival-time">
                             <div class="time">{{flight1.arrival_time}}</div>
-                            <div class="date adate" data-value="{{flight1adate | date:"d-m-Y"}}">{{flight1adate | date:"D, d M y"}}</div>
+                            <div class="date adate" data-value='{{flight1adate | date:"d-m-Y"}}'>{{flight1adate | date:"D, d M y"}}</div>
                             <div class="place">{{flight1.destination.city}}</div>
                             <div class="airport">{{flight1.destination.airport}}</div>
                         </div>
@@ -327,24 +327,30 @@
                 </div>
                 <div class="traveller-details">
                     <div class="traveller-head">
-                        <h5>Traveller Details</h5>
-                        <h6>0 Passengers</h6>
+                        <h5>Passenger Details</h5>
+                        <h6><span>0</span> Passengers</h6>
                     </div>
                     <hr>
-                    <!--<div class="row each-traveller">
-                        <div>
-                            <span class="traveller-name">Ayush Kumar,</span>
-                            MALE
-                        </div>
-                        <div class="delete-traveller">
-                            <button class="btn">
-                                <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>-->
+                    <input type="hidden" id="p-count" name="passengersCount" value="0">
+                    <div class="each-traveller-div">
+                        <!--<div class="row each-traveller">
+                            <div>
+                                <span class="traveller-name">Fname Lname</span><span>,</span>
+                                <span class="traveller-gender">MALE</span>
+                                <input type="hidden" name="passenger1FName" value="Fname">
+                                <input type="hidden" name="passenger1LName" value="Lname">
+                                <input type="hidden" name="passenger1Gender" value="male">
+                            </div>
+                            <div class="delete-traveller">
+                                <button class="btn" type="button" onclick="del_traveller(this)">
+                                    <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>-->
+                    </div>
                     <div class="row each-traveller no-traveller">
                         <div>
                             <span class="traveller-name"></span>
@@ -355,10 +361,10 @@
                         <div class="note-name"><span>IMPORTANT :</span> Enter your name as it is mentioned on your passport or any government approved ID.</div>
                         <div class="row form-group">
                             <div class="col">
-                                <input type="text" name="fname" class="form-control" placeholder="First name" required>
+                                <input type="text" class="form-control" id="fname" placeholder="First name">
                             </div>
                             <div class="col">
-                                <input type="text" name="lname" class="form-control" placeholder="Last name" required>
+                                <input type="text" class="form-control" id="lname" placeholder="Last name">
                             </div>
                         </div>
                         
@@ -368,16 +374,16 @@
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="gender" required>Male
+                                    <input type="radio" class="form-check-input gender" name="gender" value="male">Male
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="gender" required>Female
+                                    <input type="radio" class="form-check-input gender" name="gender" value="female">Female
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-light" style="margin-right: auto;">Add</button>
+                        <button type="button" class="btn btn-primary btn-light" style="margin-right: auto;" onclick="add_traveller()">Add</button>
                     </div>
                     <hr>
                     <div class="add-traveller">
@@ -406,18 +412,18 @@
                     </div>
                     <div class="row surcharges">
                         <div class="surcharges-label">Fee & Surcharges: </div>
-                        <div class="surcharges-value">₹ 0.0</div>
+                        <div class="surcharges-value">₹ {{fee}}</div>
                     </div>
                     <hr>
                     <div class="total-fare">
                         <div class="total-fare-label">Total Fare: </div>
                         <div class="total-fare-value">
                             {% if seat == 'First' %}
-                                ₹ {{flight1.first_fare}}
+                                ₹ {{flight1.first_fare | add:fee}}
                             {% elif seat == 'Business' %}
-                                ₹ {{flight1.business_fare}}
+                                ₹ {{flight1.business_fare | add:fee}}
                             {% elif seat == 'Economy' %}
-                                ₹ {{flight1.economy_fare}}
+                                ₹ {{flight1.economy_fare | add:fee}}
                             {% endif %}
                         </div>
                     </div>

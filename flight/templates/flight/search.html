@@ -288,7 +288,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="flight-details-btn">
-                                                    <form action="{% url 'review' %}" method="GET">
+                                                    <form action="{% url 'review' %}" method="GET" style="display: flex;">
                                                         <input type="hidden" name="flight1Id" value="{{flight.id}}">
                                                         <input type="hidden" name="flight1Date", value="{{depart_date|date:'d-m-Y'}}">
                                                         <input type="hidden" name="seatClass" value="{{seat}}">
