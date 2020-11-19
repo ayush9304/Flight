@@ -226,7 +226,7 @@ def payment(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             ticket_id = request.POST['ticket']
-            fare = request.POST['fare']
+            fare = request.POST.get('fare')
             card_number = request.POST['cardNumber']
             card_holder_name = request.POST['cardHolderName']
             exp_month = request.POST['expMonth']
@@ -237,10 +237,26 @@ def payment(request):
                 ticket = Ticket.objects.get(id=ticket_id)
                 ticket.status = 'CONFIRMED'
                 ticket.save()
-                return render(request, 'flight/payment_processing.html')
+                return render(request, 'flight/payment_process.html', {
+                    'ref1': ticket.ref_no,
+                    'ref2': ""
+                })
             except Exception as e:
                 return HttpResponse(e)
         else:
             return HttpResponse("Method must be post.")
     else:
         return HttpResponseRedirect(reverse('login'))
+
+#def temp(request):
+#    return render(request, 'flight/payment_process.html')
+
+def ticket_data(request, ref):
+    ticket = Ticket.objects.get(ref_no=ref)
+    return JsonResponse({
+        'ref': ticket.ref_no,
+        'from': ticket.flight.origin.code,
+        'to': ticket.flight.destination.code,
+        'flight_date': ticket.flight_date,
+        'status': ticket.status
+    })

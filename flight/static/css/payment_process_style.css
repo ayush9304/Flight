@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.section1{
+    display: block;
+}
+
+.gif-div{
+    display: flex;
+    margin-top: 10px;
+}
+.gif-div img{
+    margin: auto;
+    width: 300px;
+}
+
+.header-before{
+    font-size: 1.6em;
+    text-align: center;
+    color: orange;
+}
+
+.below-header{
+    text-align: center;
+    color: rgb(70, 70, 70);
+    margin-top: 10px;
+    font-size: .95em;
+}
+
+
+@keyframes enlarge{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.section2{
+    display: none;
+}
+.svg-div-c{
+    display: flex;
+    margin-top: 110px;
+}
+
+.section2 .svg-div-c svg{
+    animation-name: enlarge;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    color: rgb(32, 227, 100);
+    margin: auto;
+}
+.header-after{
+    color: green;
+    font-size: 1.5em;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 20px;
+}
+.details-div{
+    text-align: center;
+    margin-top: 20px;
+}
+.ticket-div{
+    display: flex;
+    margin-top: 20px;
+}
+.ticket-div button{
+    margin: auto;
+}
+.flight2{
+    display: none;
+}
+
+
+.section3{
+    display: none;
+}
+.svg-div-e{
+    display: flex;
+    margin-top: 110px;
+}
+
+.section3 .svg-div-e svg{
+    animation-name: enlarge;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    color: rgb(215, 0, 0);
+    margin: auto;
+}
+.star{
+    color: rgb(200, 0, 0);
+}

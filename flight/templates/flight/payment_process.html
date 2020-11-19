@@ -3,5 +3,55 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/payment_process.css' %}">
+    <link rel="stylesheet" href="{% static 'css/payment_process_style.css' %}">
+    <script type="text/javascript" src="{% static 'js/payment_process.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <section class="section section1">
+        <div class="gif-div">
+            <img src="{% static 'img/process.gif' %}" alt="processing">
+        </div>
+        <div class="header-before">
+            Processing Payment...
+        </div>
+        <div class="below-header">
+            Please wait while we are processing your payment.
+        </div>
+    </section>
+    <input type="hidden" class="ref1" value="{{ref1}}">
+    <input type="hidden" class="ref2" value="{{ref2}}">
+    <section class="section section2">
+        <div class="svg-div-c">
+            <svg width="5em" height="5em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </svg>
+        </div>
+        <div class="header-after">
+            Congratulations, Your flight booking is confirmed.
+        </div>
+        <div class="details-div">
+            <div class="flight1">Booking Reference Number: &nbsp;<span class="ref">EAH82E</span>&nbsp;&nbsp;&nbsp;(<span class="from1">GAU</span> <span>&#8594;</span> <span class="to1">DEL</span>)</div>
+            <div class="flight2">Booking Reference Number: &nbsp;<span class="ref">ECV39R</span>&nbsp;&nbsp;&nbsp;(<span class="from2">DEL</span> <span>&#8592;</span> <span class="to2">GAU</span>)</div>
+        </div>
+        <div class="ticket-div">
+            <button class="btn btn-outline-primary">Print Ticket</button>
+        </div>
+    </section>
+    <section class="section section3">
+        <div class="svg-div-e">
+            <svg width="5em" height="5em" viewBox="0 0 16 16" class="bi bi-x-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+            </svg>
+        </div>
+        <div class="header-after star">
+            There was an error while processing the payment.
+        </div>
+        <div class="below-header">
+            Please retry after sometime.
+        </div>
+        <div class="ticket-div">
+            <button class="btn btn-outline-primary" onclick="window.location.href = '/'">Go Home</button>
+        </div>
+    </section>
 {% endblock %}

@@ -12,5 +12,10 @@ urlpatterns = [
     path("query/places/<str:q>", views.query, name="query"),
     path("flight", views.flight, name="flight"),
     path("review", views.review, name="review"),
-    path("flight/ticket/book", views.book, name="book")
+    path("flight/ticket/book", views.book, name="book"),
+    path("flight/ticket/payment", views.payment, name="payment"),
+    ############################################
+    #path("process", views.temp),
+    ############################################
+    path('flight/ticket/<str:ref>', views.ticket_data, name="ticketdata")
 ]
