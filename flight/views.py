@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from datetime import datetime, timedelta
 import calendar
 import math
+import secrets
 from .models import *
 
 
@@ -168,9 +169,78 @@ def review(request):
         return HttpResponseRedirect(reverse("login"))
 
 def book(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            flight_1 = request.POST.get('flight1')
+            flight_2 = request.POST.get('flight2')
+            flight_1date = request.POST.get('flight1Date')
+            flight_2date = request.POST.get('flight2Date')
+            flight_1class = request.POST.get('flight1Class')
+            flight_2class = request.POST.get('flight2Class')
+            countrycode = request.POST['countryCode']
+            mobile = request.POST['mobile']
+            email = request.POST['email']
+            flight1 = Flight.objects.get(id=flight_1)
+            passengerscount = request.POST['passengersCount']
+            passengers=[]
+            for i in range(1,int(passengerscount)+1):
+                fname = request.POST[f'passenger{i}FName']
+                lname = request.POST[f'passenger{i}LName']
+                gender = request.POST[f'passenger{i}Gender']
+                passengers.append(Passenger.objects.create(first_name=fname,last_name=lname,gender=gender.lower()))
+            coupon = request.POST.get('coupon')
+            
+            try:
+                ticket = Ticket.objects.create()
+                ticket.user = request.user
+                ticket.ref_no = secrets.token_hex(3).upper()
+                for passenger in passengers:
+                    ticket.passengers.add(passenger)
+                ticket.flight = flight1
+                ticket.flight_date = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]))
+                ticket.seat_class = flight_1class.lower()
+                ticket.status = 'PENDING'
+                ticket.mobile = ('+'+countrycode+' '+mobile)
+                ticket.email = email
+                ticket.save()
+                if(flight_1class == 'Economy'):
+                    fare = flight1.economy_fare
+                elif (flight_1class == 'Business'):
+                    fare = flight1.business_fare
+                elif (flight_1class == 'First'):
+                    fare = flight1.first_fare
+            except Exception as e:
+                return HttpResponse(e)
+            
 
+            return render(request, "flight/payment.html", {
+                'fare': fare,
+                'ticket': ticket.id
+            })
+        else:
+            return HttpResponseRedirect(reverse("login"))
+    else:
+        return HttpResponse("Method must be post.")
 
-    #flight1=11   flight2=   flight1Date=17-01-2021   flight2Date=   countryCode=91   mobile=1234567890   email=liuyang%40mail.com   passengersCount=1   passenger1FName=Liu   passenger1LName=Yang   passenger1Gender=female   coupon=
+def payment(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            ticket_id = request.POST['ticket']
+            fare = request.POST['fare']
+            card_number = request.POST['cardNumber']
+            card_holder_name = request.POST['cardHolderName']
+            exp_month = request.POST['expMonth']
+            exp_year = request.POST['expYear']
+            cvv = request.POST['cvv']
 
-
-    return render(request, "flight/payment.html")
+            try:
+                ticket = Ticket.objects.get(id=ticket_id)
+                ticket.status = 'CONFIRMED'
+                ticket.save()
+                return render(request, 'flight/payment_processing.html')
+            except Exception as e:
+                return HttpResponse(e)
+        else:
+            return HttpResponse("Method must be post.")
+    else:
+        return HttpResponseRedirect(reverse('login'))

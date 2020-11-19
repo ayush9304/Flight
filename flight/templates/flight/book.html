@@ -15,6 +15,8 @@
             <input type="hidden" name="flight2" value="{{flight2.id}}">
             <input type="hidden" name="flight1Date" value='{{flight1ddate | date:"d-m-Y"}}'>
             <input type="hidden" name="flight2Date" value='{{flight2ddate | date:"d-m-Y"}}'>
+            <input type="hidden" name="flight1Class" value="{{seat}}">
+            <input type="hidden" name="flight2Class" value="{{seat}}">
             <div class="row">
                 <div class="col-8">
                 <div class="ticket-details">
@@ -374,12 +376,12 @@
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input gender" name="gender" value="male">Male
+                                    <input type="radio" class="form-check-input gender" value="male">Male
                                 </label>
                             </div>
                             <div class="form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input gender" name="gender" value="female">Female
+                                    <input type="radio" class="form-check-input gender" value="female">Female
                                 </label>
                             </div>
                         </div>

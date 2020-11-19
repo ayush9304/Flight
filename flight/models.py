@@ -74,10 +74,13 @@ TICKET_STATUS =(
 )
 
 class Ticket(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="bookings", blank=True, null=True)
     ref_no = models.CharField(max_length=6, unique=True)
     passengers = models.ManyToManyField(Passenger, related_name="flight_tickets")
-    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name="tickets")
-    flight_date = models.DateField()
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name="tickets", blank=True, null=True)
+    flight_date = models.DateField(blank=True, null=True)
     seat_class = models.CharField(max_length=20, choices=SEAT_CLASS)
     booking_date = models.DateTimeField(default=datetime.now)
+    mobile = models.CharField(max_length=20,blank=True)
+    email = models.EmailField(max_length=45, blank=True)
     status = models.CharField(max_length=45, choices=TICKET_STATUS)
