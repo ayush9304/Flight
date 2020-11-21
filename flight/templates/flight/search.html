@@ -63,7 +63,7 @@
                         <input type="hidden" name="ReturnDate" value='{{return_date|date:"Y-m-d"}}'>
                         <input type="hidden" name="SeatClass" value="{{seat|lower}}">
                         <input type="hidden" name="TripType" value="{{trip_type}}">
-                        <button class="btn" type="submit">Modify Search</button>
+                        <button class="btn spl-btn" type="submit">Modify Search</button>
                     </form>
                 </div>
             </div>
@@ -332,5 +332,62 @@
             </div>
 
         </div>
+        {% if trip_type == '2' %}
+            <div class="selection-div">
+                <div class="col-3">
+                    <div class="white">
+                        <div>
+                            <span>{{origin.code|upper}}</span>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                            <span>{{destination.code|upper}}</span>&nbsp;&nbsp;@&nbsp;&nbsp;₹ <span>3197.0</span><!---->
+                        </div>
+                        <div class="white-2">
+                            <span>B737</span><!---->
+                            &nbsp;&nbsp;
+                            <span>20:45</span><!---->
+                            •
+                            <span>23:25</span><!---->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="white">
+                        <div>
+                            <span>{{destination.code|upper}}</span>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                            <span>{{origin.code|upper}}</span>&nbsp;&nbsp;@&nbsp;&nbsp;₹ <span>2785.0</span><!---->
+                        </div>
+                        <div class="white-2">
+                            <span>B737</span><!---->
+                            &nbsp;&nbsp;
+                            <span>17:30</span><!---->
+                            •
+                            <span>20:05</span><!---->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="white">
+                        <div class="white-2">
+                            <span>TOTAL FARE</span>
+                        </div>
+                        <div>
+                            <span>₹ <span>2785.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="white">
+                        <div>
+                            <button class="btn btn-light">Continue &#8594;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </section>
 {% endblock %}

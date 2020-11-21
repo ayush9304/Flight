@@ -8,6 +8,9 @@
     color: white;
     font-size: large;
 }
+.white-2{
+    font-size: medium;
+}
 .v-line{
     border-left: 1px dashed rgba(255, 255, 255, .9);
     height: 100%;
@@ -58,6 +61,8 @@
     padding-right: 12px;
 }
 .trip-modify button{
+}
+.spl-btn{
     transition-duration: .2s;
     color: white;
     border-color: white;
@@ -311,4 +316,25 @@
 }
 .hide{
     display: none;
+}
+
+
+.selection-div{
+    position: fixed;
+    z-index: 99999;
+    background-image: linear-gradient(135deg, rgba(220, 20, 60, .85), rgba(184,1,123,.85));
+    height: 10%;
+    width: 100%;
+    bottom: 0;
+    box-shadow:  0 0 15px rgba(0, 0, 0, .1);
+    display: flex;
+    color: white;
+    justify-content: space-evenly;
+}
+.selection-div > div{
+    text-align: center;
+    display: flex;
+}
+.selection-div > div > div{
+    margin: auto;
 }
