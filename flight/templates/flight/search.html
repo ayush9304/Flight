@@ -55,7 +55,16 @@
                 </div>
                 <div class="v-line"></div>
                 <div class="trip-modify">
-                    <button class="btn">Modify Search</button>
+                    <form action="/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="Origin" value="{{origin.code|upper}}">
+                        <input type="hidden" name="Destination" value="{{destination.code|upper}}">
+                        <input type="hidden" name="DepartDate" value='{{depart_date|date:"Y-m-d"}}'>
+                        <input type="hidden" name="ReturnDate" value='{{return_date|date:"Y-m-d"}}'>
+                        <input type="hidden" name="SeatClass" value="{{seat|lower}}">
+                        <input type="hidden" name="TripType" value="{{trip_type}}">
+                        <button class="btn" type="submit">Modify Search</button>
+                    </form>
                 </div>
             </div>
         </div>

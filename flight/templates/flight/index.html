@@ -26,13 +26,13 @@
                         </div>
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                            <input type="radio" class="form-check-input trip-type" id="round-trip" name="TripType" value="2">Round Trip
+                            <input type="radio" class="form-check-input trip-type" id="round-trip" name="TripType" value="2" {% if trip_type == '2' %}checked{% endif %}>Round Trip
                             </label>
                         </div>
                         </div>
                         <div class="input-row">
                             <label for="flight-from">From: </label>
-                            <input type="text" name="Origin" placeholder="From" id="flight-from" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_from" autocomplete="off">  <!--list="places_from"-->
+                            <input type="text" name="Origin" placeholder="From" id="flight-from" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="{{origin | lower}}" data-list="places_from" autocomplete="off" value="{{origin | upper}}">  <!--list="places_from"-->
                             <div id="places_from" class="places_box">
                                 <div class="each_places_from_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
                                 <div class="each_places_from_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="input-row">
                             <label for="flight_to">To: </label>
-                            <input type="text" name="Destination" placeholder="To" id="flight-to" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="" data-list="places_to" autocomplete="off">
+                            <input type="text" name="Destination" placeholder="To" id="flight-to" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="{{destination | lower}}" data-list="places_to" autocomplete="off" value="{{destination | upper}}">
                             <div id="places_to" class="places_box">
                                 <div class="each_places_to_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
                                 <div class="each_places_to_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
@@ -58,18 +58,18 @@
                         </div>
                         <div class="input-row">
                             <label for="depart_date">Departure Date: </label>
-                            <input type="date" name="DepartDate" min="2020-09-22" max="2022-12-31" id="depart_date" placeholder="Date" class="form-control mr-sm-2">
+                            <input type="date" name="DepartDate" min="{{min_date}}" max="{{max_date}}" id="depart_date" placeholder="Date" class="form-control mr-sm-2" value="{{depart_date}}">
                         </div>
                         <div class="input-row">
                             <label for="return_date">Return Date: </label>
-                            <input type="date" name="ReturnDate" min="2020-09-22" max="2022-12-31" id="return_date" placeholder="Date" class="form-control mr-sm-2" disabled>
+                            <input type="date" name="ReturnDate" min="{{min_date}}" max="{{max_date}}" id="return_date" placeholder="Date" class="form-control mr-sm-2" value="{{return_date}}" disabled>
                         </div>
                         <div class="input-row">
                             <label for="seat_class">Class: </label>
                             <select name="SeatClass" id="SeatType" class="form-control mr-sm-2">
-                                <option value="economy">Economy</option>
-                                <option value="business">Business</option>
-                                <option value="first">First</option>
+                                <option value="economy" {% if seat == 'economy' %}selected{% endif %}>Economy</option>
+                                <option value="business" {% if seat == 'business' %}selected{% endif %}>Business</option>
+                                <option value="first" {% if seat == 'first' %}selected{% endif %}>First</option>
                             </select>
                         </div>
                         <div class="input-row">

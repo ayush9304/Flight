@@ -19,7 +19,39 @@ from .constant import FEE
 # Create your views here.
 
 def index(request):
-    return render(request, 'flight/index.html')
+    min_date = f"{datetime.now().date().year}-{datetime.now().date().month}-{datetime.now().date().day}"
+    max_date = f"{datetime.now().date().year if (datetime.now().date().month+3)<=12 else datetime.now().date().year+1}-{(datetime.now().date().month + 3) if (datetime.now().date().month+3)<=12 else (datetime.now().date().month+3-12)}-{datetime.now().date().day}"
+    if request.method == 'POST':
+        origin = request.POST.get('Origin')
+        destination = request.POST.get('Destination')
+        depart_date = request.POST.get('DepartDate')
+        seat = request.POST.get('SeatClass')
+        trip_type = request.POST.get('TripType')
+        if(trip_type == '1'):
+            return render(request, 'flight/index.html', {
+            'origin': origin,
+            'destination': destination,
+            'depart_date': depart_date,
+            'seat': seat.lower(),
+            'trip_type': trip_type
+        })
+        elif(trip_type == '2'):
+            return_date = request.POST.get('ReturnDate')
+            return render(request, 'flight/index.html', {
+            'min_date': min_date,
+            'max_date': max_date,
+            'origin': origin,
+            'destination': destination,
+            'depart_date': depart_date,
+            'seat': seat.lower(),
+            'trip_type': trip_type,
+            'return_date': return_date
+        })
+    else:
+        return render(request, 'flight/index.html', {
+            'min_date': min_date,
+            'max_date': max_date
+        })
 
 def login_view(request):
     if request.method == "POST":
@@ -130,6 +162,7 @@ def flight(request):
         'origin': origin,
         'destination': destination,
         'seat': seat.capitalize(),
+        'trip_type': trip_type,
         'depart_date': depart_date,
         'return_date': return_date,
         'max_price': math.ceil(max_price/100)*100,
