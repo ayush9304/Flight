@@ -1,4 +1,4 @@
-.section1{
+/*.section1{
     padding: 0px;
     display: flex;
     flex-direction: column;
@@ -60,23 +60,28 @@
     padding-left: 12px;
     padding-right: 12px;
 }
-.trip-modify button{
-}
 .spl-btn{
     transition-duration: .2s;
     color: white;
     border-color: white;
-}
+}*/
+
+
+/*Already in comment below code*//***********************************/
 /*.trip-modify button:hover, button:active, button:focus{
     background-color: rgba(220,53,69,.1);
 }*/
+/*Already in comment above code*//***********************************/
+
+
+/*
 .trip-modify button:hover, button:active{
     background-color: rgb(255, 235, 245);
     color: rgb(189, 4, 116);
 }
 .trip-modify button:focus{
     box-shadow: 0 0 0 0.2rem rgba(255,255,255,.3);
-}
+}*/
 
 .query-result-div, .query-result-div-2{
     flex: 1;
@@ -189,13 +194,15 @@
     width: 32%;
     justify-content: space-between;
 }
-.flight-origin-time, .flight-destination-time{
+.flight-origin-time, .flight-destination-time, .flight-origin-time2, .flight-destination-time2{
     width: 40%;
 }
-.flight-stops{
+.flight-stops, .flight-stops2{
     width: 20%;
     display: flex;
     justify-content: center;
+    position: relative;
+    opacity: 1;
 }
 .flight-time h5{
     margin-bottom: 2px;
@@ -210,19 +217,16 @@
     margin-top: auto;
     margin-bottom: auto;
 }
-.flight-price{
+.flight-price2{
     display: flex;
     margin-right: 15px;
 }
-.flight-price > h5{
+.flight-price2 > h5{
     margin-top: 20%;
     margin-bottom: 20%;
     font-weight: 600;
 }
-.flight-stops{
-    position: relative;
-    opacity: 1;
-}
+
 .tooltip .tooltiptext {
     visibility: hidden;
     white-space: nowrap;
@@ -312,65 +316,9 @@
 }
 
 
-.show{
+/*.show{
     display: block;
 }
 .hide{
     display: none;
-}
-
-
-.selection-div{
-    position: fixed;
-    z-index: 99999;
-    background-image: linear-gradient(135deg, rgba(220, 20, 60, .85), rgba(184,1,123,.85));
-    height: 10%;
-    width: 100%;
-    bottom: 0;
-    box-shadow:  0 0 15px rgba(0, 0, 0, .1);
-    display: flex;
-    color: white;
-    justify-content: space-evenly;
-}
-.selection-div > div{
-    text-align: center;
-    display: flex;
-}
-.selection-div > div > div{
-    margin: auto;
-}
-
-.flight1-radio, .flight2-radio{
-    transform: scale(1.5);
-}
-.flight-details-btn input[type="radio"]{
-    margin: auto;
-}
-
-
-.query-trip-type-div{
-    display: flex;
-    padding: 10px 0;
-}
-.query-trip-type-div > div{
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-}
-#flight1-btn-div{
-    padding: 5px 10px;
-    border-radius: 15px 0 0 15px;
-    cursor: pointer;
-    border: .5px dotted rgb(220, 45, 60);
-    transition-duration: .4s;
-}
-#flight2-btn-div{
-    padding: 5px 10px;
-    border-radius: 0 15px 15px 0;
-    cursor: pointer;
-    border: .5px dotted rgb(220, 45, 60);
-    transition-duration: .4s;
-}
-.active-div{
-    background-color: rgb(220, 45, 60);
-}
+}*/
