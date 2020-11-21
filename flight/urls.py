@@ -14,8 +14,7 @@ urlpatterns = [
     path("review", views.review, name="review"),
     path("flight/ticket/book", views.book, name="book"),
     path("flight/ticket/payment", views.payment, name="payment"),
-    ############################################
-    #path("process", views.temp),
-    ############################################
-    path('flight/ticket/<str:ref>', views.ticket_data, name="ticketdata")
+    path('flight/ticket/api/<str:ref>', views.ticket_data, name="ticketdata"),
+    path('flight/ticket/print',views.get_ticket, name="getticket"),
+    #path("flight/ticket/hola/print", views.temp)
 ]

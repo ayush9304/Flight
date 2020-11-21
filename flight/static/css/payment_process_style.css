@@ -70,7 +70,7 @@
     display: flex;
     margin-top: 20px;
 }
-.ticket-div button{
+.ticket-div form{
     margin: auto;
 }
 .flight2{

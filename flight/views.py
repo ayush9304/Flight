@@ -9,6 +9,7 @@ import calendar
 import math
 import secrets
 from .models import *
+from capstone.utils import render_to_pdf
 
 
 #Fee and Surcharge variable
@@ -19,16 +20,6 @@ from .constant import FEE
 
 def index(request):
     return render(request, 'flight/index.html')
-
-#def search(request):
-#    return render(request, 'flight/search.html')
-
-#def book(request):
-#    return render(request, 'flight/book.html')
-
-#def payment(request):
-#    return render(request, 'flight/payment.html')
-
 
 def login_view(request):
     if request.method == "POST":
@@ -146,7 +137,6 @@ def flight(request):
     })
 
 def review(request):
-
     flight_1 = request.GET.get('flight1Id')
     date1 = request.GET.get('flight1Date')
     seat = request.GET.get('seatClass')
@@ -197,18 +187,37 @@ def book(request):
                 for passenger in passengers:
                     ticket.passengers.add(passenger)
                 ticket.flight = flight1
-                ticket.flight_date = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]))
+                ticket.flight_ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]))
+                ###################
+                flight1ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
+                flight1adate = (flight1ddate + flight1.duration)
+                ###################
+                ticket.flight_adate = datetime(flight1adate.year,flight1adate.month,flight1adate.day)
+                ffre = 0.0
+                if flight_1class.lower() == 'first':
+                    ticket.flight_fare = flight1.first_fare*int(passengerscount)
+                    ffre = flight1.first_fare*int(passengerscount)
+                elif flight_1class.lower() == 'business':
+                    ticket.flight_fare = flight1.business_fare*int(passengerscount)
+                    ffre = flight1.business_fare*int(passengerscount)
+                else:
+                    ticket.flight_fare = flight1.economy_fare*int(passengerscount)
+                    ffre = flight1.economy_fare*int(passengerscount)
+                ticket.other_charges = FEE
+                if coupon:
+                    ticket.coupon_used = coupon                     ##########Coupon
+                ticket.total_fare = ffre+FEE+0.0                    ##########Total(Including coupon)
                 ticket.seat_class = flight_1class.lower()
                 ticket.status = 'PENDING'
                 ticket.mobile = ('+'+countrycode+' '+mobile)
                 ticket.email = email
                 ticket.save()
                 if(flight_1class == 'Economy'):
-                    fare = flight1.economy_fare
+                    fare = flight1.economy_fare*int(passengerscount)
                 elif (flight_1class == 'Business'):
-                    fare = flight1.business_fare
+                    fare = flight1.business_fare*int(passengerscount)
                 elif (flight_1class == 'First'):
-                    fare = flight1.first_fare
+                    fare = flight1.first_fare*int(passengerscount)
             except Exception as e:
                 return HttpResponse(e)
             
@@ -248,8 +257,6 @@ def payment(request):
     else:
         return HttpResponseRedirect(reverse('login'))
 
-#def temp(request):
-#    return render(request, 'flight/payment_process.html')
 
 def ticket_data(request, ref):
     ticket = Ticket.objects.get(ref_no=ref)
@@ -257,6 +264,19 @@ def ticket_data(request, ref):
         'ref': ticket.ref_no,
         'from': ticket.flight.origin.code,
         'to': ticket.flight.destination.code,
-        'flight_date': ticket.flight_date,
+        'flight_date': ticket.flight_ddate,
         'status': ticket.status
     })
+
+@csrf_exempt
+def get_ticket(request):
+    ref1 = request.GET.get("ref1")
+    ref2 = request.GET.get("ref2")
+    ticket1 = Ticket.objects.get(ref_no=ref1)
+    data = {
+        'ticket1':ticket1
+    }
+    pdf = render_to_pdf('flight/ticket.html', data)
+    return HttpResponse(pdf, content_type='application/pdf')
+
+

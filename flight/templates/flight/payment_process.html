@@ -35,7 +35,11 @@
             <div class="flight2">Booking Reference Number: &nbsp;<span class="ref">ECV39R</span>&nbsp;&nbsp;&nbsp;(<span class="from2">DEL</span> <span>&#8592;</span> <span class="to2">GAU</span>)</div>
         </div>
         <div class="ticket-div">
-            <button class="btn btn-outline-primary">Print Ticket</button>
+            <form action="{% url 'getticket' %}" method="get">
+                <input type="hidden" name="ref1" value="{{ref1}}">
+                <input type="hidden" name="ref2" value="{{ref2}}">
+                <button type="submit" class="btn btn-outline-primary">Print Ticket</button>
+            </form>
         </div>
     </section>
     <section class="section section3">
@@ -51,7 +55,7 @@
             Please retry after sometime.
         </div>
         <div class="ticket-div">
-            <button class="btn btn-outline-primary" onclick="window.location.href = '/'">Go Home</button>
+            <button class="btn btn-outline-primary" type="button" onclick="window.location.href = '/'">Go Home</button>
         </div>
     </section>
 {% endblock %}

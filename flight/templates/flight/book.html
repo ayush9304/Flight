@@ -404,28 +404,32 @@
                         <div class="base-fae-label">Base Fare: </div>
                         <div class="base-fare-value">
                             {% if seat == 'First' %}
-                                ₹ {{flight1.first_fare}}
+                                ₹ <span>{{flight1.first_fare}}</span>
+                                <input type="hidden" id="basefare" value="{{flight1.first_fare}}">
                             {% elif seat == 'Business' %}
-                                ₹ {{flight1.business_fare}}
+                                ₹ <span>{{flight1.business_fare}}</span>
+                                <input type="hidden" id="basefare" value="{{flight1.business_fare}}">
                             {% elif seat == 'Economy' %}
-                                ₹ {{flight1.economy_fare}}
+                                ₹ <span>{{flight1.economy_fare}}</span>
+                                <input type="hidden" id="basefare" value="{{flight1.economy_fare}}">
                             {% endif %}
                         </div>
                     </div>
                     <div class="row surcharges">
                         <div class="surcharges-label">Fee & Surcharges: </div>
-                        <div class="surcharges-value">₹ {{fee}}</div>
+                        <div class="surcharges-value">₹ <span>{{fee}}</span></div>
+                        <input type="hidden" id="fee" value="{{fee}}">
                     </div>
                     <hr>
                     <div class="total-fare">
                         <div class="total-fare-label">Total Fare: </div>
                         <div class="total-fare-value">
                             {% if seat == 'First' %}
-                                ₹ {{flight1.first_fare | add:fee}}
+                                ₹ <span>{{flight1.first_fare | add:fee}}</span>
                             {% elif seat == 'Business' %}
-                                ₹ {{flight1.business_fare | add:fee}}
+                                ₹ <span>{{flight1.business_fare | add:fee}}</span>
                             {% elif seat == 'Economy' %}
-                                ₹ {{flight1.economy_fare | add:fee}}
+                                ₹ <span>{{flight1.economy_fare | add:fee}}</span>
                             {% endif %}
                         </div>
                     </div>
