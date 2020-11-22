@@ -64,8 +64,8 @@
                             <div class="col-3 arrival-time">
                                 <div class="time">{{flight2.arrival_time}}</div>
                                 <div class="date adate">Fri, 15 Jan 2021</div>
-                                <div class="place">{{flight2.departure.city}}</div>
-                                <div class="airport">{{flight2.departure.airport}}</div>
+                                <div class="place">{{flight2.destination.city}}</div>
+                                <div class="airport">{{flight2.destination.airport}}</div>
                             </div>
                         </div>
                     {% endif %}
@@ -393,7 +393,7 @@
                     </div>
                 </div>
                 <div class="payment-btn" style="background-color: transparent;">
-                    <button class="btn btn-primary btn-danger">Proceed to payment</button>
+                    <button type="submit" class="btn btn-primary btn-danger">Proceed to payment</button>
                 </div>
                 </div>
                 <div class="col-4">
@@ -404,14 +404,14 @@
                         <div class="base-fae-label">Base Fare: </div>
                         <div class="base-fare-value">
                             {% if seat == 'First' %}
-                                ₹ <span>{{flight1.first_fare}}</span>
-                                <input type="hidden" id="basefare" value="{{flight1.first_fare}}">
+                                ₹ <span>{{flight1.first_fare | add:flight2.first_fare}}</span>
+                                <input type="hidden" id="basefare" value="{{flight1.first_fare | add:flight2.first_fare}}">
                             {% elif seat == 'Business' %}
-                                ₹ <span>{{flight1.business_fare}}</span>
-                                <input type="hidden" id="basefare" value="{{flight1.business_fare}}">
+                                ₹ <span>{{flight1.business_fare | add:flight2.business_fare}}</span>
+                                <input type="hidden" id="basefare" value="{{flight1.business_fare | add:flight2.business_fare}}">
                             {% elif seat == 'Economy' %}
-                                ₹ <span>{{flight1.economy_fare}}</span>
-                                <input type="hidden" id="basefare" value="{{flight1.economy_fare}}">
+                                ₹ <span>{{flight1.economy_fare | add:flight2.economy_fare}}</span>
+                                <input type="hidden" id="basefare" value="{{flight1.economy_fare | add:flight2.economy_fare}}">
                             {% endif %}
                         </div>
                     </div>
@@ -425,11 +425,11 @@
                         <div class="total-fare-label">Total Fare: </div>
                         <div class="total-fare-value">
                             {% if seat == 'First' %}
-                                ₹ <span>{{flight1.first_fare | add:fee}}</span>
+                                ₹ <span>{{flight1.first_fare | add:flight2.first_fare | add:fee}}</span>
                             {% elif seat == 'Business' %}
-                                ₹ <span>{{flight1.business_fare | add:fee}}</span>
+                                ₹ <span>{{flight1.business_fare | add:flight2.business_fare | add:fee}}</span>
                             {% elif seat == 'Economy' %}
-                                ₹ <span>{{flight1.economy_fare | add:fee}}</span>
+                                ₹ <span>{{flight1.economy_fare | add:flight2.economy_fare | add:fee}}</span>
                             {% endif %}
                         </div>
                     </div>
@@ -443,7 +443,7 @@
                         </div>
                         <div class="col" style="padding: 10px 10px 10px 0px">
                             <center>
-                                <button class="btn btn-primary btn-danger">Apply</button>
+                                <button type="button" class="btn btn-primary btn-danger">Apply</button>
                             </center>
                         </div>
                     </div>

@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".clr-filter-div button").addEventListener('click', reset_filter);
 
 
-
+    tab_change();
+    flight_select();
 
     ////////////////////////////////////////
     flight_duration2();
@@ -427,13 +428,87 @@ function trip_type_flight(element) {
     if(element.dataset.trip_type === '1') {
         document.querySelector(".query-result-div-2").style.display = 'none';
         document.querySelector(".query-result-div").style.display = 'block';
-        element.classList.add('active-div');
-        document.querySelector('#flight2-btn-div').classList.remove('active-div');
+        //element.classList.add('active-div');
+        //document.querySelector('#flight2-btn-div').classList.remove('active-div');
     }
     else if(element.dataset.trip_type === '2') {
         document.querySelector(".query-result-div").style.display = 'none';
         document.querySelector(".query-result-div-2").style.display = 'block';
-        element.classList.add('active-div');
-        document.querySelector('#flight1-btn-div').classList.remove('active-div');
+        //element.classList.add('active-div');
+        //document.querySelector('#flight1-btn-div').classList.remove('active-div');
     }
+}
+
+
+
+
+
+
+
+function flight_select() {
+    document.querySelectorAll(".flight1-radio").forEach(radio => {
+        radio.addEventListener('click', e => {
+            document.querySelector('#flt1').value = e.target.value;
+            document.querySelector("#select-f1-plane").innerText = e.target.dataset.plane;
+            document.querySelector("#select-f1-depart").innerText = e.target.dataset.depart;
+            document.querySelector("#select-f1-arrive").innerText = e.target.dataset.arrive;
+            document.querySelector("#select-f1-fare").innerText = e.target.dataset.fare;
+            document.querySelector("#select-total-fare").innerText = parseInt(e.target.dataset.fare) + parseInt(document.querySelector("#select-f2-fare").innerText);
+        });
+    });
+    document.querySelectorAll(".flight2-radio").forEach(radio => {
+        radio.addEventListener('click', e => {
+            document.querySelector('#flt2').value = e.target.value;
+            document.querySelector("#select-f2-plane").innerText = e.target.dataset.plane;
+            document.querySelector("#select-f2-depart").innerText = e.target.dataset.depart;
+            document.querySelector("#select-f2-arrive").innerText = e.target.dataset.arrive;
+            document.querySelector("#select-f2-fare").innerText = e.target.dataset.fare;
+            document.querySelector("#select-total-fare").innerText = parseInt(e.target.dataset.fare) + parseInt(document.querySelector("#select-f1-fare").innerText);
+        });
+    });
+}
+
+
+//a.dispatchEvent(new Event('click', { 'bubbles': true }));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function tab_change() {
+    var tabs = $('.tabs');
+    var selector = $('.tabs').find('a').length;
+    //var selector = $(".tabs").find(".selector");
+    var activeItem = tabs.find('.active-div');
+    var activeWidth = activeItem.innerWidth();
+    $(".selector").css({
+    "left": activeItem.position.left + "px", 
+    "width": activeWidth + "px"
+    });
+
+    $(".tabs").on("click","a",function(e){
+    e.preventDefault();
+    $('.tabs a').removeClass("active-div");
+    $(this).addClass('active-div');
+    var activeWidth = $(this).innerWidth();
+    var itemPos = $(this).position();
+    $(".selector").css({
+        "left":itemPos.left + "px", 
+        "width": activeWidth + "px"
+    });
+    setTimeout(() => {trip_type_flight(e.target);},400);
+    });
 }

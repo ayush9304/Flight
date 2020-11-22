@@ -69,9 +69,10 @@
 .ticket-div{
     display: flex;
     margin-top: 20px;
+    justify-content: center;
 }
-.ticket-div form{
-    margin: auto;
+.ticket-div button{
+    margin-bottom: 10px;
 }
 .flight2{
     display: none;

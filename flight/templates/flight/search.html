@@ -70,24 +70,31 @@
                 </div>
             </div>
         </div>
-        <div class="query-trip-type-div">
-            <div>
-                <div id="flight1-btn-div" class="active-div" data-trip_type="1" onclick="trip_type_flight(this)">
-                    <span>{{origin.code | upper}}</sapn>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
-                        </svg>    
-                    <span>{{destination.code | upper}}</span>
+        {% if trip_type == '2' %}
+            <div class="query-trip-type-div">
+                <div class="tabs">
+                    <div class="selector"></div>
+                    <a href="#" class="active-div" data-trip_type="1">DEL &#8594; GAU</a>
+                    <a href="#" data-trip_type="2">GAU &#8594; DEL</a>
                 </div>
-                <div id="flight2-btn-div" data-trip_type="2" onclick="trip_type_flight(this)">
-                    <span>{{destination.code | upper}}</sapn>
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
-                        </svg>    
-                    <span>{{origin.code | upper}}</span>
-                </div>
+                <!--<div>
+                    <div id="flight1-btn-div" class="active-div" data-trip_type="1" onclick="trip_type_flight(this)">
+                        <span>{{origin.code | upper}}</sapn>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                            </svg>    
+                        <span>{{destination.code | upper}}</span>
+                    </div>
+                    <div id="flight2-btn-div" data-trip_type="2" onclick="trip_type_flight(this)">
+                        <span>{{destination.code | upper}}</sapn>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                            </svg>    
+                        <span>{{origin.code | upper}}</span>
+                    </div>
+                </div>-->
             </div>
-        </div>
+        {% endif %}
         <div class="query-result-div">
             <div class="container">
                 <div class="row">
@@ -320,7 +327,7 @@
 
                                                     {% if trip_type == '2' %}
                                                         {% if forloop.couter == 1 %}checked{% endif %}
-                                                        <input type="radio" class="flight1-radio" name="flight1" value="{{flight.id}}" {% if forloop.counter == 1 %}checked{% endif %}>
+                                                        <input type="radio" class="flight1-radio" name="test1" value="{{flight.id}}" data-plane='{{flight.plane}}' data-depart='{{flight.depart_time|time:"H:i"}}' data-arrive='{{flight.arrival_time|time:"H:i"}}' data-fare="{% if seat == 'Economy' %} {{flight.economy_fare}} {% elif seat == 'Business' %} {{flight.business_fare}} {% else %} {{flight.first_fare}} {% endif %}" {% if forloop.counter == 1 %}checked{% endif %}>
                                                     {% else %}
                                                         <form action="{% url 'review' %}" method="GET" style="display: flex;">
                                                             <input type="hidden" name="flight1Id" value="{{flight.id}}">
@@ -591,9 +598,10 @@
                                                     <div class="flight-details-btn">
 
 
+
                                                         {% if trip_type == '2' %}
                                                             {% if forloop.couter == 1 %}checked{% endif %}
-                                                            <input type="radio" class="flight2-radio" name="flight2" value="{{flight2.id}}" {% if forloop.counter == 1 %}checked{% endif %}>
+                                                            <input type="radio" class="flight2-radio" name="test2" value="{{flight2.id}}" data-plane='{{flight2.plane}}' data-depart='{{flight2.depart_time|time:"H:i"}}' data-arrive='{{flight2.arrival_time|time:"H:i"}}' data-fare="{% if seat == 'Economy' %} {{flight2.economy_fare}} {% elif seat == 'Business' %} {{flight2.business_fare}} {% else %} {{flight2.first_fare}} {% endif %}" {% if forloop.counter == 1 %}checked{% endif %}>
                                                         {% else %}
                                                             <form action="{% url 'review' %}" method="GET" style="display: flex;">
                                                                 <input type="hidden" name="flight1Id" value="{{flight2.id}}">
@@ -641,14 +649,23 @@
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                             </svg>
-                            <span>{{destination.code|upper}}</span>&nbsp;&nbsp;@&nbsp;&nbsp;₹ <span>3197.0</span><!---->
+                            <span>{{destination.code|upper}}</span>&nbsp;&nbsp;@&nbsp;&nbsp;₹
+                            <span id="select-f1-fare">
+                                {% if seat == "Economy" %}
+                                    {{flights.all.0.economy_fare}}
+                                {% elif seat == "Business" %}
+                                    {{flights.all.0.business_fare}}
+                                {% else %}
+                                    {{flights.all.0.first_fare}}
+                                {% endif %}
+                            </span><!---->
                         </div>
                         <div class="white-2">
-                            <span>B737</span><!---->
+                            <span id="select-f1-plane">{{flights.all.0.plane}}</span><!---->
                             &nbsp;&nbsp;
-                            <span>20:45</span><!---->
+                            <span id="select-f1-depart">{{flights.all.0.depart_time | time:"H:i"}}</span><!---->
                             •
-                            <span>23:25</span><!---->
+                            <span id="select-f1-arrive">{{flights.all.0.arrival_time | time:"H:i"}}</span><!---->
                         </div>
                     </div>
                 </div>
@@ -659,14 +676,23 @@
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                             </svg>
-                            <span>{{origin.code|upper}}</span>&nbsp;&nbsp;@&nbsp;&nbsp;₹ <span>2785.0</span><!---->
+                            <span>{{origin.code|upper}}</span>&nbsp;&nbsp;@&nbsp;&nbsp;₹
+                            <span id="select-f2-fare">
+                                {% if seat == "Economy" %}
+                                    {{flights2.all.0.economy_fare}}
+                                {% elif seat == "Business" %}
+                                    {{flights2.all.0.business_fare}}
+                                {% else %}
+                                    {{flights2.all.0.first_fare}}
+                                {% endif %}
+                            </span><!---->
                         </div>
                         <div class="white-2">
-                            <span>B737</span><!---->
+                            <span id="select-f2-plane">{{flights2.all.0.plane}}</span><!---->
                             &nbsp;&nbsp;
-                            <span>17:30</span><!---->
+                            <span id="select-f2-depart">{{flights2.all.0.depart_time | time:"H:i"}}</span><!---->
                             •
-                            <span>20:05</span><!---->
+                            <span id="select-f2-arrive">{{flights2.all.0.arrival_time | time:"H:i"}}</span><!---->
                         </div>
                     </div>
                 </div>
@@ -676,14 +702,30 @@
                             <span>TOTAL FARE</span>
                         </div>
                         <div>
-                            <span>₹ <span>5982.0</span>
+                            <span>₹
+                                <span id="select-total-fare">
+                                    {% if seat == "Economy" %}
+                                        {{flights.all.0.economy_fare | add:flights2.all.0.economy_fare}}
+                                    {% elif seat == "Business" %}
+                                        {{flights.all.0.business_fare | add:flights2.all.0.business_fare}}
+                                    {% else %}
+                                        {{flights.all.0.first_fare | add:flights2.all.0.first_fare}}
+                                    {% endif %}
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="white">
                         <div>
-                            <button class="btn btn-light">Continue &#8594;</button>
+                            <form action="{% url 'review' %}" method="GET">
+                                <input type="hidden" name="flight1Id" value="{{flights.all.0.id}}" id="flt1">
+                                <input type="hidden" name="flight1Date", value="{{depart_date|date:'d-m-Y'}}">
+                                <input type="hidden" name="flight2Id" value="{{flights2.all.0.id}}" id="flt2">
+                                <input type="hidden" name="flight2Date", value="{{return_date|date:'d-m-Y'}}">
+                                <input type="hidden" name="seatClass" value="{{seat}}">
+                                <button class="btn btn-light" type="submit">Continue &#8594;</button>
+                            </form>
                         </div>
                     </div>
                 </div>

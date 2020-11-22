@@ -23,6 +23,9 @@
                         {% csrf_token %}
                         <!--<input type="hidden" name="payment_amount" value="{{fare}}">-->
                         <input type="hidden" name="ticket" value="{{ticket}}" required>
+                        {% if ticket2 %}
+                            <input type="hidden" name="ticket2" value="{{ticket2}}" required>
+                        {% endif %}
                         <div class="row payment-amount-div">
                             <div class="form-group">
                                 <label for="payment_amount">PAYMENT AMOUNT</label>

@@ -19,8 +19,8 @@
             Please wait while we are processing your payment.
         </div>
     </section>
-    <input type="hidden" class="ref1" value="{{ref1}}">
-    <input type="hidden" class="ref2" value="{{ref2}}">
+    <input type="hidden" class="ref1" value="{{ticket1.ref_no}}">
+    <input type="hidden" class="ref2" value="{{ticket2.ref_no}}">
     <section class="section section2">
         <div class="svg-div-c">
             <svg width="5em" height="5em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -35,11 +35,18 @@
             <div class="flight2">Booking Reference Number: &nbsp;<span class="ref">ECV39R</span>&nbsp;&nbsp;&nbsp;(<span class="from2">DEL</span> <span>&#8592;</span> <span class="to2">GAU</span>)</div>
         </div>
         <div class="ticket-div">
-            <form action="{% url 'getticket' %}" method="get">
-                <input type="hidden" name="ref1" value="{{ref1}}">
-                <input type="hidden" name="ref2" value="{{ref2}}">
-                <button type="submit" class="btn btn-outline-primary">Print Ticket</button>
-            </form>
+            <div>
+                <form action="{% url 'getticket' %}" method="get">
+                    <input type="hidden" name="ref" value="{{ticket1.ref_no}}">
+                    <button type="submit" class="btn btn-outline-primary">Print Ticket ({{ticket1.flight.origin.code}} to {{ticket1.flight.destination.code}})</button>
+                </form>
+                {% if ticket2 %}
+                    <form action="{% url 'getticket' %}" method="get">
+                        <input type="hidden" name="ref" value="{{ticket2.ref_no}}">
+                        <button type="submit" class="btn btn-outline-primary">Print Ticket ({{ticket2.flight.origin.code}} to {{ticket2.flight.destination.code}})</button>
+                    </form>
+                {% endif %}
+            </div>
         </div>
     </section>
     <section class="section section3">

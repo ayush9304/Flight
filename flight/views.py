@@ -9,7 +9,7 @@ import calendar
 import math
 import secrets
 from .models import *
-from capstone.utils import render_to_pdf
+from capstone.utils import render_to_pdf, createticket
 
 
 #Fee and Surcharge variable
@@ -215,14 +215,36 @@ def review(request):
     flight_1 = request.GET.get('flight1Id')
     date1 = request.GET.get('flight1Date')
     seat = request.GET.get('seatClass')
+    round_trip = False
+    if request.GET.get('flight2Id'):
+        round_trip = True
+
+    if round_trip:
+        flight_2 = request.GET.get('flight2Id')
+        date2 = request.GET.get('flight2Date')
 
     if request.user.is_authenticated:
         flight1 = Flight.objects.get(id=flight_1)
         flight1ddate = datetime(int(date1.split('-')[2]),int(date1.split('-')[1]),int(date1.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
         flight1adate = (flight1ddate + flight1.duration)
+        if round_trip:
+            flight2 = Flight.objects.get(id=flight_2)
+            flight2ddate = datetime(int(date2.split('-')[2]),int(date2.split('-')[1]),int(date2.split('-')[0]),flight2.depart_time.hour,flight2.depart_time.minute)
+            flight2adate = (flight2ddate + flight2.duration)
         #print("//////////////////////////////////")
         #print(f"flight1ddate: {flight1adate-flight1ddate}")
         #print("//////////////////////////////////")
+        if round_trip:
+            return render(request, "flight/book.html", {
+                'flight1': flight1,
+                'flight2': flight2,
+                "flight1ddate": flight1ddate,
+                "flight1adate": flight1adate,
+                "flight2ddate": flight2ddate,
+                "flight2adate": flight2adate,
+                "seat": seat,
+                "fee": FEE
+            })
         return render(request, "flight/book.html", {
             'flight1': flight1,
             "flight1ddate": flight1ddate,
@@ -246,6 +268,8 @@ def book(request):
             mobile = request.POST['mobile']
             email = request.POST['email']
             flight1 = Flight.objects.get(id=flight_1)
+            if flight_2:
+                flight2 = Flight.objects.get(id=flight_2)
             passengerscount = request.POST['passengersCount']
             passengers=[]
             for i in range(1,int(passengerscount)+1):
@@ -256,50 +280,69 @@ def book(request):
             coupon = request.POST.get('coupon')
             
             try:
-                ticket = Ticket.objects.create()
-                ticket.user = request.user
-                ticket.ref_no = secrets.token_hex(3).upper()
-                for passenger in passengers:
-                    ticket.passengers.add(passenger)
-                ticket.flight = flight1
-                ticket.flight_ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]))
-                ###################
-                flight1ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
-                flight1adate = (flight1ddate + flight1.duration)
-                ###################
-                ticket.flight_adate = datetime(flight1adate.year,flight1adate.month,flight1adate.day)
-                ffre = 0.0
-                if flight_1class.lower() == 'first':
-                    ticket.flight_fare = flight1.first_fare*int(passengerscount)
-                    ffre = flight1.first_fare*int(passengerscount)
-                elif flight_1class.lower() == 'business':
-                    ticket.flight_fare = flight1.business_fare*int(passengerscount)
-                    ffre = flight1.business_fare*int(passengerscount)
-                else:
-                    ticket.flight_fare = flight1.economy_fare*int(passengerscount)
-                    ffre = flight1.economy_fare*int(passengerscount)
-                ticket.other_charges = FEE
-                if coupon:
-                    ticket.coupon_used = coupon                     ##########Coupon
-                ticket.total_fare = ffre+FEE+0.0                    ##########Total(Including coupon)
-                ticket.seat_class = flight_1class.lower()
-                ticket.status = 'PENDING'
-                ticket.mobile = ('+'+countrycode+' '+mobile)
-                ticket.email = email
-                ticket.save()
+                #ticket = Ticket.objects.create()
+                #ticket.user = request.user
+                #ticket.ref_no = secrets.token_hex(3).upper()
+                #for passenger in passengers:
+                #    ticket.passengers.add(passenger)
+                #ticket.flight = flight1
+                #ticket.flight_ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]))
+                ####################
+                #flight1ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
+                #flight1adate = (flight1ddate + flight1.duration)
+                ####################
+                #ticket.flight_adate = datetime(flight1adate.year,flight1adate.month,flight1adate.day)
+                #ffre = 0.0
+                #if flight_1class.lower() == 'first':
+                #    ticket.flight_fare = flight1.first_fare*int(passengerscount)
+                #    ffre = flight1.first_fare*int(passengerscount)
+                #elif flight_1class.lower() == 'business':
+                #    ticket.flight_fare = flight1.business_fare*int(passengerscount)
+                #    ffre = flight1.business_fare*int(passengerscount)
+                #else:
+                #    ticket.flight_fare = flight1.economy_fare*int(passengerscount)
+                #    ffre = flight1.economy_fare*int(passengerscount)
+                #ticket.other_charges = FEE
+                #if coupon:
+                #    ticket.coupon_used = coupon                     ##########Coupon
+                #ticket.total_fare = ffre+FEE+0.0                    ##########Total(Including coupon)
+                #ticket.seat_class = flight_1class.lower()
+                #ticket.status = 'PENDING'
+                #ticket.mobile = ('+'+countrycode+' '+mobile)
+                #ticket.email = email
+                #ticket.save()
+                ticket1 = createticket(request.user,passengers,passengerscount,flight1,flight_1date,flight_1class,coupon,countrycode,email,mobile)
+                if flight_2:
+                    ticket2 = createticket(request.user,passengers,passengerscount,flight2,flight_2date,flight_2class,coupon,countrycode,email,mobile)
+
                 if(flight_1class == 'Economy'):
-                    fare = flight1.economy_fare*int(passengerscount)
+                    if flight_2:
+                        fare = (flight1.economy_fare*int(passengerscount))+(flight2.economy_fare*int(passengerscount))
+                    else:
+                        fare = flight1.economy_fare*int(passengerscount)
                 elif (flight_1class == 'Business'):
-                    fare = flight1.business_fare*int(passengerscount)
+                    if flight_2:
+                        fare = (flight1.business_fare*int(passengerscount))+(flight2.business_fare*int(passengerscount))
+                    else:
+                        fare = flight1.business_fare*int(passengerscount)
                 elif (flight_1class == 'First'):
-                    fare = flight1.first_fare*int(passengerscount)
+                    if flight_2:
+                        fare = (flight1.first_fare*int(passengerscount))+(flight2.first_fare*int(passengerscount))
+                    else:
+                        fare = flight1.first_fare*int(passengerscount)
             except Exception as e:
                 return HttpResponse(e)
             
 
+            if flight_2:    ##
+                return render(request, "flight/payment.html", { ##
+                    'fare': fare,   ##
+                    'ticket': ticket1.id,   ##
+                    'ticket2': ticket2.id   ##
+                })  ##
             return render(request, "flight/payment.html", {
                 'fare': fare,
-                'ticket': ticket.id
+                'ticket': ticket1.id
             })
         else:
             return HttpResponseRedirect(reverse("login"))
@@ -310,6 +353,10 @@ def payment(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             ticket_id = request.POST['ticket']
+            t2 = False
+            if request.POST.get('ticket2'):
+                ticket2_id = request.POST['ticket2']
+                t2 = True
             fare = request.POST.get('fare')
             card_number = request.POST['cardNumber']
             card_holder_name = request.POST['cardHolderName']
@@ -321,9 +368,17 @@ def payment(request):
                 ticket = Ticket.objects.get(id=ticket_id)
                 ticket.status = 'CONFIRMED'
                 ticket.save()
+                if t2:
+                    ticket2 = Ticket.objects.get(id=ticket2_id)
+                    ticket2.status = 'CONFIRMED'
+                    ticket2.save()
+                    return render(request, 'flight/payment_process.html', {
+                        'ticket1': ticket,
+                        'ticket2': ticket2
+                    })
                 return render(request, 'flight/payment_process.html', {
-                    'ref1': ticket.ref_no,
-                    'ref2': ""
+                    'ticket1': ticket,
+                    'ticket2': ""
                 })
             except Exception as e:
                 return HttpResponse(e)
@@ -345,9 +400,8 @@ def ticket_data(request, ref):
 
 @csrf_exempt
 def get_ticket(request):
-    ref1 = request.GET.get("ref1")
-    ref2 = request.GET.get("ref2")
-    ticket1 = Ticket.objects.get(ref_no=ref1)
+    ref = request.GET.get("ref")
+    ticket1 = Ticket.objects.get(ref_no=ref)
     data = {
         'ticket1':ticket1
     }

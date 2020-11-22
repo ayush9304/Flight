@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
 .section1{
     padding: 0px;
     display: flex;
@@ -78,10 +83,23 @@
     box-shadow: 0 0 0 0.2rem rgba(255,255,255,.3);
 }
 
+@keyframes appear{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 .query-result-div, .query-result-div-2{
     flex: 1;
     background-color: #fff;
     display: flex;
+    animation-name: appear;
+    animation-duration: .4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
 }
 .filter-div{
     padding: 15px;
@@ -371,6 +389,66 @@
     border: .5px dotted rgb(220, 45, 60);
     transition-duration: .4s;
 }
-.active-div{
+/*.active-div{
     background-color: rgb(220, 45, 60);
-}
+}*/
+
+
+
+
+
+
+
+/************************************/
+.tabs{
+    margin-top:50px;
+    font-size:15px;
+    padding:0px;
+    list-style:none;
+    background:#fff;
+    box-shadow:0px 5px 20px rgba(0,0,0,0.1);
+    display:inline-block;
+    border-radius:50px;
+    position:relative;
+  }
+  
+  .tabs a{
+    text-decoration:none;
+    color: #777;
+    text-transform:uppercase;
+    padding:8px 20px;
+    display:inline-block;
+    position:relative;
+    z-index:1;
+    transition-duration:0.6s;
+  }
+  
+  .tabs a.active-div{
+    color:#fff;
+  }
+  
+  
+  .tabs a i{
+    margin-right:5px;
+  }
+  
+  .tabs .selector{
+    height:100%;
+    display:inline-block;
+    position:absolute;
+    left:0px;
+    top:0px;
+    z-index:1;
+    border-radius:50px;
+    transition-duration:0.6s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    background: #b80190;
+    background: linear-gradient(45deg, crimson 0%, #b80190 100%);
+    /*background: #05abe0;*/
+    /*background: linear-gradient(45deg, #05abe0 0%,#8200f4 100%);*/
+    
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05abe0', endColorstr='#8200f4',GradientType=1 );
+  }
+  
+/***********************************/
