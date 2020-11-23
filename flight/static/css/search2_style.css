@@ -322,3 +322,46 @@
 .hide{
     display: none;
 }*/
+
+
+
+
+@media (max-width: 376px){
+    .actual-result-div{
+        padding: 10px 5px!important;
+    }
+    .sort-div{
+        display: none!important;
+    }
+    .each-flight-div{
+        padding: 5px 5px;
+    }
+    .flight-icon{
+        display: none;
+    }
+    .flight-time h5{
+        font-size: 1em;
+    }
+    .flight-details h5{
+        font-size: 1em;
+    }
+    .bb2{
+        display: block;
+    }
+    .bb1{
+        display: none;
+    }
+    .flight-price{
+        margin-right: 0;
+        flex: 1;
+    }
+    .flight-details-btn{
+        flex: 0;
+    }
+    .flight-details{
+        justify-content: space-evenly;
+    }
+    .white{
+        font-size: medium;
+    }
+}

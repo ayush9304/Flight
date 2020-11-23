@@ -100,6 +100,11 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9999999;
 }
+.popup-actions{
+    padding: 0px 5%;
+    display: flex;
+    justify-content: space-evenly;
+}
 .popup .btn{
     padding-left: 30px;
     padding-right: 30px;
@@ -116,4 +121,48 @@ body{
     padding: 25px 20px;
     overflow: auto;
     border-radius: 10px;
+}
+
+
+@media (max-width: 376px){
+    .popup-actions{
+        padding: 0;
+    }
+    .small-popup{
+        width: 80%;
+    }
+    .each-booking-div{
+        width: 100%;
+    }
+    .container{
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .each-booking-div{
+        display: block;
+    }
+    .each-booking-div > div{
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+    .each-booking-div > div > div{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .places-div{
+        display: flex;
+        justify-content: center;
+    }
+    .status-div, .booking-date-div{
+        display: flex;
+        justify-content: center;
+    }
+    .middle-div{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .last-div{
+        margin-top: 5px;
+    }
 }

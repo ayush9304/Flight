@@ -102,10 +102,40 @@ body{
 }
 @media (max-width: 376px){
     .section{
-        padding: 30px 15px;
+        padding: 30px 5px;
+    }
+    .banner-text{
+        font-size: 35px;
+        margin-top: 15px;
+        margin-bottom: 25px;
     }
     .search-flight{
         padding: 35px 10px !important;
+    }
+    .footer-content{
+        display: block!important;
+    }
+    .logo-container{
+        display: flex;
+        justify-content: center;
+    }
+    .quote-container{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .quote{
+        font-size: 1.1em!important;
+    }
+    .quote-by{
+        text-align: center;
+    }
+    .links-container{
+        margin-bottom: 15px;
+    }
+    .link-list{
+        margin-left: auto!important;
+        margin-right: auto!important;
+        text-align: center;
     }
 }
 @media (max-width: 280px){

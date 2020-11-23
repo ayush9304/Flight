@@ -452,3 +452,71 @@
   }
   
 /***********************************/
+
+
+
+
+.bb2{
+    display: none;
+    padding: .2rem .52rem;
+    border-radius: 50%;
+}
+
+@media (max-width: 376px){
+    .section1{
+        font-size: 1em;
+    }
+    .query-data-div .container{
+        padding-right: 5px;
+        padding-left: 5px;
+        display: block;
+    }
+    .query-result-div .container{
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    .query-data-div .white{
+        font-size: medium;
+    }
+    .trip-class, .trip-modify, .trip-time, .trip-places{
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        margin-bottom: 7px!important;
+    }
+    .trip-places > .from-div{
+        width: 40%;
+        text-align: center;
+    }
+    .trip-places > .to-div{
+        width: 40%;
+        text-align: center;
+    }
+    .trip-places > .trip-type-div{
+        width: 20%;
+        text-align: center;
+    }
+    .query-data-div .trip-time{
+        justify-content: space-between;
+    }
+    .query-data-div .trip-time > div{
+        width: 40%;
+        text-align: center;
+    }
+    .trip-class{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .trip-modify{
+        display: flex;
+        justify-content: center;
+    }
+    .trip-places{
+        margin-top: 7px!important;
+    }
+    .spl-btn{
+        padding: .3rem .65rem;
+    }
+    /*Next css in othet css file*/
+}

@@ -25,22 +25,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 middle-div">
                         <div style="width:100%">
-                            <div class="row" style=" display: flex;">
+                            <div class="row places-div" style=" display: flex;">
                                 <div style="max-width: 45%;">{{ticket.flight.origin.city}}</div>
                                 <div>&nbsp;-&nbsp;</div>
                                 <div style="max-width: 45%;">{{ticket.flight.destination.city}}</div>
                             </div>
-                            <div class="row" style="font-size: .8em; color: #999999; ">
+                            <div class="row places-div" style="font-size: .8em; color: #999999; ">
                                 <div style="max-width: 100%;">{{ticket.flight.airline}} &middot; {{ticket.flight.plane}} &middot; {{ticket.passengers.count}} Passengers</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 middle-div">
                         <div style="font-size: 1.2em; color: #945937;">{{ticket.ref_no}}</div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 middle-div">
                         <div>
                             <div class="row status-div">
                                 {% if ticket.status == 'CONFIRMED' %}
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 last-div">
                         <div>
                             <div class="ticket-action-div">
                                 {% if ticket.status == 'CONFIRMED' %}
@@ -102,7 +102,7 @@
     <div class="popup">
         <div class="small-popup">
             <div style="margin-bottom: 10px; font-size: 1.1em;"><strong>Do you really want to cancel this ticket?</strong></div>
-            <div style="padding: 0px 5%; display: flex; justify-content: space-evenly;">
+            <div class="popup-actions">
                 <button class="btn btn-light" onclick="remove_popup()">Go Back</button>
                 <button class="btn btn-danger" id="cancel_ticket_btn" data-ref="" onclick="cancel_tkt()">Cancel</button>
             </div>
