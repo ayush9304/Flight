@@ -227,6 +227,9 @@ def review(request):
         flight1 = Flight.objects.get(id=flight_1)
         flight1ddate = datetime(int(date1.split('-')[2]),int(date1.split('-')[1]),int(date1.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
         flight1adate = (flight1ddate + flight1.duration)
+        flight2 = None
+        flight2ddate = None
+        flight2adate = None
         if round_trip:
             flight2 = Flight.objects.get(id=flight_2)
             flight2ddate = datetime(int(date2.split('-')[2]),int(date2.split('-')[1]),int(date2.split('-')[0]),flight2.depart_time.hour,flight2.depart_time.minute)
@@ -259,16 +262,19 @@ def book(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
             flight_1 = request.POST.get('flight1')
-            flight_2 = request.POST.get('flight2')
             flight_1date = request.POST.get('flight1Date')
-            flight_2date = request.POST.get('flight2Date')
             flight_1class = request.POST.get('flight1Class')
-            flight_2class = request.POST.get('flight2Class')
+            f2 = False
+            if request.POST.get('flight2'):
+                flight_2 = request.POST.get('flight2')
+                flight_2date = request.POST.get('flight2Date')
+                flight_2class = request.POST.get('flight2Class')
+                f2 = True
             countrycode = request.POST['countryCode']
             mobile = request.POST['mobile']
             email = request.POST['email']
             flight1 = Flight.objects.get(id=flight_1)
-            if flight_2:
+            if f2:
                 flight2 = Flight.objects.get(id=flight_2)
             passengerscount = request.POST['passengersCount']
             passengers=[]
@@ -280,53 +286,22 @@ def book(request):
             coupon = request.POST.get('coupon')
             
             try:
-                #ticket = Ticket.objects.create()
-                #ticket.user = request.user
-                #ticket.ref_no = secrets.token_hex(3).upper()
-                #for passenger in passengers:
-                #    ticket.passengers.add(passenger)
-                #ticket.flight = flight1
-                #ticket.flight_ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]))
-                ####################
-                #flight1ddate = datetime(int(flight_1date.split('-')[2]),int(flight_1date.split('-')[1]),int(flight_1date.split('-')[0]),flight1.depart_time.hour,flight1.depart_time.minute)
-                #flight1adate = (flight1ddate + flight1.duration)
-                ####################
-                #ticket.flight_adate = datetime(flight1adate.year,flight1adate.month,flight1adate.day)
-                #ffre = 0.0
-                #if flight_1class.lower() == 'first':
-                #    ticket.flight_fare = flight1.first_fare*int(passengerscount)
-                #    ffre = flight1.first_fare*int(passengerscount)
-                #elif flight_1class.lower() == 'business':
-                #    ticket.flight_fare = flight1.business_fare*int(passengerscount)
-                #    ffre = flight1.business_fare*int(passengerscount)
-                #else:
-                #    ticket.flight_fare = flight1.economy_fare*int(passengerscount)
-                #    ffre = flight1.economy_fare*int(passengerscount)
-                #ticket.other_charges = FEE
-                #if coupon:
-                #    ticket.coupon_used = coupon                     ##########Coupon
-                #ticket.total_fare = ffre+FEE+0.0                    ##########Total(Including coupon)
-                #ticket.seat_class = flight_1class.lower()
-                #ticket.status = 'PENDING'
-                #ticket.mobile = ('+'+countrycode+' '+mobile)
-                #ticket.email = email
-                #ticket.save()
                 ticket1 = createticket(request.user,passengers,passengerscount,flight1,flight_1date,flight_1class,coupon,countrycode,email,mobile)
-                if flight_2:
+                if f2:
                     ticket2 = createticket(request.user,passengers,passengerscount,flight2,flight_2date,flight_2class,coupon,countrycode,email,mobile)
 
                 if(flight_1class == 'Economy'):
-                    if flight_2:
+                    if f2:
                         fare = (flight1.economy_fare*int(passengerscount))+(flight2.economy_fare*int(passengerscount))
                     else:
                         fare = flight1.economy_fare*int(passengerscount)
                 elif (flight_1class == 'Business'):
-                    if flight_2:
+                    if f2:
                         fare = (flight1.business_fare*int(passengerscount))+(flight2.business_fare*int(passengerscount))
                     else:
                         fare = flight1.business_fare*int(passengerscount)
                 elif (flight_1class == 'First'):
-                    if flight_2:
+                    if f2:
                         fare = (flight1.first_fare*int(passengerscount))+(flight2.first_fare*int(passengerscount))
                     else:
                         fare = flight1.first_fare*int(passengerscount)
@@ -334,14 +309,14 @@ def book(request):
                 return HttpResponse(e)
             
 
-            if flight_2:    ##
+            if f2:    ##
                 return render(request, "flight/payment.html", { ##
-                    'fare': fare,   ##
+                    'fare': fare+FEE,   ##
                     'ticket': ticket1.id,   ##
                     'ticket2': ticket2.id   ##
                 })  ##
             return render(request, "flight/payment.html", {
-                'fare': fare,
+                'fare': fare+FEE,
                 'ticket': ticket1.id
             })
         else:
@@ -367,6 +342,7 @@ def payment(request):
             try:
                 ticket = Ticket.objects.get(id=ticket_id)
                 ticket.status = 'CONFIRMED'
+                ticket.booking_date = datetime.now()
                 ticket.save()
                 if t2:
                     ticket2 = Ticket.objects.get(id=ticket2_id)
@@ -409,3 +385,55 @@ def get_ticket(request):
     return HttpResponse(pdf, content_type='application/pdf')
 
 
+def bookings(request):
+    if request.user.is_authenticated:
+        tickets = Ticket.objects.filter(user=request.user).order_by('-booking_date')
+        return render(request, 'flight/bookings.html', {
+            'page': 'bookings',
+            'tickets': tickets
+        })
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+@csrf_exempt
+def cancel_ticket(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            ref = request.POST['ref']
+            try:
+                ticket = Ticket.objects.get(ref_no=ref)
+                if ticket.user == request.user:
+                    ticket.status = 'CANCELLED'
+                    ticket.save()
+                    return JsonResponse({'success': True})
+                else:
+                    return JsonResponse({
+                        'success': False,
+                        'error': "User unauthorised"
+                    })
+            except Exception as e:
+                return JsonResponse({
+                    'success': False,
+                    'error': e
+                })
+        else:
+            return HttpResponse("User unauthorised")
+    else:
+        return HttpResponse("Method must be POST.")
+
+def resume_booking(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            ref = request.POST['ref']
+            ticket = Ticket.objects.get(ref_no=ref)
+            if ticket.user == request.user:
+                return render(request, "flight/payment.html", {
+                    'fare': ticket.total_fare,
+                    'ticket': ticket.id
+                })
+            else:
+                return HttpResponse("User unauthorised")
+        else:
+            return HttpResponseRedirect(reverse("login"))
+    else:
+        return HttpResponse("Method must be post.")

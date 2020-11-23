@@ -70,7 +70,8 @@ SEAT_CLASS = (
 
 TICKET_STATUS =(
     ('PENDING', 'Pending'),
-    ('CONFIRMED', 'Confirmed')
+    ('CONFIRMED', 'Confirmed'),
+    ('CANCELLED', 'Cancelled')
 )
 
 class Ticket(models.Model):

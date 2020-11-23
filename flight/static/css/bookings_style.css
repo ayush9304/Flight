@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    background-color: #f5f5f5;
+    word-wrap: break-word;
+}
+.container{
+    cursor: pointer;
+}
+.each-booking-div{
+    width: 95%;
+    margin: 5px auto 8px auto;
+    transition-duration: .4s;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+}
+.each-booking-div:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+    border-color: rgb(246,247,247);
+    background-color: rgb(246,247,247);
+}
+.btnp{
+    padding: .15rem .6rem;
+    font-size: .9em;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+.each-booking-div > div{
+    display: flex;
+    overflow: auto;
+}
+.each-booking-div > div > div{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.green, .red, .orange{
+    border-radius: 3px;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: .7em;
+}
+.green{
+    background-color: green;
+}
+.red{
+    background-color: red;
+}
+.orange{
+    background-color: orange;
+}
+.btnp:hover, .btnp:focus, .btnp:active{
+    background-color: rgb(246,247,247)!important;
+    color: #007bff!important;
+}
+
+/*
+.popup{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999;
+}
+.cover{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+}
+@keyframes popup{
+    0%{
+        transform: scale(0.4);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+.popup-box{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    animation-name: popup;
+    animation-fill-mode: forwards;
+    animation-duration: .5s;
+}*/
+
+.popup{
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999999;
+}
+.popup .btn{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.small-popup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
+    overflow: auto;
+    border-radius: 10px;
+}
