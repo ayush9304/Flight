@@ -102,7 +102,7 @@ body{
 }
 @media (max-width: 376px){
     .section{
-        padding: 30px 5px;
+        padding: 30px 1px;
     }
     .banner-text{
         font-size: 35px;

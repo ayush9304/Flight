@@ -19,7 +19,7 @@
                 <input type="hidden" name="flight2Class" value="{{seat}}">
                 <input type="hidden" name="flight2Date" value='{{flight2ddate | date:"d-m-Y"}}'>
             {% endif %}
-            <div class="row">
+            <div class="row main-row">
                 <div class="col-8">
                 <div class="ticket-details">
                     <h5>Ticket Details</h5>
@@ -399,93 +399,98 @@
                 </div>
                 </div>
                 <div class="col-4">
-                <div class="price-details">
-                    <h5>Fare Summary</h5>
-                    <hr>
-                    <div class="row base-fare">
-                        <div class="base-fae-label">Base Fare: </div>
-                        <div class="base-fare-value">
-                            {% if seat == 'First' %}
-                                ₹ <span>
-                                    {% if flight2 %}
-                                        {{flight1.first_fare | add:flight2.first_fare}}
-                                    {% else %}
-                                        {{flight1.first_fare}}
-                                    {% endif %}
+                    <div class="price-details">
+                        <h5>Fare Summary</h5>
+                        <hr>
+                        <div class="row base-fare">
+                            <div class="base-fae-label">Base Fare: </div>
+                            <div class="base-fare-value">
+                                {% if seat == 'First' %}
+                                    ₹ <span>
+                                        {% if flight2 %}
+                                            {{flight1.first_fare | add:flight2.first_fare}}
+                                        {% else %}
+                                            {{flight1.first_fare}}
+                                        {% endif %}
+                                        </span>
+                                    <input type="hidden" id="basefare" value="{% if flight2 %}{{flight1.first_fare | add:flight2.first_fare}}{% else %}{{flight1.first_fare}}{% endif %}">
+                                {% elif seat == 'Business' %}
+                                    ₹ <span>
+                                        {% if flight2 %}
+                                            {{flight1.business_fare | add:flight2.business_fare}}
+                                        {% else %}
+                                            {{flight1.business_fare}}
+                                        {% endif %}
+                                        </span>
+                                    <input type="hidden" id="basefare" value="{% if flight2 %}{{flight1.business_fare | add:flight2.business_fare}}{% else %}{{flight1.business_fare}}{% endif %}">
+                                {% elif seat == 'Economy' %}
+                                    ₹ <span>
+                                        {% if flight2 %}
+                                            {{flight1.economy_fare | add:flight2.economy_fare}}
+                                        {% else %}
+                                            {{flight1.economy_fare}}
+                                        {% endif %}
                                     </span>
-                                <input type="hidden" id="basefare" value="{% if flight2 %}{{flight1.first_fare | add:flight2.first_fare}}{% else %}{{flight1.first_fare}}{% endif %}">
-                            {% elif seat == 'Business' %}
-                                ₹ <span>
-                                    {% if flight2 %}
-                                        {{flight1.business_fare | add:flight2.business_fare}}
-                                    {% else %}
-                                        {{flight1.business_fare}}
-                                    {% endif %}
+                                    <input type="hidden" id="basefare" value="{% if flight2 %}{{flight1.economy_fare | add:flight2.economy_fare}}{% else %}{{flight1.economy_fare}}{% endif %}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row surcharges">
+                            <div class="surcharges-label">Fee & Surcharges: </div>
+                            <div class="surcharges-value">₹ <span>{{fee}}</span></div>
+                            <input type="hidden" id="fee" value="{{fee}}">
+                        </div>
+                        <hr>
+                        <div class="total-fare">
+                            <div class="total-fare-label">Total Fare: </div>
+                            <div class="total-fare-value">
+                                {% if seat == 'First' %}
+                                    ₹ <span>
+                                        {% if flight2 %}
+                                            {{flight1.first_fare | add:flight2.first_fare | add:fee}}
+                                        {% else %}
+                                            {{flight1.first_fare | add:fee}}
+                                        {% endif %}
                                     </span>
-                                <input type="hidden" id="basefare" value="{% if flight2 %}{{flight1.business_fare | add:flight2.business_fare}}{% else %}{{flight1.business_fare}}{% endif %}">
-                            {% elif seat == 'Economy' %}
-                                ₹ <span>
-                                    {% if flight2 %}
-                                        {{flight1.economy_fare | add:flight2.economy_fare}}
-                                    {% else %}
-                                        {{flight1.economy_fare}}
-                                    {% endif %}
-                                </span>
-                                <input type="hidden" id="basefare" value="{% if flight2 %}{{flight1.economy_fare | add:flight2.economy_fare}}{% else %}{{flight1.economy_fare}}{% endif %}">
-                            {% endif %}
+                                {% elif seat == 'Business' %}
+                                    ₹ <span>
+                                        {% if flight2 %}
+                                            {{flight1.business_fare | add:flight2.business_fare | add:fee}}
+                                        {% else %}
+                                            {{flight1.business_fare | add:fee}}
+                                        {% endif %}
+                                    </span>
+                                {% elif seat == 'Economy' %}
+                                    ₹ <span>
+                                        {% if flight2 %}
+                                            {{flight1.economy_fare | add:flight2.economy_fare | add:fee}}
+                                        {% else %}
+                                            {{flight1.economy_fare | add:fee}}
+                                        {% endif %}
+                                        </span>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                    <div class="row surcharges">
-                        <div class="surcharges-label">Fee & Surcharges: </div>
-                        <div class="surcharges-value">₹ <span>{{fee}}</span></div>
-                        <input type="hidden" id="fee" value="{{fee}}">
-                    </div>
-                    <hr>
-                    <div class="total-fare">
-                        <div class="total-fare-label">Total Fare: </div>
-                        <div class="total-fare-value">
-                            {% if seat == 'First' %}
-                                ₹ <span>
-                                    {% if flight2 %}
-                                        {{flight1.first_fare | add:flight2.first_fare | add:fee}}
-                                    {% else %}
-                                        {{flight1.first_fare | add:fee}}
-                                    {% endif %}
-                                </span>
-                            {% elif seat == 'Business' %}
-                                ₹ <span>
-                                    {% if flight2 %}
-                                        {{flight1.business_fare | add:flight2.business_fare | add:fee}}
-                                    {% else %}
-                                        {{flight1.business_fare | add:fee}}
-                                    {% endif %}
-                                </span>
-                            {% elif seat == 'Economy' %}
-                                ₹ <span>
-                                    {% if flight2 %}
-                                        {{flight1.economy_fare | add:flight2.economy_fare | add:fee}}
-                                    {% else %}
-                                        {{flight1.economy_fare | add:fee}}
-                                    {% endif %}
-                                    </span>
-                            {% endif %}
+                    <div class="coupon-code">
+                        <h5>Have a coupon code?</h5>
+                        <hr>
+                        <div class="row base-fare">
+                            <div class="col-9" style="padding: 10px 10px 10px 0px">
+                                <input type="text" name="coupon" class="form-control" placeholder="Coupon Code" style="text-transform: uppercase;">
+                            </div>
+                            <div class="col" style="padding: 10px 10px 10px 0px">
+                                <center>
+                                    <button type="button" class="btn btn-primary btn-danger">Apply</button>
+                                </center>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="coupon-code">
-                    <h5>Have a coupon code?</h5>
-                    <hr>
-                    <div class="row base-fare">
-                        <div class="col-9" style="padding: 10px 10px 10px 0px">
-                            <input type="text" name="coupon" class="form-control" placeholder="Coupon Code" style="text-transform: uppercase;">
-                        </div>
-                        <div class="col" style="padding: 10px 10px 10px 0px">
-                            <center>
-                                <button type="button" class="btn btn-primary btn-danger">Apply</button>
-                            </center>
-                        </div>
+                <div class="col media-payment-btn">
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-danger">Proceed to payment</button>
                     </div>
-                </div>
                 </div>
             </div>
         </form>

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     filter_price();
     document.querySelector(".clr-filter-div button").addEventListener('click', reset_filter);
 
-
+    initial_click();
     tab_change();
     flight_select();
 
@@ -454,6 +454,7 @@ function flight_select() {
             document.querySelector("#select-f1-arrive").innerText = e.target.dataset.arrive;
             document.querySelector("#select-f1-fare").innerText = e.target.dataset.fare;
             document.querySelector("#select-total-fare").innerText = parseInt(e.target.dataset.fare) + parseInt(document.querySelector("#select-f2-fare").innerText);
+            document.querySelector("#select-total-fare-media").innerText = parseInt(e.target.dataset.fare) + parseInt(document.querySelector("#select-f2-fare").innerText);
         });
     });
     document.querySelectorAll(".flight2-radio").forEach(radio => {
@@ -464,6 +465,7 @@ function flight_select() {
             document.querySelector("#select-f2-arrive").innerText = e.target.dataset.arrive;
             document.querySelector("#select-f2-fare").innerText = e.target.dataset.fare;
             document.querySelector("#select-total-fare").innerText = parseInt(e.target.dataset.fare) + parseInt(document.querySelector("#select-f1-fare").innerText);
+            document.querySelector("#select-total-fare-media").innerText = parseInt(e.target.dataset.fare) + parseInt(document.querySelector("#select-f1-fare").innerText);
         });
     });
 }
@@ -472,8 +474,54 @@ function flight_select() {
 //a.dispatchEvent(new Event('click', { 'bubbles': true }));
 
 
+function media_click(element) {
+    if (window.matchMedia("(max-width: 376px)").matches) {
+        if (document.querySelector('#trip-identifier').value === '1') {
+            element.querySelector('.o-b').click();
+        }
+        else {
+            element.querySelector('.r-b').click();
+            element.parentElement.parentElement.querySelectorAll('.blue').forEach(flt => {
+                flt.classList.remove('blue');
+            });
+            element.classList.add('blue');
+        }
+    }
+    else {
+        return;
+    }
+}
+
+function initial_click() {
+    if (window.matchMedia("(max-width: 376px)").matches) {
+        document.querySelector(".query-result-div .each-flight-div").classList.add('blue');
+        document.querySelector(".query-result-div-2 .each-flight-div").classList.add('blue');
+    }
+}
 
 
+function close_filter(element) {
+    element.parentElement.parentElement.style.display = 'none';
+}
+
+
+function show_filter() {
+    if(Boolean(document.querySelector(".query-result-div-2"))) {
+        let r1 = document.querySelector(".query-result-div");
+        let r2 = document.querySelector(".query-result-div-2");
+        if(r2.style.display === 'none') {
+            r1.querySelector(".filter-div").style.display = 'block';
+            r2.querySelector(".filter-div").style.display = 'none';
+        }
+        else {
+            r2.querySelector(".filter-div").style.display = 'block';
+            r1.querySelector(".filter-div").style.display = 'none';
+        }
+    }
+    else {
+        document.querySelector(".query-result-div .filter-div").style.display = 'block';
+    }
+}
 
 
 

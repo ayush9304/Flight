@@ -64,9 +64,69 @@
                         <input type="hidden" name="DepartDate" value='{{depart_date|date:"Y-m-d"}}'>
                         <input type="hidden" name="ReturnDate" value='{{return_date|date:"Y-m-d"}}'>
                         <input type="hidden" name="SeatClass" value="{{seat|lower}}">
-                        <input type="hidden" name="TripType" value="{{trip_type}}">
+                        <input type="hidden" name="TripType" id="trip-identifier" value="{{trip_type}}">
                         <button class="btn spl-btn" type="submit">Modify Search</button>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="query-data-div2">
+            <div class="container">
+                <div class="trip-modify">
+                    <form action="/" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="Origin" value="{{origin.code|upper}}">
+                        <input type="hidden" name="Destination" value="{{destination.code|upper}}">
+                        <input type="hidden" name="DepartDate" value='{{depart_date|date:"Y-m-d"}}'>
+                        <input type="hidden" name="ReturnDate" value='{{return_date|date:"Y-m-d"}}'>
+                        <input type="hidden" name="SeatClass" value="{{seat|lower}}">
+                        <input type="hidden" name="TripType" value="{{trip_type}}">
+                        <button class="btn spl-btn2" type="submit">
+                            <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                <div class="trip-data">
+                    <div class="trip-data-p" style="display: flex; color: white;">
+                        <div>{{origin.city}}</div>
+                        <div>
+                            {% if trip_type == '1' %}
+                                &nbsp;
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                </svg>
+                                &nbsp;
+                            {% else %}
+                                &nbsp;
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                                </svg>
+                                &nbsp;
+                            {% endif %}
+                            
+                        </div>
+                        <div>{{destination.city}}</div>
+                    </div>
+                    <div class="trip-data-d" style="display: flex; font-size: .8em; color: rgb(240,240,240);">
+                        <div>
+                            {{depart_date | date:'D, d M'}}
+                            {% if trip_type == '2' %}
+                                |
+                                {{return_date | date:'D, d M'}}     
+                            {% endif %}
+                            |
+                            {{seat}}
+                        </div>
+                    </div>
+                </div>
+                <div class="trip-filter">
+                    <button class="btn spl-btn2" onclick="show_filter()">
+                        <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-funnel" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -100,6 +160,13 @@
                 <div class="row">
                     {% if flights %}
                         <div class="col-lg-3 filter-div">
+                            <div class="close-filter" style="margin-top: 0;">
+                                <button class="btn b1" onclick="close_filter(this)">
+                                    <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                    </svg>
+                                </button>
+                            </div>
                             <div class="filter">
                                 <center>
                                     <h4>Filter Results</h4>
@@ -226,6 +293,11 @@
                                     </center>
                                 </div>
                             </div>
+                            <div class="close-filter">
+                                <button class="btn btn-danger b2" onclick="close_filter(this)">
+                                    SHOW RESULTS
+                                </button>
+                            </div>
                         </div>
                         <div class="col-lg-9 actual-result-div">
                             <div class="sort-div" style="display:none">
@@ -277,7 +349,7 @@
                                 {% for flight in flights %}
 
                                     <div class="each-flight-div-box show">
-                                        <div class="each-flight-div">
+                                        <div class="each-flight-div" onclick="media_click(this)">
                                             <div class="flight-company">
                                                 <div class="flight-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1.5em" height="1.3em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 440 384"><path d="M14 335h405v43H14v-43zm417.5-199.5q3.5 12.5-3 24T409 175l-114 30l-92 25l-114 30l-34 10l-16-29l-39-67l31-9l42 33l106-28L91 17l41-11l147 137l113-30q13-4 24.5 3t15 19.5z" fill="#434445"/><rect x="0" y="0" width="440" height="384" fill="rgba(0, 0, 0, 0)" /></svg>
@@ -287,7 +359,7 @@
                                                     <div class="plane-name">{{flight.plane}}</div>
                                                 </div>
                                             </div>
-                                            <div class="flight-time">
+                                            <div class="flight-time flight-time-div">
                                                 <div class="flight-origin-time">
                                                     <div class="flight-time">
                                                         <h5>{{flight.depart_time|time:"H:i"}}</h5>
@@ -327,17 +399,16 @@
 
                                                     {% if trip_type == '2' %}
                                                         {% if forloop.couter == 1 %}checked{% endif %}
-                                                        <input type="radio" class="flight1-radio" name="test1" value="{{flight.id}}" data-plane='{{flight.plane}}' data-depart='{{flight.depart_time|time:"H:i"}}' data-arrive='{{flight.arrival_time|time:"H:i"}}' data-fare="{% if seat == 'Economy' %} {{flight.economy_fare}} {% elif seat == 'Business' %} {{flight.business_fare}} {% else %} {{flight.first_fare}} {% endif %}" {% if forloop.counter == 1 %}checked{% endif %}>
+                                                        <input type="radio" class="flight1-radio r-b" name="test1" value="{{flight.id}}" data-plane='{{flight.plane}}' data-depart='{{flight.depart_time|time:"H:i"}}' data-arrive='{{flight.arrival_time|time:"H:i"}}' data-fare="{% if seat == 'Economy' %} {{flight.economy_fare}} {% elif seat == 'Business' %} {{flight.business_fare}} {% else %} {{flight.first_fare}} {% endif %}" {% if forloop.counter == 1 %}checked{% endif %}>
                                                     {% else %}
                                                         <form action="{% url 'review' %}" method="GET" style="display: flex;">
                                                             <input type="hidden" name="flight1Id" value="{{flight.id}}">
                                                             <input type="hidden" name="flight1Date", value="{{depart_date|date:'d-m-Y'}}">
                                                             <input type="hidden" name="seatClass" value="{{seat}}">
-                                                            <button class="btn btn-primary btn-danger bb1" type="submit">
+                                                            <button class="btn btn-primary btn-danger o-b" type="submit">
                                                             
                                                                 Book Flight &#8594;
                                                             </button>
-                                                            <button class="btn btn-primary btn-danger bb2" type="submit">&#8811;</button>
                                                         </form>
                                                     {% endif %}
 
@@ -375,6 +446,13 @@
                     <div class="row">
                         {% if flights2 %}
                             <div class="col-lg-3 filter-div">
+                                <div class="close-filter" style="margin-top: 0;">
+                                    <button class="btn b1" onclick="close_filter(this)">
+                                        <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                        </svg>
+                                    </button>
+                                </div>
                                 <div class="filter">
                                     <center>
                                         <h4>Filter Results</h4>
@@ -501,6 +579,11 @@
                                         </center>
                                     </div>
                                 </div>
+                                <div class="close-filter">
+                                    <button class="btn btn-danger b2" onclick="close_filter(this)">
+                                        SHOW RESULTS
+                                    </button>
+                                </div>
                             </div>
                             <div class="col-lg-9 actual-result-div">
                                 <div class="sort-div" style="display:none">
@@ -552,7 +635,7 @@
                                     {% for flight2 in flights2 %}
 
                                         <div class="each-flight-div-box show">
-                                            <div class="each-flight-div">
+                                            <div class="each-flight-div" onclick="media_click(this)">
                                                 <div class="flight-company">
                                                     <div class="flight-icon">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1.5em" height="1.3em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 440 384"><path d="M14 335h405v43H14v-43zm417.5-199.5q3.5 12.5-3 24T409 175l-114 30l-92 25l-114 30l-34 10l-16-29l-39-67l31-9l42 33l106-28L91 17l41-11l147 137l113-30q13-4 24.5 3t15 19.5z" fill="#434445"/><rect x="0" y="0" width="440" height="384" fill="rgba(0, 0, 0, 0)" /></svg>
@@ -603,7 +686,7 @@
 
                                                         {% if trip_type == '2' %}
                                                             {% if forloop.couter == 1 %}checked{% endif %}
-                                                            <input type="radio" class="flight2-radio" name="test2" value="{{flight2.id}}" data-plane='{{flight2.plane}}' data-depart='{{flight2.depart_time|time:"H:i"}}' data-arrive='{{flight2.arrival_time|time:"H:i"}}' data-fare="{% if seat == 'Economy' %} {{flight2.economy_fare}} {% elif seat == 'Business' %} {{flight2.business_fare}} {% else %} {{flight2.first_fare}} {% endif %}" {% if forloop.counter == 1 %}checked{% endif %}>
+                                                            <input type="radio" class="flight2-radio r-b" name="test2" value="{{flight2.id}}" data-plane='{{flight2.plane}}' data-depart='{{flight2.depart_time|time:"H:i"}}' data-arrive='{{flight2.arrival_time|time:"H:i"}}' data-fare="{% if seat == 'Economy' %} {{flight2.economy_fare}} {% elif seat == 'Business' %} {{flight2.business_fare}} {% else %} {{flight2.first_fare}} {% endif %}" {% if forloop.counter == 1 %}checked{% endif %}>
                                                         {% else %}
                                                             <form action="{% url 'review' %}" method="GET" style="display: flex;">
                                                                 <input type="hidden" name="flight1Id" value="{{flight2.id}}">
@@ -644,7 +727,7 @@
                 </div>
             </div>
             <div class="selection-div">
-                <div class="col-3">
+                <div class="col-3 selection1">
                     <div class="white">
                         <div>
                             <span>{{origin.code|upper}}</span>
@@ -671,7 +754,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 selection2">
                     <div class="white">
                         <div>
                             <span>{{destination.code|upper}}</span>
@@ -698,7 +781,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 selection-total">
                     <div class="white">
                         <div class="white-2">
                             <span>TOTAL FARE</span>
@@ -717,7 +800,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 selection-confirm">
                     <div class="white">
                         <div>
                             <form action="{% url 'review' %}" method="GET">
@@ -728,6 +811,40 @@
                                 <input type="hidden" name="seatClass" value="{{seat}}">
                                 <button class="btn btn-light" type="submit">Continue &#8594;</button>
                             </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="selection-media">
+                    <div>
+                        <div class="col-7" style="display: flex; justify-content: space-between;">
+                            <div class="col-5" style="padding: 0; text-align: left;">
+                                <div>TOTAL</div>
+                                <div>AMOUNT</div>
+                            </div>
+                            <div class="col-7" style="font-size: 1.2em; font-weight: bold; display: flex; padding: 0;">
+                                <span style="margin: auto;">₹
+                                    <span id="select-total-fare-media">
+                                        {% if seat == "Economy" %}
+                                            {{flights.all.0.economy_fare | add:flights2.all.0.economy_fare}}
+                                        {% elif seat == "Business" %}
+                                            {{flights.all.0.business_fare | add:flights2.all.0.business_fare}}
+                                        {% else %}
+                                            {{flights.all.0.first_fare | add:flights2.all.0.first_fare}}
+                                        {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-5" style="display: flex;">
+                            <div style="margin: auto;">
+                                <form action="{% url 'review' %}" method="GET">
+                                    <input type="hidden" name="flight1Id" value="{{flights.all.0.id}}" id="flt1">
+                                    <input type="hidden" name="flight1Date", value="{{depart_date|date:'d-m-Y'}}">
+                                    <input type="hidden" name="flight2Id" value="{{flights2.all.0.id}}" id="flt2">
+                                    <input type="hidden" name="flight2Date", value="{{return_date|date:'d-m-Y'}}">
+                                    <input type="hidden" name="seatClass" value="{{seat}}">
+                                    <button class="btn btn-light" type="submit">Continue &#8594;</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

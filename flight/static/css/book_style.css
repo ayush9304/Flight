@@ -197,3 +197,32 @@ h5{
     display: flex;
     margin: 0px;
 }
+
+
+
+.media-payment-btn{
+    display: none;
+}
+.media-payment-btn > div{
+    display: flex;
+    justify-content: center;
+}
+
+
+@media (max-width: 376px) {
+    .main-row{
+        display: block;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .main-row > div{
+        max-width: 100%;
+        padding: 1px;
+    }
+    .payment-btn{
+        display: none;
+    }
+    .media-payment-btn{
+        display: block;
+    }
+}
