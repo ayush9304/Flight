@@ -87,3 +87,27 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 }
+
+
+
+
+
+@media (max-width: 376px){
+    .section1 > .container{
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .payment-box{
+        margin: auto 0;
+        width: 100%;
+    }
+    .payment-box-head-div{
+        padding: 5px 10px;
+    }
+    .payment-details-input-box{
+        padding: 15px 10px;
+    }
+    .right-col{
+        padding-right: 0;
+    }
+}

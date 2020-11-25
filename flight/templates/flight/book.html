@@ -24,13 +24,22 @@
                 <div class="ticket-details">
                     <h5>Ticket Details</h5>
                     <hr>
+                    <div class="media-airline">
+                        <div>
+                            <div class="brand">{{flight1.airline}}</div>
+                            <div>&nbsp;&middot;&nbsp;</div>
+                            <div class="plane-name">{{flight1.plane}}</div>
+                            <div>&nbsp;&middot;&nbsp;</div>
+                            <div class="plane-name">{{seat}}</div>
+                        </div>
+                    </div>
                     <div class="row ticket-details-div">
                         <div class="col-3 airline-name">
                             <div class="brand">{{flight1.airline}}</div>
                             <div class="plane-name">{{flight1.plane}}</div>
                         </div>
                         <div class="col-3 depart-time">
-                            <div class="time">{{flight1.depart_time}}</div>
+                            <div class="time">{{flight1.depart_time | time:'H:i'}}</div>
                             <div class="date ddate" data-value='{{flight1ddate | date:"d-m-Y"}}'>{{flight1ddate | date:"D, d M y"}}</div>
                             <div class="place">{{flight1.origin.city}}</div>
                             <div class="airport">{{flight1.origin.airport}}</div>
@@ -39,7 +48,7 @@
                             <div class="duration" data-value="{{flight1.duration}}"></div>
                         </div>
                         <div class="col-3 arrival-time">
-                            <div class="time">{{flight1.arrival_time}}</div>
+                            <div class="time">{{flight1.arrival_time | time:'H:i'}}</div>
                             <div class="date adate" data-value='{{flight1adate | date:"d-m-Y"}}'>{{flight1adate | date:"D, d M y"}}</div>
                             <div class="place">{{flight1.destination.city}}</div>
                             <div class="airport">{{flight1.destination.airport}}</div>
@@ -47,16 +56,25 @@
                     </div>
                     {% if flight2 %}
                         <!--Round Trip-->
-                        <div style="padding: 0 15px;"><hr style="border-top: 0.5px dashed rgba(0,0,0,.1);"></div>
+                        <div style="padding: 0 15px;" class="round-seperator"><hr style="border-top: 0.5px dashed rgba(0,0,0,.1);"></div>
                         <!--/Round Trip-->
+                        <div class="media-airline">
+                            <div>
+                                <div class="brand">{{flight2.airline}}</div>
+                                <div>&nbsp;&middot;&nbsp;</div>
+                                <div class="plane-name">{{flight2.plane}}</div>
+                                <div>&nbsp;&middot;&nbsp;</div>
+                                <div class="plane-name">{{seat}}</div>
+                            </div>
+                        </div>
                         <div class="row ticket-details-div">
                             <div class="col-3 airline-name">
                                 <div class="brand">{{flight2.airline}}</div>
                                 <div class="plane-name">{{flight2.plane}}</div>
                             </div>
                             <div class="col-3 depart-time">
-                                <div class="time">{{flight2.depart_time}}</div>
-                                <div class="date ddate">{{flight2date | date:"D, d M y"}}</div>
+                                <div class="time">{{flight2.depart_time | time:'H:i'}}</div>
+                                <div class="date ddate">{{flight2ddate | date:"D, d M y"}}</div>
                                 <div class="place">{{flight2.origin.city}}</div>
                                 <div class="airport">{{flight2.origin.airport}}</div>
                             </div>
@@ -64,8 +82,8 @@
                                 <div class="duration" data-value="{{flight2.duration}}"></div>
                             </div>
                             <div class="col-3 arrival-time">
-                                <div class="time">{{flight2.arrival_time}}</div>
-                                <div class="date adate">Fri, 15 Jan 2021</div>
+                                <div class="time">{{flight2.arrival_time | time:'H:i'}}</div>
+                                <div class="date adate">{{flight2adate | date:"D, d M y"}}</div>
                                 <div class="place">{{flight2.destination.city}}</div>
                                 <div class="airport">{{flight2.destination.airport}}</div>
                             </div>
@@ -329,7 +347,7 @@
                         Your booking details will be sent to this email address.
                     </div>
                 </div>
-                <div class="traveller-details">
+                <div class="traveller-details individual-traveller-div">
                     <div class="traveller-head">
                         <h5>Passenger Details</h5>
                         <h6><span>0</span> Passengers</h6>
@@ -363,7 +381,7 @@
                     </div>
                     <div class="row add-traveller-div collapse" id="collapseExample">
                         <div class="note-name"><span>IMPORTANT :</span> Enter your name as it is mentioned on your passport or any government approved ID.</div>
-                        <div class="row form-group">
+                        <div class="row form-group add-traveller-div-name">
                             <div class="col">
                                 <input type="text" class="form-control" id="fname" placeholder="First name">
                             </div>
@@ -479,7 +497,7 @@
                             <div class="col-9" style="padding: 10px 10px 10px 0px">
                                 <input type="text" name="coupon" class="form-control" placeholder="Coupon Code" style="text-transform: uppercase;">
                             </div>
-                            <div class="col" style="padding: 10px 10px 10px 0px">
+                            <div class="col coupon-apply" style="padding: 10px 10px 10px 0px">
                                 <center>
                                     <button type="button" class="btn btn-primary btn-danger">Apply</button>
                                 </center>

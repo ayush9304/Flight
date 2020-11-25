@@ -208,8 +208,31 @@ h5{
     justify-content: center;
 }
 
+.media-airline{
+    display: none;
+}
+.media-airline > div{
+    display: flex;
+    text-align: left;
+    margin-top: 13px;
+}
+.media-airline > div > div{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
 
 @media (max-width: 376px) {
+    .container-fluid{
+        background-color: rgba(10, 0, 0, .05);
+    }
+    .section1{
+        background-color: transparent;
+    }
+    .section{
+        padding-top: 0;
+    }
     .main-row{
         display: block;
         margin-left: 0;
@@ -217,12 +240,123 @@ h5{
     }
     .main-row > div{
         max-width: 100%;
-        padding: 1px;
+        padding: 0;
+    }
+    .main-row > div > div{
+        border-radius: 0;
     }
     .payment-btn{
         display: none;
     }
     .media-payment-btn{
+        display: block;
+    }
+    .contact-details-div{
+        margin: 0;
+        padding: 0;
+    }
+    .contact-details-div > div{
+        display: block;
+    }
+    .contact-details-div > div > div{
+        max-width: 100%;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .individual-traveller-div .each-traveller{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .individual-traveller-div .add-traveller-div{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .individual-traveller-div .add-traveller-div-name{
+        display: block;
+    }
+    .individual-traveller-div .add-traveller-div-name > div{
+        margin-top: 10px;
+    }
+    .price-details > .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .price-details{
+        margin-top: 0;
+    }
+    .coupon-code .base-fare{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .coupon-apply{
+        padding-right: 0!important;
+    }
+    .ticket-details-div{
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 5px;
+        justify-content: space-between;
+    }
+    .ticket-details-div > .airline-name{
+        display: none;
+    }
+    .ticket-details-div .depart-time{
+        max-width: 36%;
+        width: 36%;
+        flex: auto;
+    }
+    .ticket-details-div .arrival-time{
+        max-width: 36%;
+        width: 36%;
+        flex: auto;
+    }
+    .ticket-details-div .time-details{
+        margin-left: 0;
+        margin-right: 0;
+        width: fit-content;
+        width: 28%;
+        max-width: 28%;
+        flex: auto;
+        justify-content: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .ticket-details-div .airport{
+        
+    }
+    .ticket-details-div .time-details{
+        display: flex;
+    }
+    .ticket-details-div .time-details > div{
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .ticket-details-div .time{
+        font-size: 1.4em;
+    }
+    .ticket-details-div .depart-time{
+        padding-left: 0;
+        padding-right: 10px;
+    }
+    .ticket-details-div .arrival-time{
+        padding-left: 10px;
+        padding-right: 0;
+        text-align: right;
+    }
+    .ticket-details-div .ddate{
+        font-size: .9em;
+        font-weight: normal;
+        color: black;
+    }
+    .ticket-details-div .adate{
+        font-size: .9em;
+        font-weight: normal;
+        color: black;
+    }
+    .round-seperator > hr{
+        border-top: 1px dashed rgba(0,0,0,.5) !important;
+    }
+    .media-airline{
         display: block;
     }
 }
