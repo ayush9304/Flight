@@ -106,6 +106,17 @@
     color: white;
     padding: 0;
 }
+.spl-btn2:hover{
+    color: white!important;
+    background-color: transparent!important;
+}
+.spl-btn2:active{
+    background-color: transparent!important;
+    color: white!important;
+}
+.spl-btn2:focus{
+    box-shadow: none!important;
+}
 /*.trip-modify button:hover, button:active, button:focus{
     background-color: rgba(220,53,69,.1);
 }*/

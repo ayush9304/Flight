@@ -9,10 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
     flight_select();
 
     ////////////////////////////////////////
-    flight_duration2();
     //document.querySelector(".filter-price2 input[type=range]").addEventListener('input', filter); //filter_price
-    filter_price2();
-    document.querySelector(".clr-filter-div2 button").addEventListener('click', reset_filter2);
+    if (document.querySelector('#trip-identifier').value === '2') {
+        flight_duration2();
+        filter_price2();
+        document.querySelector(".clr-filter-div2 button").addEventListener('click', reset_filter2);
+    }
     ///////////////////////////////////////
 });
 
@@ -448,7 +450,9 @@ function trip_type_flight(element) {
 function flight_select() {
     document.querySelectorAll(".flight1-radio").forEach(radio => {
         radio.addEventListener('click', e => {
-            document.querySelector('#flt1').value = e.target.value;
+            document.querySelectorAll('#flt1').forEach(flt1 => {
+                flt1.value = e.target.value;
+            });
             document.querySelector("#select-f1-plane").innerText = e.target.dataset.plane;
             document.querySelector("#select-f1-depart").innerText = e.target.dataset.depart;
             document.querySelector("#select-f1-arrive").innerText = e.target.dataset.arrive;
@@ -459,7 +463,9 @@ function flight_select() {
     });
     document.querySelectorAll(".flight2-radio").forEach(radio => {
         radio.addEventListener('click', e => {
-            document.querySelector('#flt2').value = e.target.value;
+            document.querySelectorAll('#flt2').forEach(flt2 => {
+                flt2.value = e.target.value;
+            })
             document.querySelector("#select-f2-plane").innerText = e.target.dataset.plane;
             document.querySelector("#select-f2-depart").innerText = e.target.dataset.depart;
             document.querySelector("#select-f2-arrive").innerText = e.target.dataset.arrive;
@@ -494,8 +500,10 @@ function media_click(element) {
 
 function initial_click() {
     if (window.matchMedia("(max-width: 376px)").matches) {
-        document.querySelector(".query-result-div .each-flight-div").classList.add('blue');
-        document.querySelector(".query-result-div-2 .each-flight-div").classList.add('blue');
+        if (document.querySelector('#trip-identifier').value === '2'){
+            document.querySelector(".query-result-div .each-flight-div").classList.add('blue');
+            document.querySelector(".query-result-div-2 .each-flight-div").classList.add('blue');
+        }
     }
 }
 
