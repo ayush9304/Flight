@@ -8,7 +8,7 @@ This is the capstone project for CS50's Web Programming with Python and Javascri
 2. Users can book both one-way as well as round-trip tickets.
 3. Webpages are mobile responsive.
 4. Users can cancel their booked tickets.
-5. Users can view their previously booked tickets (Both confirmed and cancelled tickets)
+5. Users can view their previously booked tickets (Both confirmed and cancelled tickets).
 6. Tickets are downloadable as pdf document.
 
 ### Files & Directories
@@ -42,7 +42,7 @@ This is the capstone project for CS50's Web Programming with Python and Javascri
 
 ### Justification
 
-1 Mobile responsive webpages.
-2 More complex models.
-3 More interatactive because webpages use ajax functionality (eg., fetch) written in javascript.
-4 Converts html template to downloadable pdf.
+1. Mobile responsive webpages.
+2. More complex models.
+3. More interatactive because webpages use ajax functionality (eg., fetch) written in javascript.
+4. Converts html template to downloadable pdf.
