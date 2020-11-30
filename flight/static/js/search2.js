@@ -8,14 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     tab_change();
     flight_select();
 
-    ////////////////////////////////////////
     //document.querySelector(".filter-price2 input[type=range]").addEventListener('input', filter); //filter_price
     if (document.querySelector('#trip-identifier').value === '2') {
         flight_duration2();
         filter_price2();
         document.querySelector(".clr-filter-div2 button").addEventListener('click', reset_filter2);
     }
-    ///////////////////////////////////////
 });
 
 function flight_duration() {
@@ -25,25 +23,13 @@ function flight_duration() {
     });
 }
 
-
-
-/////////////////////////////////////
 function flight_duration2() {
     document.querySelectorAll(".flight-stops2 .tooltiptext").forEach(element => {
         let time = element.dataset.value.split(":");
         element.innerText = time[0]+"h "+time[1]+"m";
     });
 }
-/////////////////////////////////////
 
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////
 
 function filter(element=null) {
     //reset_filter();
@@ -78,10 +64,6 @@ function filter(element=null) {
 }
 
 
-
-
-
-//////////////////////////////////////////
 function filter2(element=null) {
     //reset_filter2();
     filter_price2();
@@ -113,11 +95,6 @@ function filter2(element=null) {
     }
     //flights = document.querySelectorAll("#flights_div2 .each-flight-div-box.show");
 }
-//////////////////////////////////////////
-
-
-
-
 
 
 function arrival_slot(flights, start, end) {
@@ -156,24 +133,6 @@ function departure_slot(flights, start, end) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////
 function arrival_slot2(flights, start, end) {
     if (flights) {
         for (let i = 0; i < flights.length; i++) {
@@ -208,33 +167,6 @@ function departure_slot2(flights, start, end) {
         }
     }
 }
-///////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
 
 
 function timeslot(slot) {
@@ -299,11 +231,6 @@ function inactive(slot) {
 }
 
 
-
-
-
-
-
 /////////////////////////////
 function active2(slot) {
     slot.classList.add('active');
@@ -332,11 +259,6 @@ function inactive2(slot) {
     }
 }
 /////////////////////////////
-
-
-
-
-
 
 
 function filter_price() {
@@ -440,10 +362,6 @@ function trip_type_flight(element) {
         //document.querySelector('#flight1-btn-div').classList.remove('active-div');
     }
 }
-
-
-
-
 
 
 
