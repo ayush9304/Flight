@@ -46,3 +46,13 @@ This is the capstone project for CS50's Web Programming with Python and Javascri
 2. More complex models.
 3. More interatactive because webpages use ajax functionality (eg., fetch) written in javascript.
 4. Converts html template to downloadable pdf.
+
+### Installation
+
+- Install Python3.9 from [here](https://www.python.org/downloads/) manually.
+- Install project dependencies by running `py -m pip install -r requirements.txt`.
+- Make and apply migrations by running `py manage.py makemigrations` and `py manage.py migrate`.
+- Create superuser with `py manage.py createsuperuser`. This step is optional.
+- Run the command `py manage.py runserver` in project directory to run the web server.
+- Open web browser and goto `127.0.0.1:8000` url to start using the web application.
+
