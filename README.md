@@ -57,3 +57,5 @@ This is the capstone project for CS50's Web Programming with Python and Javascri
 - Run the command `py manage.py runserver` to run the web server.
 - Open web browser and goto `127.0.0.1:8000` url to start using the web application.
 
+
+Project video [https://youtu.be/3tD4OsuGmoo](https://youtu.be/3tD4OsuGmoo)
