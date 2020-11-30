@@ -136,49 +136,57 @@ def flight(request):
     origin = Place.objects.get(code=o_place.upper())
     if seat == 'economy':
         flights = Flight.objects.filter(depart_day=flightday,origin=origin,destination=destination).exclude(economy_fare=0).order_by('economy_fare')
-        if trip_type == '2':    ##
-            flights2 = Flight.objects.filter(depart_day=flightday2,origin=origin2,destination=destination2).exclude(economy_fare=0).order_by('economy_fare')    ##
         try:
             max_price = flights.last().economy_fare
             min_price = flights.first().economy_fare
-            if trip_type == '2':    ##
-                max_price2 = flights2.last().economy_fare   ##
-                min_price2 = flights2.first().economy_fare  ##
         except:
             max_price = 0
             min_price = 0
-            max_price2 = 0  ##
-            min_price2 = 0  ##
+
+        if trip_type == '2':    ##
+            flights2 = Flight.objects.filter(depart_day=flightday2,origin=origin2,destination=destination2).exclude(economy_fare=0).order_by('economy_fare')    ##
+            try:
+                max_price2 = flights2.last().economy_fare   ##
+                min_price2 = flights2.first().economy_fare  ##
+            except:
+                max_price2 = 0  ##
+                min_price2 = 0  ##
+                
     elif seat == 'business':
         flights = Flight.objects.filter(depart_day=flightday,origin=origin,destination=destination).exclude(business_fare=0).order_by('business_fare')
-        if trip_type == '2':    ##
-            flights2 = Flight.objects.filter(depart_day=flightday2,origin=origin2,destination=destination2).exclude(business_fare=0).order_by('business_fare')    ##
         try:
             max_price = flights.last().business_fare
             min_price = flights.first().business_fare
-            if trip_type == '2':    ##
-                max_price2 = flights2.last().business_fare   ##
-                min_price2 = flights2.first().business_fare  ##
         except:
             max_price = 0
             min_price = 0
-            max_price2 = 0  ##
-            min_price2 = 0  ##
+
+        if trip_type == '2':    ##
+            flights2 = Flight.objects.filter(depart_day=flightday2,origin=origin2,destination=destination2).exclude(business_fare=0).order_by('business_fare')    ##
+            try:
+                max_price2 = flights2.last().business_fare   ##
+                min_price2 = flights2.first().business_fare  ##
+            except:
+                max_price2 = 0  ##
+                min_price2 = 0  ##
+
     elif seat == 'first':
         flights = Flight.objects.filter(depart_day=flightday,origin=origin,destination=destination).exclude(first_fare=0).order_by('first_fare')
-        if trip_type == '2':    ##
-            flights2 = Flight.objects.filter(depart_day=flightday2,origin=origin2,destination=destination2).exclude(first_fare=0).order_by('first_fare')    ##
         try:
             max_price = flights.last().first_fare
             min_price = flights.first().first_fare
-            if trip_type == '2':    ##
-                max_price2 = flights2.last().first_fare   ##
-                min_price2 = flights2.first().first_fare  ##
         except:
             max_price = 0
             min_price = 0
-            max_price2 = 0  ##
-            min_price2 = 0  ##
+            
+        if trip_type == '2':    ##
+            flights2 = Flight.objects.filter(depart_day=flightday2,origin=origin2,destination=destination2).exclude(first_fare=0).order_by('first_fare')
+            try:
+                max_price2 = flights2.last().first_fare   ##
+                min_price2 = flights2.first().first_fare  ##
+            except:
+                max_price2 = 0  ##
+                min_price2 = 0  ##    ##
 
     #print(calendar.day_name[depart_date.weekday()])
     if trip_type == '2':

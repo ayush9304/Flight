@@ -91,3 +91,6 @@ class Ticket(models.Model):
     mobile = models.CharField(max_length=20,blank=True)
     email = models.EmailField(max_length=45, blank=True)
     status = models.CharField(max_length=45, choices=TICKET_STATUS)
+
+    def __str__(self):
+        return self.ref_no

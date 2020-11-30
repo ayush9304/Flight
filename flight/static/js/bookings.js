@@ -21,9 +21,9 @@ function cancel_tkt() {
     .then(response => {
         if (response.success === true) {
             remove_popup();
-            document.querySelector(`#${ref} .ticket-action-div`).innerHTML = '';
-            document.querySelector(`#${ref} .status-div`).innerHTML = `<div class="red">CANCELLED</div>`;
-            document.querySelector(`#${ref} .booking-date-div`).innerHTML = '';
+            document.querySelector(`[id='${ref}'] .ticket-action-div`).innerHTML = '';
+            document.querySelector(`[id='${ref}'] .status-div`).innerHTML = `<div class="red">CANCELLED</div>`;
+            document.querySelector(`[id='${ref}'] .booking-date-div`).innerHTML = '';
         }
         else {
             remove_popup();
