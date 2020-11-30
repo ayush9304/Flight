@@ -10,6 +10,7 @@ This is the capstone project for CS50's Web Programming with Python and Javascri
 4. Users can cancel their booked tickets.
 5. Users can view their previously booked tickets (Both confirmed and cancelled tickets).
 6. Tickets are downloadable as pdf document.
+7. As-you-type Search
 
 ### Files & Directories
   - `capstone` - project directory.
