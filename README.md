@@ -3,6 +3,8 @@
 A flight booking Django application written in Python, HTML, CSS & Javascript.
 This is the capstone project for CS50's Web Programming with Python and Javascript.
 
+[Watch on Youtube](https://www.youtube.com/watch?v=3tD4OsuGmoo)
+
 ### Features
 1. Users can create their user account.
 2. Users can book both one-way as well as round-trip tickets.
