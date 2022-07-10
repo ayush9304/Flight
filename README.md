@@ -7,6 +7,8 @@ This is the capstone project for CS50's Web Programming with Python and Javascri
 
 [Watch on Youtube](https://www.youtube.com/watch?v=3tD4OsuGmoo)
 
+[Try it (Deployed)](https://flight-web-app.herokuapp.com/)
+
 <img alt="flight" src="https://user-images.githubusercontent.com/56977388/178156598-69491e88-bd9a-42dc-88f3-afeb02d7161e.png">
 
 
