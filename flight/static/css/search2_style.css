@@ -284,6 +284,7 @@
 .flight-details-btn{
     display: flex;
     flex: 1;
+    justify-content: space-around;
 }
 .flight-details-btn button{
     margin-top: auto;
