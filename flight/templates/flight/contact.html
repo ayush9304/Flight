@@ -1,0 +1,132 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/contact.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+{% endblock head %}
+
+{% block body %}
+    <section class="section section1" style="background: url({% static 'img/contactbg.svg' %}) no-repeat top center;background-size: cover;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 top-left-section">
+                    <div class="section-heading">
+                        <h1>Get in touch with us</h1>
+                        <div class="line-dec"></div>
+                    </div>
+                    <div class="row-fluid-wrapper row-depth-1 row-number-3 section-1-column-1-row-1-margin dnd-row">
+                        <div class="row-fluid ">
+                        <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                        <div id="hs_cos_wrapper_section-1-module-3" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                        
+                        <div class="container-fluid ">
+                            <div class="row-fluid-wrapper bb">
+                              
+                                <div class="row-fluid">
+                                    <div class="span12 widget-span widget-type-cell elements-module-button_section-1-module-3" style="
+                          text-align: left;
+                          width: 100%;
+                        " data-widget-type="cell" data-x="0" data-w="12">
+                                        <span class="elements-btns-styles_section-1-module-3" target="_blank" rel="noopener">
+                                            
+                                              <a href="ayush@mail.com" target="_blank" rel="noopener">
+                                                <img class="elements-ci__image_section-1-module-3" src="https://www.peoplemetrics.com/hubfs/Website/email_1-blue-bottom.svg" alt="email" loading="" width="52" height="40">
+                                              </a>
+                                          
+                                        
+                                        <a href="mailto:connect@flight.com" class="elements-btns-text--styles_section-1-module-3" style="color: #74828c; letter-spacing:.5px;">
+                                          connect@flight.com
+                                        </a>
+                        
+                                      </span>
+                                     
+                                    </div>
+                        
+                                </div>
+                              
+                                <div class="row-fluid">
+                                    <div class="span12 widget-span widget-type-cell elements-module-button_section-1-module-3" style="
+                          text-align: left;
+                          width: 100%;
+                        " data-widget-type="cell" data-x="0" data-w="12">
+                                        <span href="tel:(215)%20979-8030" class="elements-btns-styles_section-1-module-3" target="_blank" rel="noopener">
+                                              <a href="tel:(215)%20979-8030" target="_blank" rel="noopener">
+                                                <img class="elements-ci__image_section-1-module-3" src="https://www.peoplemetrics.com/hubfs/Website/phone_1-blue-bottom.svg" alt="phone" loading="" width="52" height="40">
+                                              </a>
+                                        <a href="tel:#" class="elements-btns-text--styles_section-1-module-3" style="color: #74828c;">
+                                          (215) 979-8030
+                                        </a>
+                                      </span>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12 widget-span widget-type-cell elements-module-button_section-1-module-3" style="
+                          text-align: left;
+                          width: 100%;
+                        " data-widget-type="cell" data-x="0" data-w="12">
+                                        <span href="https://g.page/DSCENGG?share" class="elements-btns-styles_section-1-module-3" target="_blank" rel="noopener"> 
+                                              <a href="https://g.page/DSCENGG?share" target="_blank" rel="noopener">
+                                                <img class="elements-ci__image_section-1-module-3" src="https://www.peoplemetrics.com/hubfs/Website/pin-blue-bottom.svg" alt="address" loading="" width="50" height="50">
+                                              </a>
+                                        <a href="https://g.page/DSCENGG?share" class="elements-btns-text--styles_section-1-module-3" style="color: #74828c;">
+                                          DSCE, Bangalore, India 560078
+                                        </a>
+                        
+                                      </span>
+                                     
+                                    </div>
+                        
+                                </div>
+                              
+                            </div>
+                        </div>
+                        </div>
+                        </div><!--end widget-span -->
+                        </div><!--end row-->
+                        </div>
+                </div>
+                <div class="col-md-6 contact-form-box">
+                    <div class="section-heading">
+                        <form action="#" id="ContactUs100" method="post" onsubmit="return ValidateForm(this);">
+                          {% csrf_token %}
+                            <script type="text/javascript">
+                            function ValidateForm(frm) {
+                            if (frm.Name.value == "") { alert('Name is required.'); frm.Name.focus(); return false; }
+                            if (frm.FromEmailAddress.value == "") { alert('Email address is required.'); frm.FromEmailAddress.focus(); return false; }
+                            if (frm.FromEmailAddress.value.indexOf("@") < 1 || frm.FromEmailAddress.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.FromEmailAddress.focus(); return false; }
+                            if (frm.Comments.value == "") { alert('Please enter comments or questions.'); frm.Comments.focus(); return false; }
+                            return true; }
+                            </script>
+                            <table style="width:100%;max-width:550px;border:0;" cellpadding="8" cellspacing="0">
+                            <tr> <td>
+                            <label for="Name">Name:</label>
+                            </td> <td>
+                            <input name="Name" type="text" maxlength="60"  autocomplete="off">
+                            </td> </tr> <tr> <td>
+                            <label for="PhoneNumber">Phone:</label>
+                            </td> <td>
+                            <input name="PhoneNumber" type="text" maxlength="43"  autocomplete="off">
+                            </td> </tr> <tr> <td>
+                            <label for="FromEmailAddress">Email:</label>
+                            </td> <td>
+                            <input name="FromEmailAddress" type="text" maxlength="90"  autocomplete="off">
+                            </td> </tr> <tr> <td>
+                            <label for="Comments">Message:</label>
+                            </td> <td>
+                            <textarea name="Comments" rows="7" cols="40" autocomplete="off"></textarea>
+                            </td> </tr> <tr> <td>
+                            </td> <td>
+                            <button class="btn btn-danger">Send Message</button>
+                            <button type='submit' class="btn btn-danger" hidden>Send Message</button>
+                            {% comment %} <input name="skip_Submit" type="submit" value="Send Message" /> {% endcomment %}
+                            </td> </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock%}

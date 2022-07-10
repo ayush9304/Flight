@@ -11,7 +11,7 @@ body{
     cursor: pointer;
 }
 .each-booking-div{
-    width: 95%;
+    width: 96%;
     margin: 5px auto 8px auto;
     transition-duration: .4s;
     padding: 10px 15px;
@@ -37,6 +37,7 @@ body{
 .each-booking-div > div > div{
     margin-top: auto;
     margin-bottom: auto;
+    width: 100%;
 }
 .green, .red, .orange{
     border-radius: 3px;
@@ -56,7 +57,6 @@ body{
 }
 .btnp:hover, .btnp:focus, .btnp:active{
     background-color: rgb(246,247,247)!important;
-    color: #007bff!important;
 }
 
 /*
@@ -165,4 +165,25 @@ body{
     .last-div{
         margin-top: 5px;
     }
+}
+
+.ticket-action-div{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.pbtn, .rbtn{
+    border: 0;
+}
+
+.cbtn:hover, .cbtn:focus, .cbtn:active{
+    color: #dc3545!important;
+}
+
+.pbtn:hover, .pbtn:focus, .pbtn:active{
+    color: #17a2b8!important;
+}
+
+.rbtn:hover, .rbtn:focus, .rbtn:active{
+    color: #007bff!important;
 }

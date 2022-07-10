@@ -4,17 +4,30 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 
-from datetime import datetime, timedelta
-import calendar
+from datetime import datetime
 import math
-import secrets
 from .models import *
 from capstone.utils import render_to_pdf, createticket
 
 
 #Fee and Surcharge variable
 from .constant import FEE
+from flight.utils import createWeekDays, addPlaces, addDomesticFlights, addInternationalFlights
 
+try:
+    if len(Week.objects.all()) == 0:
+        createWeekDays()
+
+    if len(Place.objects.all()) == 0:
+        addPlaces()
+
+    if len(Flight.objects.all()) == 0:
+        print("Do you want to add flights in the Database? (y/n)")
+        if input().lower() in ['y', 'yes']:
+            addDomesticFlights()
+            addInternationalFlights()
+except:
+    pass
 
 # Create your views here.
 
@@ -387,7 +400,8 @@ def get_ticket(request):
     ref = request.GET.get("ref")
     ticket1 = Ticket.objects.get(ref_no=ref)
     data = {
-        'ticket1':ticket1
+        'ticket1':ticket1,
+        'current_year': datetime.now().year
     }
     pdf = render_to_pdf('flight/ticket.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
@@ -445,3 +459,6 @@ def resume_booking(request):
             return HttpResponseRedirect(reverse("login"))
     else:
         return HttpResponse("Method must be post.")
+
+def contact(request):
+    return render(request, 'flight/contact.html')

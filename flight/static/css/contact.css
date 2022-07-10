@@ -1,0 +1,71 @@
+.contact-form-box{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 30px 25px;
+
+    border: 1px solid #E7E8F1;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0px 0px 18px rgb(35 37 89 / 13%);
+}
+
+h1{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+    text-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+    font-size: 40px;
+}
+
+section{
+    background-color: rgba(250, 247, 247, 1) !important;
+}
+
+input, textarea{
+    outline: none;
+    border: 1px solid #dbdfe2;
+    color: #343a3f;
+    border-radius: 6px;
+    height: 56px;
+    width: 100%;
+    font-size: 20px;
+    padding: 10px !important;
+}
+
+input:focus, textarea:focus{
+    box-shadow: 0px 2px 8px rgb(244 38 62 / 4%), 0px 1px 3px rgb(31 37 89 / 7%);
+    border: 1.5px solid rgb(220,53,69);
+    transition-property: border-width;
+    transition-duration: 100ms;
+}
+
+textarea{
+    font-size: larger;
+    height: 150px;
+    width: 100%;
+}
+
+button{
+    font-size: medium;
+    width: auto;
+    height: auto;
+    padding: 7px 13px 7px 13px !important;
+}
+
+.top-left-section{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.bbc{
+    padding: 20px 30px 20px 5px;
+}
+
+.row-fluid{
+    margin: 16px 0px;
+}
+
+.row-fluid a{
+    color: rgb(31 37 89 / 90%)!important;
+}

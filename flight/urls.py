@@ -15,5 +15,6 @@ urlpatterns = [
     path('flight/ticket/print',views.get_ticket, name="getticket"),
     path('flight/bookings', views.bookings, name="bookings"),
     path('flight/ticket/cancel', views.cancel_ticket, name="cancelticket"),
-    path('flight/ticket/resume', views.resume_booking, name="resumebooking")
+    path('flight/ticket/resume', views.resume_booking, name="resumebooking"),
+    path('contact', views.contact, name="contact"),
 ]

@@ -133,7 +133,7 @@
                 </div>
             </div>
         </div>
-        {% if trip_type == '2' %}
+        {% if trip_type == '2' and flights %}
             <div class="query-trip-type-div">
                 <div class="tabs">
                     <div class="selector"></div>
@@ -443,7 +443,7 @@
                 </div>
             </div>
         </div>
-        {% if trip_type == '2' %}
+        {% if trip_type == '2' and flights %}
             <div class="query-result-div-2" style="display: none;">
                 <div class="container">
                     <div class="row">
@@ -764,23 +764,31 @@
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                             </svg>
-                            <span>{{origin.code|upper}}</span>&nbsp;&nbsp;@&nbsp;&nbsp;₹
-                            <span id="select-f2-fare">
-                                {% if seat == "Economy" %}
-                                    {{flights2.all.0.economy_fare}}
-                                {% elif seat == "Business" %}
-                                    {{flights2.all.0.business_fare}}
-                                {% else %}
-                                    {{flights2.all.0.first_fare}}
-                                {% endif %}
-                            </span><!---->
+                            <span>{{origin.code|upper}}</span>
+                            &nbsp;&nbsp;@&nbsp;&nbsp;₹
+                            {% if flights2 %}
+                                &nbsp;&nbsp;@&nbsp;&nbsp;₹
+                                <span id="select-f2-fare">
+                                    {% if seat == "Economy" %}
+                                        {{flights2.all.0.economy_fare}}
+                                    {% elif seat == "Business" %}
+                                        {{flights2.all.0.business_fare}}
+                                    {% else %}
+                                        {{flights2.all.0.first_fare}}
+                                    {% endif %}
+                                </span><!---->
+                            {% endif %}
                         </div>
                         <div class="white-2">
-                            <span id="select-f2-plane">{{flights2.all.0.plane}}</span><!---->
-                            &nbsp;&nbsp;
-                            <span id="select-f2-depart">{{flights2.all.0.depart_time | time:"H:i"}}</span><!---->
-                            •
-                            <span id="select-f2-arrive">{{flights2.all.0.arrival_time | time:"H:i"}}</span><!---->
+                            {% if flights2 %}
+                                <span id="select-f2-plane">{{flights2.all.0.plane}}</span><!---->
+                                &nbsp;&nbsp;
+                                <span id="select-f2-depart">{{flights2.all.0.depart_time | time:"H:i"}}</span><!---->
+                                •
+                                <span id="select-f2-arrive">{{flights2.all.0.arrival_time | time:"H:i"}}</span><!---->
+                            {% else %}
+                                <span id="select-f2-plane" style="letter-spacing: 2px!important;">--</span><!---->
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -792,13 +800,24 @@
                         <div>
                             <span>₹
                                 <span id="select-total-fare">
-                                    {% if seat == "Economy" %}
-                                        {{flights.all.0.economy_fare | add:flights2.all.0.economy_fare}}
-                                    {% elif seat == "Business" %}
-                                        {{flights.all.0.business_fare | add:flights2.all.0.business_fare}}
+                                    {% if flights2 %}
+                                        {% if seat == "Economy" %}
+                                            {{flights.all.0.economy_fare | add:flights2.all.0.economy_fare}}
+                                        {% elif seat == "Business" %}
+                                            {{flights.all.0.business_fare | add:flights2.all.0.business_fare}}
+                                        {% else %}
+                                            {{flights.all.0.first_fare | add:flights2.all.0.first_fare}}
+                                        {% endif %}
                                     {% else %}
-                                        {{flights.all.0.first_fare | add:flights2.all.0.first_fare}}
+                                        {% if seat == "Economy" %}
+                                            {{flights.all.0.economy_fare}}
+                                        {% elif seat == "Business" %}
+                                            {{flights.all.0.business_fare}}
+                                        {% else %}
+                                            {{flights.all.0.first_fare}}
+                                        {% endif %}
                                     {% endif %}
+                                </span>
                             </span>
                         </div>
                     </div>
@@ -827,13 +846,24 @@
                             <div class="col-7" style="font-size: 1.2em; font-weight: bold; display: flex; padding: 0;">
                                 <span style="margin: auto;">₹
                                     <span id="select-total-fare-media">
-                                        {% if seat == "Economy" %}
-                                            {{flights.all.0.economy_fare | add:flights2.all.0.economy_fare}}
-                                        {% elif seat == "Business" %}
-                                            {{flights.all.0.business_fare | add:flights2.all.0.business_fare}}
+                                        {% if flights2 %}
+                                            {% if seat == "Economy" %}
+                                                {{flights.all.0.economy_fare | add:flights2.all.0.economy_fare}}
+                                            {% elif seat == "Business" %}
+                                                {{flights.all.0.business_fare | add:flights2.all.0.business_fare}}
+                                            {% else %}
+                                                {{flights.all.0.first_fare | add:flights2.all.0.first_fare}}
+                                            {% endif %}
                                         {% else %}
-                                            {{flights.all.0.first_fare | add:flights2.all.0.first_fare}}
+                                            {% if seat == "Economy" %}
+                                                {{flights.all.0.economy_fare}}
+                                            {% elif seat == "Business" %}
+                                                {{flights.all.0.business_fare}}
+                                            {% else %}
+                                                {{flights.all.0.first_fare}}
+                                            {% endif %}
                                         {% endif %}
+                                    </span>
                                 </span>
                             </div>
                         </div>
