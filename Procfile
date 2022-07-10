@@ -1,1 +1,1 @@
-web: gunicorn game.wsgi
+web: gunicorn capstone.wsgi
