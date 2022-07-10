@@ -1,4 +1,5 @@
-# Flight
+![icon_logo](https://user-images.githubusercontent.com/56977388/178156803-19eadb2a-5f5d-4ece-bf15-f44fdd32e291.png)
+
 
 A flight booking Django application written in Python, HTML, CSS & Javascript.
 This is the capstone project for CS50's Web Programming with Python and Javascript.
