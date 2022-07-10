@@ -1,0 +1,27 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Privacy Policy | Flight</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/privacy-policy.css' %}">
+{% endblock head %}
+
+{% block body %}
+    <section class="privacybanner-section">
+            <img src="{% static 'img/privacy-policy.png' %}" alt="Privacy Policy" class="privacybannerimg">
+    </section>
+    <section class="section section1">
+        <div class="container">
+            <p>
+                Flight Planners Limited (hereinafter “<b>flight-web-app.herokuapp.com</b>”) understands its valuable customer's concerns for privacy and undertakes several measures of protecting and maintaining theirpersonal information that is being shared with us.
+            </p>
+            <p>
+                The applicability of this Privacy Policy extends to the User who inquires, or means to purchase or purchase the product(s) or service(s) offered by flight-web-app.herokuapp.com. through any of its's online channels including its website, mobile site, mobile app & offline channels including call centers and offices (collectively referred herein as "Sales Channels"). For the purpose of this Privacy Policy, Website means the website(s), mobile site(s) and mobile app(s). By using or accessing the Website or other Sales Channels, the User hereby agrees with the terms of this Privacy Policy and the contents herein. If you disagree with this Privacy Policy please do not use or access our Website or other Sales Channels.
+            </p>
+            <p>
+                This Privacy Policy does not apply to any website(s), mobile sites and mobile apps of third parties, even if their websites/products are linked to our Website. User should take note that information and privacy practices of flight-web-app.herokuapp.com's business partners, advertisers, sponsors or other sites to which flight-web-app.herokuapp.com provides hyperlink(s), may be significantly different from this Privacy Policy. Accordingly, it is recommended that the User reviews the privacy statements and policies of any such third parties with whom they interact.
+            </p>
+        </div>
+    </section>
+{% endblock%}
