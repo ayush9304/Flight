@@ -67,7 +67,7 @@
       </div>
         <div class="col-md-6 contact-form-box">
             <div class="section-heading">
-                <form action="#" id="ContactUs100" method="post" onsubmit="return ValidateForm(this);">
+                <form id="ContactUs100" method="post" onsubmit="return ValidateForm(this);">
                   {% csrf_token %}
                     <script type="text/javascript">
                     function ValidateForm(frm) {
@@ -75,25 +75,26 @@
                     if (frm.FromEmailAddress.value == "") { alert('Email address is required.'); frm.FromEmailAddress.focus(); return false; }
                     if (frm.FromEmailAddress.value.indexOf("@") < 1 || frm.FromEmailAddress.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.FromEmailAddress.focus(); return false; }
                     if (frm.Comments.value == "") { alert('Please enter comments or questions.'); frm.Comments.focus(); return false; }
+                    alert('Thank you for contacting us. We will get back to you as soon as possible.');
                     return true; }
                     </script>
                     <table style="width:100%;max-width:550px;border:0;" cellpadding="8" cellspacing="0">
                     <tr> <td>
                     <label for="Name">Name:</label>
                     </td> <td>
-                    <input name="Name" type="text" maxlength="60"  autocomplete="off">
+                    <input name="Name" type="text" maxlength="60"  autocomplete="off" placeholder="John Doe" required>
                     </td> </tr> <tr> <td>
                     <label for="PhoneNumber">Phone:</label>
                     </td> <td>
-                    <input name="PhoneNumber" type="text" maxlength="43"  autocomplete="off">
+                    <input name="PhoneNumber" type="tel" maxlength="15"  autocomplete="off" placeholder="+91 9999988888" required>
                     </td> </tr> <tr> <td>
                     <label for="FromEmailAddress">Email:</label>
                     </td> <td>
-                    <input name="FromEmailAddress" type="text" maxlength="90"  autocomplete="off">
+                    <input name="FromEmailAddress" type="email" maxlength="90"  autocomplete="off" placeholder="john@gmail.com" required>
                     </td> </tr> <tr> <td>
                     <label for="Comments">Message:</label>
                     </td> <td>
-                    <textarea name="Comments" rows="7" cols="40" autocomplete="off"></textarea>
+                    <textarea name="Comments" rows="7" cols="40" autocomplete="off" placeholder="Enter your message here..." required></textarea>
                     </td> </tr> <tr> <td>
                     </td> <td>
                     <button class="btn btn-danger">Send Message</button>
