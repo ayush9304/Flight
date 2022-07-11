@@ -6,3 +6,10 @@
 .privacybannerimg{
     width: 100%;
 }
+
+p, ul{
+    color: #818087 !important;
+}
+b{
+    color: #504f51 !important;
+}

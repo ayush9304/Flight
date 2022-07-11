@@ -468,3 +468,6 @@ def privacy_policy(request):
 
 def terms_and_conditions(request):
     return render(request, 'flight/terms.html')
+
+def about_us(request):
+    return render(request, 'flight/about.html')
